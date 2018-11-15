@@ -1,0 +1,111 @@
+﻿<!-- Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License.
+-->
+<UserControl x:Class="BITSManager.JobDetailViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:BITSManager.Properties"
+             xmlns:local="clr-namespace:BITSManager"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <!-- First grid is job details -->
+                <TextBlock FontSize="18" Margin="0,10,0,0" Text="{x:Static p:Resources.JobDetails}" />
+                <Grid>
+                <TextBlock TextWrapping="Wrap" FontSize="14">
+                    <Run Text="{x:Static p:Resources.JobOwner}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobOwner" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobCreationTime}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobCreationTime" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobModificationTime}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobModificationTime" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobTransferCompletionTime}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobTransferCompletionTime" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobFileProgress}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobProgressFiles" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobByteProgress}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobProgressBytes" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobErrorCount}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobErrorCount" />
+                    <LineBreak />
+                    <Run x:Name="uiJobError" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobType}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobType" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobState}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobState" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobPriority}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobPriority" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobFlags}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobFlags" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobCost}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobCost" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobHttpMethod}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobHttpMethod" />
+                    <LineBreak />
+                    <Run Text="{x:Static p:Resources.JobCustomHeaders}" />
+                    <Run Text="&#09;" />
+                    <Run x:Name="uiJobCustomHeaders" />
+                </TextBlock>
+            </Grid>
+
+                <!-- Send item is all of the file details -->
+                <TextBlock FontSize="18" Margin="0,10,0,0" Text="{x:Static p:Resources.FileDetails}" />
+                <ItemsControl x:Name="uiFileList" HorizontalAlignment="Stretch"
+                            IsTabStop="True">
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Job actions pause/resume/cancel -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="4">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="1" />
+                    <Setter Property="Padding" Value="5,0,5,0" />
+                    <Setter Property="MinWidth" Value="70" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="{x:Static p:Resources.JobButtonAddFile}" Click="OnAddFile" x:Name="uiAddFileButton" />
+            <Button Content="{x:Static p:Resources.JobButtonCancel}" Click="OnCancel" x:Name="uiCancelButton" />
+            <Button Content="{x:Static p:Resources.JobButtonComplete}" Click="OnComplete" x:Name="uiCompleteButton" />
+            <Button Content="{x:Static p:Resources.JobButtonSuspend}" Click="OnSuspend" x:Name="uiSuspendButton" />
+            <Button Content="{x:Static p:Resources.JobButtonResume}" Click="OnResume" x:Name="uiResumeButton" />
+        </StackPanel>
+    </Grid>
+</UserControl>
