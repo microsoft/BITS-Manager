@@ -25,9 +25,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <SupportUrl>https://github.com/Microsoft/BITS-Manager</SupportUrl>
+    <ProductName>BITS Manager</ProductName>
+    <PublisherName>BITS-Manager</PublisherName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.2.148.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -52,26 +57,43 @@
   <PropertyGroup>
     <ApplicationIcon>BitsManagerIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C1A2CC0101B87E0ED582A9FC47FD2E1E0788D4E2</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>BITSManager_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BITSReference10_1">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference10_1.dll</HintPath>
+    <Reference Include="BITSReference10_1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference10_2">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference10_2.dll</HintPath>
+    <Reference Include="BITSReference10_2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference1_5">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference1_5.dll</HintPath>
+    <Reference Include="BITSReference1_5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference4_0">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference4_0.dll</HintPath>
+    <Reference Include="BITSReference4_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference5_0">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference5_0.dll</HintPath>
+    <Reference Include="BITSReference5_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -171,11 +193,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="..\LICENSE">
+      <Link>LICENSE</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\README.md">
+      <Link>README.md</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="BITSManager_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -188,16 +224,12 @@
     <Resource Include="BitsManagerIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
