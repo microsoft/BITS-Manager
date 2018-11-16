@@ -29,8 +29,8 @@
     <ProductName>BITS Manager</ProductName>
     <PublisherName>BITS-Manager</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
-    <ApplicationVersion>1.2.148.%2a</ApplicationVersion>
+    <ApplicationRevision>151</ApplicationRevision>
+    <ApplicationVersion>1.4.151.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
