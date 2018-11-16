@@ -450,7 +450,7 @@
     <value>Suspended</value>
   </data>
   <data name="JobStateTransferred" xml:space="preserve">
-    <value>Tranferred</value>
+    <value>Transferred</value>
   </data>
   <data name="JobStateTransferring" xml:space="preserve">
     <value>Transferring</value>
