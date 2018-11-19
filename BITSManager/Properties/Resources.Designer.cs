@@ -880,6 +880,15 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BITS Jobs.
+        /// </summary>
+        public static string Jobs {
+            get {
+                return ResourceManager.GetString("Jobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Job State.
         /// </summary>
         public static string JobState {
@@ -943,7 +952,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tranferred.
+        ///   Looks up a localized string similar to Transferred.
         /// </summary>
         public static string JobStateTransferred {
             get {
@@ -1038,6 +1047,15 @@ namespace BITSManager.Properties {
         public static string JobUserName {
             get {
                 return ResourceManager.GetString("JobUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Menu.
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
             }
         }
         
