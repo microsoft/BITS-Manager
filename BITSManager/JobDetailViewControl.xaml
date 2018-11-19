@@ -19,7 +19,7 @@ Licensed under the MIT License.
         </Grid.RowDefinitions>
         
         <ScrollViewer Grid.Row="1">
-            <StackPanel Margin="0,5,0,0">
+            <StackPanel Margin="8,0,0,0">
                 <!-- First grid is job details -->
                 <Grid>
                 <TextBlock TextWrapping="Wrap" FontSize="14">
