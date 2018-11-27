@@ -26,13 +26,13 @@ Licensed under the MIT License.
         <TextBlock Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" FontSize="32">📂</TextBlock>
 
         <!-- Job information -->
-        <TextBlock x:Name="uiJobName" Grid.Column="1" Grid.Row="0" FontSize="18" ToolTip="{x:Static p:Resources.JobDisplayName}" Text="(displayname)" TextWrapping="Wrap" />
+        <TextBlock x:Name="uiJobName" Grid.Column="1" Grid.Row="0" FontSize="16" ToolTip="{x:Static p:Resources.JobDisplayName}" Text="(displayname)" TextWrapping="Wrap" />
         <TextBlock x:Name="uiJobDescription" Grid.Column="1" Grid.Row="1" FontSize="14" ToolTip="{x:Static p:Resources.JobDescription}" Text="(description)" TextWrapping="Wrap" />
 
         <!-- The Job state starts off blank. It is set by UpdateState() in code-behind. -->
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" >
-            <TextBlock x:Name="uiJobOld" FontSize="32"></TextBlock>
-            <TextBlock x:Name="uiJobState" FontSize="32"></TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
+            <TextBlock x:Name="uiJobOld" FontSize="32" AutomationProperties.IsOffscreenBehavior="Offscreen" />
+            <TextBlock x:Name="uiJobState" FontSize="32" AutomationProperties.IsOffscreenBehavior="Offscreen" />
         </StackPanel>
     </Grid>
 </UserControl>
