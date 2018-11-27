@@ -133,11 +133,15 @@ namespace BITSManager
             catch (Exception ex)
             {
                 // The most common error is trying to enumerate all users jobs
-                // when you are not running as admin.
-                if (ShouldNotifyUserOnError && JobEnumType == BG_JOB_ENUM_ALL_USERS && (uint)ex.HResult == 0x80070005) // E_ACCESS_DENIED
+                // when you are not running as admin. Don't keep telling the user
+                // that they are not the admin.
+                if (JobEnumType == BG_JOB_ENUM_ALL_USERS && (uint)ex.HResult == 0x80070005) // E_ACCESS_DENIED
                 {
-                    ShouldNotifyUserOnError = false; // only display this dialog once.
-                    MessageBox.Show(Properties.Resources.ErrorInsufficientPrivilegesMessage, Properties.Resources.ErrorInsufficientPrivilegesTitle);
+                    if (ShouldNotifyUserOnError)
+                    {
+                        ShouldNotifyUserOnError = false; // only display this dialog once.
+                        MessageBox.Show(Properties.Resources.ErrorInsufficientPrivilegesMessage, Properties.Resources.ErrorInsufficientPrivilegesTitle);
+                    }
                 }
                 else
                 {
