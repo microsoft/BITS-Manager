@@ -72,9 +72,12 @@ namespace BITSManager
                 // Make a corresponding file name. If the user has changed the file text,
                 // don't update it when the URL changes.
                 var file = uri.Segments[uri.Segments.Length - 1];
-                var dir = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                var fullpath = System.IO.Path.Combine(dir, file);
-                uiFile.Text = fullpath;
+                if (file != "/")
+                {
+                    var dir = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    var fullpath = System.IO.Path.Combine(dir, file);
+                    uiFile.Text = fullpath;
+                }
             }
         }
 

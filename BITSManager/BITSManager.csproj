@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>BITSManager</RootNamespace>
     <AssemblyName>BITSManager</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -34,6 +34,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -70,28 +71,28 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BITSReference10_1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BITSReference10_1">
+      <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference10_2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BITSReference10_2">
+      <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference1_5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BITSReference1_5">
+      <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference4_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BITSReference4_0">
+      <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference5_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BITSReference5_0">
+      <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
     </Reference>
@@ -224,12 +225,28 @@
     <Resource Include="BitsManagerIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7">
       <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
+      <ProductName>Microsoft .NET Framework 4.7 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
