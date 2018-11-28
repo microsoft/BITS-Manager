@@ -55,23 +55,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BITSReference10_1">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference10_1.dll</HintPath>
+      <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="BITSReference10_2">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference10_2.dll</HintPath>
+      <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="BITSReference1_5">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference1_5.dll</HintPath>
+      <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="BITSReference4_0">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference4_0.dll</HintPath>
+      <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="BITSReference5_0">
-      <HintPath>..\..\..\..\..\..\BITSTEMPDIR\BITSReference5_0.dll</HintPath>
+      <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -199,6 +199,23 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
