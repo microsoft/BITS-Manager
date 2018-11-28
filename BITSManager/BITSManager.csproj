@@ -71,53 +71,28 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Reference Include="BITSReference10_1">
       <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
-=======
-    <Reference Include="BITSReference10_1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="BITSReference10_2">
       <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
-=======
-    <Reference Include="BITSReference10_2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="BITSReference1_5">
       <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
-=======
-    <Reference Include="BITSReference1_5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="BITSReference4_0">
       <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
-=======
-    <Reference Include="BITSReference4_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="BITSReference5_0">
       <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
-=======
-    <Reference Include="BITSReference5_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
     </Reference>
@@ -250,21 +225,12 @@
     <Resource Include="BitsManagerIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <BootstrapperPackage Include=".NETFramework,Version=v4.7">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-=======
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <Content Include="BITSReferenceDLLs\BITSReference10_1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -282,8 +248,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-=======
-  <ItemGroup />
->>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
