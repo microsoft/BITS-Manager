@@ -74,27 +74,22 @@
     <Reference Include="BITSReference10_1">
       <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
     </Reference>
     <Reference Include="BITSReference10_2">
       <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
     </Reference>
     <Reference Include="BITSReference1_5">
       <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
     </Reference>
     <Reference Include="BITSReference4_0">
       <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
     </Reference>
     <Reference Include="BITSReference5_0">
       <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -194,11 +189,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
