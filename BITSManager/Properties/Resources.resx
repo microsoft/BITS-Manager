@@ -427,6 +427,10 @@
   <data name="JobPropertyHighPerformance" xml:space="preserve">
     <value>Job is High Performance</value>
   </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>BITS Jobs</value>
+    <comment>Title of the job list for Keros accessibility</comment>
+  </data>
   <data name="JobState" xml:space="preserve">
     <value>Job State</value>
   </data>
@@ -450,7 +454,7 @@
     <value>Suspended</value>
   </data>
   <data name="JobStateTransferred" xml:space="preserve">
-    <value>Tranferred</value>
+    <value>Transferred</value>
   </data>
   <data name="JobStateTransferring" xml:space="preserve">
     <value>Transferring</value>
@@ -482,6 +486,10 @@
   </data>
   <data name="JobUserName" xml:space="preserve">
     <value>User Name</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Application Menu</value>
+    <comment>Title of the menu for Keros accessibility</comment>
   </data>
   <data name="MenuCreateNewJob" xml:space="preserve">
     <value>New _Job</value>

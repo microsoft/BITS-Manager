@@ -25,9 +25,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.148.%2a</ApplicationVersion>
+    <SupportUrl>https://github.com/Microsoft/BITS-Manager</SupportUrl>
+    <ProductName>BITS Manager</ProductName>
+    <PublisherName>BITS-Manager</PublisherName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>151</ApplicationRevision>
+    <ApplicationVersion>1.4.151.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -53,26 +58,68 @@
   <PropertyGroup>
     <ApplicationIcon>BitsManagerIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C1A2CC0101B87E0ED582A9FC47FD2E1E0788D4E2</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>BITSManager_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="BITSReference10_1">
       <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
+=======
+    <Reference Include="BITSReference10_1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference10_1.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="BITSReference10_2">
       <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
+=======
+    <Reference Include="BITSReference10_2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="BITSReference1_5">
       <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
+=======
+    <Reference Include="BITSReference1_5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="BITSReference4_0">
       <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
+=======
+    <Reference Include="BITSReference4_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference4_0.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="BITSReference5_0">
       <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
+=======
+    <Reference Include="BITSReference5_0, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>BITSReferenceDLLs\BITSReference5_0.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -172,11 +219,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll" />
+    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="..\LICENSE">
+      <Link>LICENSE</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\README.md">
+      <Link>README.md</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="BITSManager_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -189,17 +250,21 @@
     <Resource Include="BitsManagerIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <BootstrapperPackage Include=".NETFramework,Version=v4.7">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+=======
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <Content Include="BITSReferenceDLLs\BITSReference10_1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -217,5 +282,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+=======
+  <ItemGroup />
+>>>>>>> c6db529832f81ffc6585d9edac069d5e403ce582
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
