@@ -13,14 +13,15 @@ Licensed under the MIT License.
     <Grid KeyDown="OnKeyDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MaxWidth="350" />
+            <ColumnDefinition Width="*" MaxWidth="475" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Menu>
+        <Menu AutomationProperties.Name="{x:Static p:Resources.Menu}" Grid.ColumnSpan="2">
             <MenuItem Header="{x:Static p:Resources.MenuJob}">
                 <MenuItem Header="{x:Static p:Resources.MenuQuickFileDownload}" Click="OnMenuQuickFileDownload" />
                 <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuJobsAllUsers}" Click="OnMenuAllUsers" x:Name="uiMenuAllUsers" />
@@ -31,24 +32,27 @@ Licensed under the MIT License.
         </Menu>
 
         <!-- The list of all BITS Jobs -->
-
-            <ListView Grid.Row="1" Grid.Column="0" x:Name="uiJobList"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
-                      SelectionMode="Single" SelectionChanged="OnJobSelectionChanged" 
-                      IsTabStop="True">
-                <!-- All of the JobView items need to be stretch to the full width.
-                If this isn't done, the state icons won't be neatly adjusted on the right.
-                The uiJobList is filled with JobViewControl items in MainWindow code.
-                  -->
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                    <Setter Property="Focusable" Value="True" />
-                </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="uiJobListHeader" Text="{x:Static p:Resources.Jobs}" FontSize="18" FontWeight="Bold" />
+        <ListView Grid.Row="2" Grid.Column="0" x:Name="uiJobList"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
+                    SelectionMode="Single" SelectionChanged="OnJobSelectionChanged" 
+                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}" 
+                    IsTabStop="True">
+            <!-- All of the JobView items need to be stretch to the full width.
+            If this isn't done, the state icons won't be neatly adjusted on the right.
+            The uiJobList is filled with JobViewControl items in MainWindow code.
+                -->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                <Setter Property="Focusable" Value="True" />
+            </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
         
         <!-- The selected job details -->
-        <local:JobDetailViewControl Grid.Row="1" Grid.Column="1"  x:Name="uiJobDetails" 
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
+        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="uiJobDetails" 
+                                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}" 
                                     IsTabStop="True" />
     </Grid>
 </Window>

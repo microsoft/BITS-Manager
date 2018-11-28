@@ -117,321 +117,145 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddFileToJob" xml:space="preserve">
-    <value>Add file to job</value>
-    <comment>Title for Add File to Job dialog</comment>
-  </data>
-  <data name="CreateNewJob" xml:space="preserve">
-    <value>Create New Job</value>
-    <comment>Title in the Create New Job dialog</comment>
-  </data>
-  <data name="CreateNewJobJobName" xml:space="preserve">
-    <value>Job Name</value>
-  </data>
-  <data name="CreateNewJobJobType" xml:space="preserve">
-    <value>Job Type</value>
-  </data>
-  <data name="DialogCancel" xml:space="preserve">
-    <value>Cancel</value>
-    <comment>Cancel button text (used on all dialogs)</comment>
-  </data>
-  <data name="DialogFile" xml:space="preserve">
-    <value>Local file</value>
-    <comment>Title of the local file textbox. Local file might be the source or the destination. (used on all dialogs)</comment>
-  </data>
-  <data name="DialogOK" xml:space="preserve">
-    <value>OK</value>
-    <comment>OK button text (used on all dialogs)</comment>
-  </data>
-  <data name="DialogUrl" xml:space="preserve">
-    <value>Remote URL</value>
-    <comment>Title of the URL textbox (used on all dialogs)</comment>
-  </data>
-  <data name="ErrorCantSetDynamic" xml:space="preserve">
-    <value>You can only set DOWNLOAD jobs as DYNAMIC</value>
-    <comment>Error message in the New Job dialog</comment>
-  </data>
-  <data name="ErrorInsufficientPrivilegesMessage" xml:space="preserve">
-    <value>You must be an administrator to read job information for all users</value>
-  </data>
-  <data name="ErrorInsufficientPrivilegesTitle" xml:space="preserve">
-    <value>Insufficient Privileges</value>
-  </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>Error: {0}</value>
-  </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FileByteProgress" xml:space="preserve">
-    <value>Progress</value>
-  </data>
-  <data name="FileDetails" xml:space="preserve">
-    <value>File Details</value>
-    <comment>Header for the list of individual files in the job</comment>
-  </data>
-  <data name="FileHttpResponseData" xml:space="preserve">
-    <value>HTTP Response</value>
-  </data>
-  <data name="FileHttpResponseDataNotAvailable" xml:space="preserve">
-    <value>(not available)</value>
-    <comment>Shown when we can't get the File HTTP property</comment>
-  </data>
-  <data name="FileLocal" xml:space="preserve">
-    <value>Filename</value>
-  </data>
-  <data name="FileProgressByteCount" xml:space="preserve">
-    <value>{0:N0} of {1:N0} bytes</value>
-  </data>
-  <data name="FileProgressByteCountUnknown" xml:space="preserve">
-    <value>{0:N0} bytes</value>
-  </data>
-  <data name="FileRemote" xml:space="preserve">
-    <value>URL	</value>
-  </data>
-  <data name="JobButtonAddFile" xml:space="preserve">
-    <value>Add File</value>
-    <comment>ADD FILE button text</comment>
-  </data>
-  <data name="JobButtonCancel" xml:space="preserve">
-    <value>Cancel</value>
-    <comment>CANCEL button text</comment>
-  </data>
-  <data name="JobButtonComplete" xml:space="preserve">
-    <value>Complete</value>
-    <comment>COMPLETE button text</comment>
-  </data>
-  <data name="JobButtonResume" xml:space="preserve">
-    <value>Resume</value>
-    <comment>RESUME button text</comment>
-  </data>
-  <data name="JobButtonSuspend" xml:space="preserve">
-    <value>Suspend</value>
-    <comment>SUSPEND button text</comment>
-  </data>
-  <data name="JobByteProgress" xml:space="preserve">
-    <value>Byte Progress</value>
-  </data>
-  <data name="JobCantAddFileMessage" xml:space="preserve">
-    <value>Can't add file {0} because {1}</value>
-    <comment>Message string when a file can't be added to a job</comment>
-  </data>
-  <data name="JobCantAddFileTitle" xml:space="preserve">
-    <value>Error: Unable to add file</value>
-    <comment>Title of message box when a file can't be added to a job</comment>
-  </data>
-  <data name="JobCost" xml:space="preserve">
-    <value>Cost	</value>
-  </data>
-  <data name="JobCostAlways" xml:space="preserve">
-    <value>Always</value>
-  </data>
-  <data name="JobCostFlag" xml:space="preserve">
-    <value>Cost	</value>
-  </data>
-  <data name="JobCostNoSurcharge" xml:space="preserve">
-    <value>No surcharge</value>
-  </data>
-  <data name="JobCostNotAvailable" xml:space="preserve">
-    <value>Not available</value>
-    <comment>Shown when job cost isn't availble (e.g., on Windows 7)</comment>
-  </data>
-  <data name="JobCostNotRoaming" xml:space="preserve">
-    <value>Not roaming</value>
-  </data>
-  <data name="JobCostStandard" xml:space="preserve">
-    <value>Standard</value>
-  </data>
-  <data name="JobCostUnrestricted" xml:space="preserve">
-    <value>Unrestricted</value>
-  </data>
-  <data name="JobCreationTime" xml:space="preserve">
-    <value>Created On</value>
-  </data>
-  <data name="JobCustomHeaders" xml:space="preserve">
-    <value>Custom HTTP</value>
-  </data>
-  <data name="JobCustomHeadersNotSet" xml:space="preserve">
-    <value>(no custom headers set)</value>
-    <comment>Used when we can't get the custom headers OR when there aren't any set</comment>
-  </data>
-  <data name="JobDescription" xml:space="preserve">
-    <value>Description</value>
-    <comment>The name of the Job "Description" field</comment>
-  </data>
-  <data name="JobDetails" xml:space="preserve">
-    <value>Job Details</value>
-    <comment>Header for the job details</comment>
-  </data>
-  <data name="JobDisplayName" xml:space="preserve">
-    <value>Name</value>
-    <comment>The name of the job "DisplayName" field</comment>
-  </data>
-  <data name="JobErrorContext" xml:space="preserve">
-    <value>Context	</value>
-  </data>
-  <data name="JobErrorCount" xml:space="preserve">
-    <value>Error Count</value>
-  </data>
-  <data name="JobErrorDescription" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="JobErrorException" xml:space="preserve">
-    <value>Can't read error details</value>
-    <comment>Shown when we should be able to get job error data, but can't</comment>
-  </data>
-  <data name="JobErrorHRESULT" xml:space="preserve">
-    <value>HRESULT</value>
-  </data>
-  <data name="JobErrorNoErrors" xml:space="preserve">
-    <value>No errors</value>
-  </data>
-  <data name="JobErrorWhenError" xml:space="preserve">
-    <value>Can't get error details</value>
-    <comment>Shown when a job has errors, but it's not in an ERROR or TRANSIENT_ERROR state (e.g., SUSPENDED)</comment>
-  </data>
-  <data name="JobFileProgress" xml:space="preserve">
-    <value>File Progress</value>
-  </data>
-  <data name="JobFlags" xml:space="preserve">
-    <value>Flags	</value>
-  </data>
-  <data name="JobFlagsDynamic" xml:space="preserve">
-    <value>Dynamic</value>
-    <comment>Used when the BITS_JOB_PROPERTY_DYNAMIC_CONTENT returns Enabled=true</comment>
-  </data>
-  <data name="JobFlagsHighPerformance" xml:space="preserve">
-    <value>High-performance</value>
-    <comment>Used when the BITS_JOB_PROPERTY_HIGH_PERFORMANCE returns Enabled=true</comment>
-  </data>
-  <data name="JobFlagsNoneSet" xml:space="preserve">
-    <value>No flags set</value>
-    <comment>Used when none of the BITS_JOB_PROPERTY "Enabled" flags are set.</comment>
-  </data>
-  <data name="JobFlagsOnDemandMode" xml:space="preserve">
-    <value>On-demand mode</value>
-    <comment>Used when the BITS_JOB_PROPERTY_ON_DEMAND_MODE returns Enabled=true</comment>
-  </data>
-  <data name="JobModificationTime" xml:space="preserve">
-    <value>Modified On</value>
+  <data name="JobPassword" xml:space="preserve">
+    <value>Password</value>
   </data>
   <data name="JobPriority" xml:space="preserve">
-    <value>Priority	</value>
+    <value>Priority	</value>
     <comment>Also used by the SetJobProperty dialog</comment>
   </data>
   <data name="JobPriorityForeground" xml:space="preserve">
-    <value>Foreground</value>
+    <value>Foreground</value>
   </data>
   <data name="JobPriorityHigh" xml:space="preserve">
-    <value>High</value>
+    <value>High</value>
   </data>
   <data name="JobPriorityLow" xml:space="preserve">
-    <value>Low</value>
+    <value>Low</value>
   </data>
   <data name="JobPriorityNormal" xml:space="preserve">
-    <value>Normal</value>
+    <value>Normal</value>
   </data>
   <data name="JobProgress" xml:space="preserve">
-    <value>Progress</value>
+    <value>Progress</value>
     <comment>Title of the job progress indicator</comment>
   </data>
   <data name="JobProgressByteCount" xml:space="preserve">
-    <value>{0:N0} of {1:N0} bytes</value>
+    <value>{0:N0} of {1:N0} bytes</value>
     <comment>Used for number of bytes; N0 format is use culture-aware string formatting</comment>
   </data>
   <data name="JobProgressByteCountUnknown" xml:space="preserve">
-    <value>{0:N0} bytes</value>
+    <value>{0:N0} bytes</value>
     <comment>Used for number of bytes when we don't know the total number of bytes</comment>
   </data>
   <data name="JobProgressFileCount" xml:space="preserve">
-    <value>{0:N0} of {1:N0} files</value>
+    <value>{0:N0} of {1:N0} files</value>
     <comment>Used for the number of files</comment>
   </data>
   <data name="JobPropertyDynamic" xml:space="preserve">
-    <value>Job is Dynamic</value>
+    <value>Job is Dynamic</value>
   </data>
   <data name="JobPropertyHighPerformance" xml:space="preserve">
-    <value>Job is High Performance</value>
+    <value>Job is High Performance</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>BITS Jobs</value>
+    <comment>Title of the job list for Keros accessibility</comment>
   </data>
   <data name="JobState" xml:space="preserve">
-    <value>Job State</value>
+    <value>Job State</value>
   </data>
   <data name="JobStateAcknowledged" xml:space="preserve">
-    <value>Acknowledged</value>
+    <value>Acknowledged</value>
   </data>
   <data name="JobStateCancelled" xml:space="preserve">
-    <value>Cancelled</value>
+    <value>Cancelled</value>
   </data>
   <data name="JobStateConnecting" xml:space="preserve">
-    <value>Connecting</value>
+    <value>Connecting</value>
   </data>
   <data name="JobStateError" xml:space="preserve">
-    <value>Error</value>
+    <value>Error</value>
   </data>
   <data name="JobStateQueued" xml:space="preserve">
-    <value>Queued</value>
+    <value>Queued</value>
     <comment>BITS JobState hover text for queued</comment>
   </data>
   <data name="JobStateSuspended" xml:space="preserve">
-    <value>Suspended</value>
+    <value>Suspended</value>
   </data>
   <data name="JobStateTransferred" xml:space="preserve">
-    <value>Tranferred</value>
+    <value>Transferred</value>
   </data>
   <data name="JobStateTransferring" xml:space="preserve">
-    <value>Transferring</value>
+    <value>Transferring</value>
   </data>
   <data name="JobStateTransientError" xml:space="preserve">
-    <value>Transient Error</value>
+    <value>Transient Error</value>
   </data>
   <data name="JobStateUnknown" xml:space="preserve">
-    <value>Job State Unknown ({0})</value>
+    <value>Job State Unknown ({0})</value>
   </data>
   <data name="JobTimeNotSet" xml:space="preserve">
-    <value>not set</value>
+    <value>not set</value>
     <comment>Shown instead of a date/time when the time value hasn't been set.</comment>
   </data>
   <data name="JobTransferCompletionTime" xml:space="preserve">
-    <value>Completed On</value>
+    <value>Completed On</value>
   </data>
   <data name="JobType" xml:space="preserve">
-    <value>Job Type</value>
+    <value>Job Type</value>
   </data>
   <data name="JobTypeDownload" xml:space="preserve">
-    <value>Download</value>
+    <value>Download</value>
   </data>
   <data name="JobTypeUpload" xml:space="preserve">
-    <value>Upload</value>
+    <value>Upload</value>
   </data>
   <data name="JobTypeUploadReply" xml:space="preserve">
-    <value>Upload Reply</value>
+    <value>Upload Reply</value>
+  </data>
+  <data name="JobUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Application Menu</value>
+    <comment>Title of the menu for Keros accessibility</comment>
   </data>
   <data name="MenuCreateNewJob" xml:space="preserve">
-    <value>New _Job</value>
+    <value>New _Job</value>
     <comment>Create New Job menu item</comment>
   </data>
   <data name="MenuJob" xml:space="preserve">
-    <value>_Jobs</value>
+    <value>_Jobs</value>
     <comment>Edit menu header</comment>
   </data>
   <data name="MenuJobsAllUsers" xml:space="preserve">
-    <value>_All Users</value>
+    <value>_All Users</value>
     <comment>Menu to read jobs for all users or just the one. </comment>
   </data>
   <data name="MenuQuickFileDownload" xml:space="preserve">
-    <value>Quic_k File Download</value>
+    <value>Quic_k File Download</value>
     <comment>Menu item in the MainWindow for quick file download</comment>
   </data>
   <data name="MenuRefresh" xml:space="preserve">
-    <value>_Refresh</value>
+    <value>_Refresh</value>
     <comment>Refresh menu item</comment>
   </data>
   <data name="QuickFileDownload" xml:space="preserve">
-    <value>Quick file download</value>
+    <value>Quick file download</value>
     <comment>Title for QuickFileDownload dialog box</comment>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>BITS Manager</value>
+    <value>BITS Manager</value>
     <comment>Title in the main window</comment>
+  </data>
+  <data name="UnhandledExceptionMessage" xml:space="preserve">
+    <value>Unhandled exception {0} type {1}</value>
+    <comment>Message when "some other" exception is thrown.</comment>
+  </data>
+  <data name="UnhandledExceptionTitle" xml:space="preserve">
+    <value>Unhandled Exception</value>
+    <comment>Title of the message when "some other" exception is thrown.</comment>
   </data>
 </root>
