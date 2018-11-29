@@ -72,53 +72,7 @@ namespace BITSManager
         }
 
 
-        /// <summary>
-        /// Demonstrate minimal code for downloading a file using BITS.
-        /// </summary>
-        private void DownloadFile()
-        {
-            new System.Threading.Thread(() =>
-            {
-                try
-                {
-                    var mgr = new BITS.BackgroundCopyManager1_5();
-                    BITS.GUID jobGuid;
-                    BITS.IBackgroundCopyJob job;
-                    mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD, out jobGuid, out job);
-                    job.AddFile("https://aka.ms/WinServ16/StndPDF", @"C:\Server2016.pdf");
-                    job.Resume();
-                    bool jobIsFinal = false;
-                    while (!jobIsFinal)
-                    {
-                        BITS.BG_JOB_STATE state;
-                        job.GetState(out state);
-                        switch (state)
-                        {
-                            case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR:
-                            case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
-                                job.Complete();
-                                break;
 
-                            case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
-                            case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
-                                jobIsFinal = true;
-                                break;
-                            default:
-                                Task.Delay(500); // delay a little bit
-                                break;
-                        }
-                    }
-                    // Job is complete
-
-
-                }
-                catch (Exception)
-                {
-                    ; // Handle job exception
-                }
-            }
-            ).Start();
-        }
 
         public void RefreshJobList()
         {
@@ -292,41 +246,14 @@ namespace BITSManager
             var dlg = new QuickFileDownloadWindow();
             dlg.Owner = this;
             var result = dlg.ShowDialog();
-            if (result.HasValue && result.Value && Mgr != null)
+            var job = dlg.Job;
+
+            // Update the UI with the new job (if any)
+            if (job != null)
             {
-                var remoteUri = dlg.RemoteUri;
-                if (remoteUri == "")
-                {
-                    MessageBox.Show(Properties.Resources.ErrorEmptyRemoteUrl, Properties.Resources.ErrorTitle);
-                    return;
-                }
-                var localFile = dlg.LocalFile;
-                if (localFile == "")
-                {
-                    MessageBox.Show(Properties.Resources.ErrorEmptyLocalFile, Properties.Resources.ErrorTitle);
-                    return;
-                }
-                var displayName = System.IO.Path.GetFileNameWithoutExtension(localFile);
-
-                BITS.GUID jobId;
-                BITS.IBackgroundCopyJob job;
-                Mgr.CreateJob(displayName, BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD, out jobId, out job);
-                try
-                {
-                    job.AddFile(remoteUri, localFile);
-                }
-                catch (System.ArgumentException ex)
-                {
-                    MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message), Properties.Resources.ErrorCantAddFile);
-                    return; // don't resume or refresh the job list.
-                }
-                job.Resume();
-                job.SetNotifyInterface(this); // Get notified when this particular job is updated.
                 RefreshJobList();
-
-                // Select the newly-created job.
                 var idx = GetJobIndex(job);
-                uiJobList.SelectedIndex = idx;                
+                uiJobList.SelectedIndex = idx;
             }
         }
 

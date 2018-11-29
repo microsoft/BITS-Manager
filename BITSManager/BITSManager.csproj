@@ -68,7 +68,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BITSReference10_1">
@@ -81,8 +81,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference10_2.dll</HintPath>
     </Reference>
-    <Reference Include="BITSReference1_5">
-      <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
+    <Reference Include="BITSReference1_5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>BITSReferenceDLLs\BITSReference1_5.dll</HintPath>
     </Reference>
@@ -194,11 +194,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll" />
-    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
