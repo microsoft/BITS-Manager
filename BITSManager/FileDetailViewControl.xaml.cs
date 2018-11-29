@@ -104,7 +104,8 @@ namespace BITSManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message), Properties.Resources.ErrorTitle);
+                MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message), 
+                    Properties.Resources.ErrorTitle);
             }
         }
     }
