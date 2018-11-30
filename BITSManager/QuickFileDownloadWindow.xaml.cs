@@ -38,7 +38,7 @@ namespace BITSManager
         }
 
         /// <summary>
-        /// Sets job properties using settings from the SetJobProperties control.
+        /// Sets job properties using settings from the SetJobProperties control
         /// </summary>
         /// <param name="job"></param>
         public void SetJobProperties (BITS.IBackgroundCopyJob job)
@@ -162,11 +162,11 @@ namespace BITSManager
             mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD, 
                 out jobGuid, out job);
             job.AddFile(URL, filename);
-            SetJobProperties(job); // Set job properties as needed.
-            job.SetNotifyInterface(this); // Call JobTransferred, JobError and JobModification.
+            SetJobProperties(job); // Set job properties as needed
+            job.SetNotifyInterface(this); // Call JobTransferred, JobError and JobModification
             job.Resume();
-            // Job is now running.
-            return job; // Return the job that was created.
+            // Job is now running. We can exit and it will continue automatically.
+            return job; // Return the job that was created
         }
 
         public void JobTransferred(BITS.IBackgroundCopyJob pJob)
@@ -181,7 +181,7 @@ namespace BITSManager
 
         public void JobModification(BITS.IBackgroundCopyJob pJob, uint dwReserved)
         {
-            // Don't need to do anything.
+            // Don't need to do anything on job modification
         }
     }
 }

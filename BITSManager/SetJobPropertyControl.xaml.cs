@@ -42,7 +42,7 @@ namespace BITSManager
             }
             catch (System.InvalidCastException)
             {
-                ; // Must be an older version of BITS
+                ; // Program is running on an older version of Windows that doesn't have BITS 5.0
             }
             if (job5 != null) // job5 will be null on, e.g., Windows 7.
             {

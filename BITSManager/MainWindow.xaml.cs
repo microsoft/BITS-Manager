@@ -143,7 +143,7 @@ namespace BITSManager
                 if (!control.Updated)
                 {
                     control.MarkAsOld();
-                    if (!control.JobIsFinal) // Once it's final, it will never change.
+                    if (!control.JobIsFinal) // Once it's final, it will never change
                     {
                         control.UpdateState();
                     }
@@ -273,7 +273,7 @@ namespace BITSManager
                 dlg.SetJobProperties(job);
                 RefreshJobList();
 
-                // Select the newly-created job.
+                // Select the newly-created job
                 var idx = GetJobIndex(job);
                 uiJobList.SelectedIndex = idx;
             }
@@ -295,7 +295,7 @@ namespace BITSManager
         }
 
 
-        // Callbacks for when a job is transferred. 
+        // Callbacks for when a job is transferred
         public void JobTransferred(BITS.IBackgroundCopyJob pJob)
         {
             Dispatcher.Invoke(() => { RefreshJobList(); });
