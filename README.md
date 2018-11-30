@@ -20,6 +20,8 @@ BITS Manager is a sample GUI tool for examining and creating BITS (Background In
 * create new jobs and add file to jobs
 * examine job and file settings
 
+![Annotated BITS Manager screen](./Screenshots/BITSManagerOverview-Annotated.png)
+
 # The different states
 
 Each job is marked with an icon that represents its state. See the [Life Cycle of a BITS Job](https://docs.microsoft.com/en-us/windows/desktop/Bits/life-cycle-of-a-bits-job) for details on the different BITS jobs states that are possible and how they transition from one to the other.
