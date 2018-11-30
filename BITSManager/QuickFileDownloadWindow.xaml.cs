@@ -163,7 +163,7 @@ namespace BITSManager
                 out jobGuid, out job);
             job.AddFile(URL, filename);
             SetJobProperties(job); // Set job properties as needed
-            job.SetNotifyInterface(this); // Call JobTransferred, JobError and JobModification
+            job.SetNotifyInterface(this); // Will call JobTransferred, JobError, JobModification
             job.Resume();
             // Job is now running. We can exit and it will continue automatically.
             return job; // Return the job that was created
