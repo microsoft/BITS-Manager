@@ -34,25 +34,16 @@ Licensed under the MIT License.
         <!-- The list of all BITS Jobs -->
         <TextBlock Grid.Row="1" Grid.Column="0" x:Name="uiJobListHeader" Text="{x:Static p:Resources.Jobs}" FontSize="18" FontWeight="Bold" />
         <ListView Grid.Row="2" Grid.Column="0" x:Name="uiJobList"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
-                    SelectionMode="Single" SelectionChanged="OnJobSelectionChanged" 
-                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}" 
-                    IsTabStop="True">
-            <!-- All of the JobView items need to be stretch to the full width.
-            If this isn't done, the state icons won't be neatly adjusted on the right.
-            The uiJobList is filled with JobViewControl items in MainWindow code.
-                -->
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                <Setter Property="Focusable" Value="True" />
-            </Style>
-            </ListView.ItemContainerStyle>
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
+                  SelectionMode="Single" SelectionChanged="OnJobSelectionChanged"
+                  AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}"
+                  IsTabStop="True">
         </ListView>
-        
+
         <!-- The selected job details -->
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
-        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="uiJobDetails" 
-                                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}" 
+        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="uiJobDetails"
+                                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}"
                                     IsTabStop="True" />
     </Grid>
 </Window>

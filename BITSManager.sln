@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITSManager", "BITSManager\BITSManager.csproj", "{9937DB49-5A24-4400-8CF1-1734194A6D30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITSManagerTests", "BITSManagerTests\BITSManagerTests.csproj", "{5B91BEAC-6299-494F-AC2E-04AE4C01BFBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9937DB49-5A24-4400-8CF1-1734194A6D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9937DB49-5A24-4400-8CF1-1734194A6D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9937DB49-5A24-4400-8CF1-1734194A6D30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B91BEAC-6299-494F-AC2E-04AE4C01BFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B91BEAC-6299-494F-AC2E-04AE4C01BFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B91BEAC-6299-494F-AC2E-04AE4C01BFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B91BEAC-6299-494F-AC2E-04AE4C01BFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

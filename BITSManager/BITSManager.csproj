@@ -125,6 +125,7 @@
     <Compile Include="SetJobPropertyControl.xaml.cs">
       <DependentUpon>SetJobPropertyControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TabifyHttpHeaders.cs" />
     <Page Include="AddFileToJobWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,7 +190,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

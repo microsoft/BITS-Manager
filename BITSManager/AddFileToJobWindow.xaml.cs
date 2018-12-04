@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BITSManager
 {
@@ -22,7 +12,7 @@ namespace BITSManager
     {
         public string RemoteUri { get { return uiUri.Text; } }
         public string LocalFile { get { return uiFile.Text; } }
-        bool FileHasChanged = false;
+        private bool FileHasChanged = false;
 
         public AddFileToJobWindow()
         {
@@ -30,24 +20,20 @@ namespace BITSManager
             this.Loaded += AddFileToJobWindowControl_Loaded;
         }
 
-
         private void AddFileToJobWindowControl_Loaded(object sender, RoutedEventArgs e)
         {
             uiUri.Focus();
         }
-
 
         private void OnCancel(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
 
-
         private void OnOK(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
         }
-
 
         private void OnUriChanged(object sender, TextChangedEventArgs e)
         {
@@ -67,7 +53,6 @@ namespace BITSManager
                 }
             }
         }
-
 
         private void OnFileChangedViaKeyboard(object sender, KeyEventArgs e)
         {

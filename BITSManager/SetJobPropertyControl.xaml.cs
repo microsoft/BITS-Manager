@@ -1,24 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 // Set up the BITS namespaces
 using BITS = BITSReference1_5;
+
 //using BITS4 = BITSReference4_0;
 using BITS5 = BITSReference5_0;
+
 //using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
@@ -35,16 +25,8 @@ namespace BITSManager
 
         public void SetJobProperties(BITS.IBackgroundCopyJob job)
         {
-            BITS5.IBackgroundCopyJob5 job5 = null;
-            try
-            {
-                job5 = (BITS5.IBackgroundCopyJob5)job;
-            }
-            catch (System.InvalidCastException)
-            {
-                ; // Program is running on an older version of Windows that doesn't have BITS 5.0
-            }
-            if (job5 != null) // job5 will be null on, e.g., Windows 7.
+            var job5 = job as BITS5.IBackgroundCopyJob5;
+            if (job5 != null) // job5 will be null on, e.g., Windows 7 and earlier.
             {
                 // Set the job properties.
                 var costs = JobCosts;
@@ -84,13 +66,13 @@ namespace BITSManager
                 var job2 = (BITS.IBackgroundCopyJob2)job; // Job2 exists on all supported version of Windows.
                 var credentials = new BITS.BG_AUTH_CREDENTIALS();
                 credentials.Scheme = (BITS.BG_AUTH_SCHEME)authScheme.Value;
-                credentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_SERVER; // This app doesn't support setting proxy auth.
+                credentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_SERVER;
+                // This app doesn't support setting proxy auth.
                 credentials.Credentials.Password = Password;
                 credentials.Credentials.UserName = UserName;
                 job2.SetCredentials(credentials);
             }
         }
-
 
         private bool? JobIsDynamic
         {
@@ -141,6 +123,7 @@ namespace BITSManager
 
         public string UserName { get { return uiUserName.Text; } }
         public string Password { get { return uiUserName.Text; } }
+
         public BITS.BG_AUTH_SCHEME? AuthScheme
         {
             get

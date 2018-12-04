@@ -1,26 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 // Set up the BITS namespaces
 using BITS = BITSReference1_5;
+
 //using BITS4 = BITSReference4_0;
 //using BITS5 = BITSReference5_0;
-using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
@@ -29,17 +19,16 @@ namespace BITSManager
     /// </summary>
     public partial class MainWindow : Window, IRefreshJobList, BITS.IBackgroundCopyCallback
     {
-        const uint BG_JOB_ENUM_ALL_USERS = 1;
-        uint JobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
-        BITS.IBackgroundCopyManager Mgr = null;
-        DispatcherTimer timer;
+        private const uint BG_JOB_ENUM_ALL_USERS = 1;
+        private uint JobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
+        private BITS.IBackgroundCopyManager Mgr = null;
+        private DispatcherTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
         }
-
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -49,7 +38,11 @@ namespace BITSManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format(Properties.Resources.ErrorCantConnectToBitsException, ex.HResult, ex.Message));
+                MessageBox.Show(
+                    String.Format(
+                    Properties.Resources.ErrorCantConnectToBitsException,
+                    ex.HResult,
+                    ex.Message));
             }
             if (Mgr == null)
             {
@@ -65,14 +58,10 @@ namespace BITSManager
             uiJobDetails.RefreshJobList = this;
         }
 
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             RefreshJobList();
         }
-
-
-
 
         public void RefreshJobList()
         {
@@ -94,7 +83,9 @@ namespace BITSManager
                     if (ShouldNotifyUserOnError)
                     {
                         ShouldNotifyUserOnError = false; // only display this dialog once.
-                        MessageBox.Show(Properties.Resources.ErrorInsufficientPrivilegesMessage, Properties.Resources.ErrorInsufficientPrivilegesTitle);
+                        MessageBox.Show(
+                            Properties.Resources.ErrorInsufficientPrivilegesMessage,
+                            Properties.Resources.ErrorInsufficientPrivilegesTitle);
                     }
                 }
                 else
@@ -103,7 +94,10 @@ namespace BITSManager
                         Properties.Resources.ErrorTitle);
                 }
             }
-            if (jobsEnum == null) return;
+            if (jobsEnum == null)
+            {
+                return;
+            }
 
             // Set all jobs as not updated at the start. I'll update each active
             // job, and later mark the inactive jobs as old.
@@ -169,7 +163,6 @@ namespace BITSManager
             }
         }
 
-
         private int GetJobIndex(BITS.IBackgroundCopyJob job)
         {
             BITS.GUID searchFor;
@@ -186,7 +179,6 @@ namespace BITSManager
             }
             return -1;
         }
-
 
         private static bool GuidEqual(BITS.GUID a, BITS.GUID b)
         {
@@ -213,15 +205,16 @@ namespace BITSManager
             return Retval;
         }
 
-
         private void OnJobSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count != 1) return;
+            if (e.AddedItems.Count != 1)
+            {
+                return;
+            }
             var control = e.AddedItems[0] as JobViewControl;
             uiJobList.ScrollIntoView(control);
             uiJobDetails.SetJob(control.Job);
         }
-
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -257,7 +250,6 @@ namespace BITSManager
             }
         }
 
-
         private void OnMenuCreateNewJob(object sender, RoutedEventArgs e)
         {
             var dlg = new CreateNewJobWindow();
@@ -279,21 +271,19 @@ namespace BITSManager
             }
         }
 
-
         private void OnMenuRefresh(object sender, RoutedEventArgs e)
         {
             RefreshJobList();
         }
 
+        private bool ShouldNotifyUserOnError = false;
 
-        bool ShouldNotifyUserOnError = false;
         private void OnMenuAllUsers(object sender, RoutedEventArgs e)
         {
             ShouldNotifyUserOnError = true;
             JobEnumType = uiMenuAllUsers.IsChecked ? BG_JOB_ENUM_ALL_USERS : 0;
             RefreshJobList();
         }
-
 
         // Callbacks for when a job is transferred
         public void JobTransferred(BITS.IBackgroundCopyJob pJob)

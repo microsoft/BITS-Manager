@@ -225,7 +225,7 @@
     <value>Digest</value>
   </data>
   <data name="JobAuthSchemeNegotiate" xml:space="preserve">
-    <value>Nego</value>
+    <value>Negotiate</value>
   </data>
   <data name="JobAuthSchemeNtlm" xml:space="preserve">
     <value>NTLM</value>

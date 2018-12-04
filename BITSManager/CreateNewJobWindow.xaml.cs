@@ -1,21 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 // Set up the BITS namespaces
 using BITS = BITSReference1_5;
+
 //using BITS4 = BITSReference4_0;
 //using BITS5 = BITSReference5_0;
 //using BITS10_2 = BITSReference10_2;
@@ -43,12 +33,10 @@ namespace BITSManager
             uiJobName.Focus();
         }
 
-
         private void OnCancel(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
-
 
         private void OnOK(object sender, RoutedEventArgs e)
         {
@@ -56,6 +44,7 @@ namespace BITSManager
         }
 
         public string JobName { get { return uiJobName.Text; } }
+
         public BITS.BG_JOB_TYPE JobType
         {
             get
@@ -68,7 +57,6 @@ namespace BITSManager
                     case "Upload": return BITS.BG_JOB_TYPE.BG_JOB_TYPE_UPLOAD;
                     case "UploadReply": return BITS.BG_JOB_TYPE.BG_JOB_TYPE_UPLOAD_REPLY;
                 }
-
             }
         }
     }

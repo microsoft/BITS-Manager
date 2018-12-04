@@ -1,22 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 // Set up the BITS namespaces
 using BITS = BITSReference1_5;
+
 //using BITS4 = BITSReference4_0;
 //using BITS5 = BITSReference5_0;
 //using BITS10_2 = BITSReference10_2;
@@ -29,8 +21,8 @@ namespace BITSManager
     public partial class QuickFileDownloadWindow : Window, BITS.IBackgroundCopyCallback
     {
         public BITS.IBackgroundCopyJob Job { get; internal set; } = null;
+        private bool FileHasChanged = false;
 
-        bool FileHasChanged = false;
         public QuickFileDownloadWindow()
         {
             InitializeComponent();
@@ -41,7 +33,7 @@ namespace BITSManager
         /// Sets job properties using settings from the SetJobProperties control
         /// </summary>
         /// <param name="job"></param>
-        public void SetJobProperties (BITS.IBackgroundCopyJob job)
+        public void SetJobProperties(BITS.IBackgroundCopyJob job)
         {
             uiJobProperty.SetJobProperties(job);
         }
@@ -51,23 +43,21 @@ namespace BITSManager
             uiUri.Focus();
         }
 
-
         private void OnCancel(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
         }
 
-
         private void OnOK(object sender, RoutedEventArgs e)
         {
             Job = null; // Clear out the old value, if any.
             this.DialogResult = true;
-            if (RemoteUri == "")
+            if (String.IsNullOrEmpty(RemoteUri))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyRemoteUrl, Properties.Resources.ErrorTitle);
                 return;
             }
-            if (LocalFile == "")
+            if (String.IsNullOrEmpty(LocalFile))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyLocalFile, Properties.Resources.ErrorTitle);
                 return;
@@ -75,10 +65,8 @@ namespace BITSManager
             Job = DownloadFile(RemoteUri, LocalFile);
         }
 
-
         public string RemoteUri { get { return uiUri.Text; } }
         public string LocalFile { get { return uiFile.Text; } }
-
 
         private void OnUriChanged(object sender, TextChangedEventArgs e)
         {
@@ -98,7 +86,6 @@ namespace BITSManager
                 }
             }
         }
-
 
         private void OnFileChangedViaKeyboard(object sender, KeyEventArgs e)
         {
@@ -133,6 +120,7 @@ namespace BITSManager
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
                                 jobIsFinal = true;
                                 break;
+
                             default:
                                 Task.Delay(500); // delay a little bit
                                 break;
@@ -146,7 +134,6 @@ namespace BITSManager
                 }
             }
             ).Start();
-
         }
 
         /// <summary>
@@ -159,7 +146,7 @@ namespace BITSManager
             var mgr = new BITS.BackgroundCopyManager1_5();
             BITS.GUID jobGuid;
             BITS.IBackgroundCopyJob job;
-            mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD, 
+            mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD,
                 out jobGuid, out job);
             job.AddFile(URL, filename);
             SetJobProperties(job); // Set job properties as needed

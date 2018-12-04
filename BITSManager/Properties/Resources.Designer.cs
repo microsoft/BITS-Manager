@@ -349,7 +349,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nego.
+        ///   Looks up a localized string similar to Negotiate.
         /// </summary>
         public static string JobAuthSchemeNegotiate {
             get {

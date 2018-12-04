@@ -2,21 +2,20 @@
 // Licensed under the MIT License.
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 // Set up the BITS namespaces
 using BITS = BITSReference1_5;
+
 //using BITS4 = BITSReference4_0;
 //using BITS5 = BITSReference5_0;
 //using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
-    //Must recreate the BITS COST values; they don't transfer over when converting the IDL file.
+    // Must recreate the BITS COST values; they don't transfer over when converting the IDL file.
     // From bits5_0.idl.
-    // The transfer policy is a two-step conversion: there are 5 documented high-level values 
+    // The transfer policy is a two-step conversion: there are 5 documented high-level values
     // (e.g., BITS_COST_STATE_TRANSFER_NOT_ROAMING) which are composed from a series of
     // low-level values (e.g., BITS_COST_STATE_UNRESTRICTED)
     // #define BITS_COST_STATE_UNRESTRICTED          0x1
@@ -39,8 +38,9 @@ namespace BITSManager
     public enum BitsCosts : UInt32
     {
         // See https://msdn.microsoft.com/library/9dc2c020-06c0-41dd-bf36-203432ad9d4f for a full discussion
-        // of how network metering is measures. 
+        // of how network metering is measures.
         UNRESTRICTED = 0x1,
+
         CAPPED_USAGE_UNKNOWN = 0x2,
         BELOW_CAP = 0x4,
         NEAR_CAP = 0x8,
@@ -57,7 +57,6 @@ namespace BITSManager
         TRANSFER_ALWAYS = (IGNORE_CONGESTION | ROAMING | USAGE_BASED | OVERCAP_THROTTLED | OVERCAP_CHARGED | NEAR_CAP | BELOW_CAP | CAPPED_USAGE_UNKNOWN | UNRESTRICTED),
     }
 
-
     public class BitsConversions
     {
         /// <summary>
@@ -68,27 +67,50 @@ namespace BITSManager
         /// <returns></returns>
         public static string ConvertCostToString(BitsCosts cost)
         {
-            if (cost == BitsCosts.TRANSFER_NOT_ROAMING) return Properties.Resources.JobCostNotRoaming;
-            if (cost == BitsCosts.TRANSFER_NO_SURCHARGE) return Properties.Resources.JobCostNoSurcharge;
-            if (cost == BitsCosts.TRANSFER_STANDARD) return Properties.Resources.JobCostStandard;
-            if (cost == BitsCosts.TRANSFER_UNRESTRICTED) return Properties.Resources.JobCostUnrestricted;
-            if (cost == BitsCosts.TRANSFER_ALWAYS) return Properties.Resources.JobCostAlways;
+            if (cost == BitsCosts.TRANSFER_NOT_ROAMING)
+            {
+                return Properties.Resources.JobCostNotRoaming;
+            }
+            if (cost == BitsCosts.TRANSFER_NO_SURCHARGE)
+            {
+                return Properties.Resources.JobCostNoSurcharge;
+            }
+            if (cost == BitsCosts.TRANSFER_STANDARD)
+            {
+                return Properties.Resources.JobCostStandard;
+            }
+            if (cost == BitsCosts.TRANSFER_UNRESTRICTED)
+            {
+                return Properties.Resources.JobCostUnrestricted;
+            }
+            if (cost == BitsCosts.TRANSFER_ALWAYS)
+            {
+                return Properties.Resources.JobCostAlways;
+            }
 
             // It wasn't one of the standard sets. Break it into the known cost values plus "all the rest"
             // Because these values are never encounted in real life, it's OK to use the ENUM value
             // as the output value instead of a translated string.
             var costBuilder = new StringBuilder();
-            List<BitsCosts> AllCostsToCheck = new List<BitsCosts>() {  BitsCosts.UNRESTRICTED, BitsCosts.CAPPED_USAGE_UNKNOWN,
-                BitsCosts.BELOW_CAP, BitsCosts.NEAR_CAP, BitsCosts.OVERCAP_CHARGED, BitsCosts.OVERCAP_THROTTLED,
-                BitsCosts.USAGE_BASED, BitsCosts.ROAMING, BitsCosts.IGNORE_CONGESTION};
+            List<BitsCosts> allCostsToCheck = new List<BitsCosts>() {
+                BitsCosts.UNRESTRICTED,
+                BitsCosts.CAPPED_USAGE_UNKNOWN,
+                BitsCosts.BELOW_CAP,
+                BitsCosts.NEAR_CAP,
+                BitsCosts.OVERCAP_CHARGED,
+                BitsCosts.OVERCAP_THROTTLED,
+                BitsCosts.USAGE_BASED,
+                BitsCosts.ROAMING,
+                BitsCosts.IGNORE_CONGESTION};
 
-
-            AllCostsToCheck = new List<BitsCosts>() { BitsCosts.UNRESTRICTED };
-            foreach (var item in AllCostsToCheck)
+            foreach (var item in allCostsToCheck)
             {
                 if ((cost & item) != 0)
                 {
-                    if (costBuilder.Length > 0) costBuilder.Append(", ");
+                    if (costBuilder.Length > 0)
+                    {
+                        costBuilder.Append(", ");
+                    }
                     costBuilder.Append(item.ToString());
                     cost &= ~item;
                 }
@@ -97,7 +119,10 @@ namespace BITSManager
             // be printed as a simple hex value.
             if (cost != 0)
             {
-                if (costBuilder.Length > 0) costBuilder.Append(", ");
+                if (costBuilder.Length > 0)
+                {
+                    costBuilder.Append(", ");
+                }
                 costBuilder.Append(string.Format("{0:X}", cost));
             }
             return costBuilder.ToString();
@@ -120,7 +145,6 @@ namespace BITSManager
             }
         }
 
-
         public static string ConvertJobStateToIconString(BITS.BG_JOB_STATE jobState)
         {
             switch (jobState)
@@ -134,10 +158,9 @@ namespace BITSManager
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED: return "😁";
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED: return "😎";
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED: return "😧";
-                default:return $"{(int)jobState}";
+                default: return $"{(int)jobState}";
             }
         }
-
 
         public static string ConvertJobTypeToString(BITS.BG_JOB_TYPE jobType)
         {
@@ -149,7 +172,6 @@ namespace BITSManager
                 default: return String.Format("{0:X}", jobType);
             }
         }
-
 
         public static string ConvertPriorityToString(BITS.BG_JOB_PRIORITY priority)
         {
