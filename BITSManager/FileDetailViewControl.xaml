@@ -12,21 +12,21 @@ Licensed under the MIT License.
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TextBlock TextWrapping="Wrap" FontSize="14">
-                <Run Text="{x:Static p:Resources.FileLocal}" FontSize="16" />
+                <Run Text="{x:Static p:Resources.FileLocal}" FontSize="16" FontWeight="Bold" />
                 <Run Text="&#09;" /> <!-- Tab character -->
                 <Run x:Name="uiFileLocal" FontSize="16" />
                 <LineBreak />
-                <Run Text="{x:Static p:Resources.FileRemote}" FontSize="16" />
+                <Run Text="{x:Static p:Resources.FileRemote}" FontSize="16"  FontWeight="Bold"/>
                 <Run Text="&#09;" />
                 <Run x:Name="uiFileRemote" FontSize="16" />
                 <LineBreak />
-                <Run Text="{x:Static p:Resources.FileByteProgress}" />
+                <Run Text="{x:Static p:Resources.FileByteProgress}" FontWeight="Bold" />
                 <Run Text="&#09;" />
                 <Run x:Name="uiFileByteProgress" />
                 <LineBreak />
-                <Run Text="{x:Static p:Resources.FileHttpResponseData}" />
+                <Run Text="{x:Static p:Resources.FileHttpResponseData}" FontWeight="Bold" />
                 <Run Text="&#09;" />
-                <Run x:Name="uiFileHttpResponseData" />
+                <Run x:Name="uiFileHttpResponseData" FontFamily="Consolas" />
                 <LineBreak />
         </TextBlock>
 

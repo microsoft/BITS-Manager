@@ -52,18 +52,13 @@ namespace BITSManager
         /// <returns></returns>
         static private string GetTabs(int length)
         {
-            const double TabSize = 8.0;
-            const char TabChar = '\t';
-            const double TargetLength = 32.0;
+            const double TargetLength = 24.0;
 
             var missingLength = TargetLength - length;
-            var ntab = Math.Ceiling(missingLength / TabSize);
-            ntab = Math.Max(1, ntab); // Always show at least one tab
-
             string tabs = "";
-            for (int i = 0; i < ntab; i++)
+            for (int i = 0; i < missingLength; i++)
             {
-                tabs = tabs + TabChar;
+                tabs = tabs + " ";
             }
             return tabs;
         }

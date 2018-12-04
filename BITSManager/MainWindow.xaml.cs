@@ -24,6 +24,15 @@ namespace BITSManager
         private BITS.IBackgroundCopyManager Mgr = null;
         private DispatcherTimer timer;
 
+        public static readonly RoutedCommand QuickFileDownloadCommand = new RoutedUICommand(
+            "QuickFileDownload", 
+            "QuickFileDownloadCommand", 
+            typeof(MainWindow), 
+            new InputGestureCollection(
+                new InputGesture[] { new KeyGesture(Key.K, ModifierKeys.Control)}
+                )
+            );
+
         public MainWindow()
         {
             InitializeComponent();
@@ -216,19 +225,6 @@ namespace BITSManager
             uiJobDetails.SetJob(control.Job);
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.K && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                // Redirect to the menu handler.
-                OnMenuQuickFileDownload(null, null);
-            }
-            else if (e.Key == Key.F5)
-            {
-                RefreshJobList();
-            }
-        }
-
         /// <summary>
         /// QuickFileDownload is a dialog box that lets you paste in a URL + Path to download a file.
         /// </summary>
@@ -301,8 +297,17 @@ namespace BITSManager
             Dispatcher.Invoke(() => { RefreshJobList(); });
         }
 
-        public void FileTransferred(BITS.IBackgroundCopyJob pJob, BITS.IBackgroundCopyFile pFile)
+        private void OnMenuFileExit(object sender, RoutedEventArgs e)
         {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void OnMenuHelpAbout(object sender, RoutedEventArgs e)
+        {
+            var moreUrl = "https://github.com/Microsoft/BITS-Manager";
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var text = String.Format(Properties.Resources.AboutMessage, version, moreUrl);
+            MessageBox.Show(text, Properties.Resources.AboutTitle);
         }
     }
 }

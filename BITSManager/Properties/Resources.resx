@@ -497,9 +497,9 @@
   </data>
   <data name="MenuJob" xml:space="preserve">
     <value>_Jobs</value>
-    <comment>Edit menu header</comment>
+    <comment>Jobs menu header</comment>
   </data>
-  <data name="MenuJobsAllUsers" xml:space="preserve">
+  <data name="MenuViewAllUsers" xml:space="preserve">
     <value>_All Users</value>
     <comment>Menu to read jobs for all users or just the one. </comment>
   </data>
@@ -507,9 +507,9 @@
     <value>Quic_k File Download</value>
     <comment>Menu item in the MainWindow for quick file download</comment>
   </data>
-  <data name="MenuRefresh" xml:space="preserve">
+  <data name="MenuViewRefresh" xml:space="preserve">
     <value>_Refresh</value>
-    <comment>Refresh menu item</comment>
+    <comment>View/Refresh menu item</comment>
   </data>
   <data name="QuickFileDownload" xml:space="preserve">
     <value>Quick file download</value>
@@ -526,5 +526,35 @@
   <data name="UnhandledExceptionTitle" xml:space="preserve">
     <value>Unhandled Exception</value>
     <comment>Title of the message when "some other" exception is thrown.</comment>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>_File</value>
+    <comment>File menu header</comment>
+  </data>
+  <data name="MenuFileExit" xml:space="preserve">
+    <value>E_xit</value>
+    <comment>File/Exit menu</comment>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>_Help</value>
+    <comment>Help menu</comment>
+  </data>
+  <data name="MenuHelpAbout" xml:space="preserve">
+    <value>_About BITS Manager</value>
+    <comment>Help/About menu</comment>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>_View</value>
+    <comment>View menu</comment>
+  </data>
+  <data name="AboutMessage" xml:space="preserve">
+    <value>BITS Manager
+Utility to examine and modify BITS jobs.
+For more information see {1}
+Version {0}</value>
+    <comment>Message in the About box. Arg 0= version number Arg 1=hyperlink</comment>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About BITS Manager</value>
   </data>
 </root>

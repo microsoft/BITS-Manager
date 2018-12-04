@@ -23,68 +23,68 @@ Licensed under the MIT License.
                 <!-- First grid is job details -->
                 <Grid>
                     <TextBlock TextWrapping="Wrap" FontSize="14">
-                    <Run Text="{x:Static p:Resources.JobOwner}" />
+                    <Run Text="{x:Static p:Resources.JobOwner}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobOwner" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobCreationTime}" />
+                    <Run Text="{x:Static p:Resources.JobCreationTime}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobCreationTime" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobModificationTime}" />
+                    <Run Text="{x:Static p:Resources.JobModificationTime}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobModificationTime" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobTransferCompletionTime}" />
+                    <Run Text="{x:Static p:Resources.JobTransferCompletionTime}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobTransferCompletionTime" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobFileProgress}" />
+                    <Run Text="{x:Static p:Resources.JobFileProgress}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobProgressFiles" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobByteProgress}" />
+                    <Run Text="{x:Static p:Resources.JobByteProgress}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobProgressBytes" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobErrorCount}" />
+                    <Run Text="{x:Static p:Resources.JobErrorCount}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobErrorCount" />
                     <LineBreak />
                     <Run x:Name="uiJobError" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobType}" />
+                    <Run Text="{x:Static p:Resources.JobType}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobType" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobState}" />
+                    <Run Text="{x:Static p:Resources.JobState}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobState" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobPriority}" />
+                    <Run Text="{x:Static p:Resources.JobPriority}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobPriority" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobFlags}" />
+                    <Run Text="{x:Static p:Resources.JobFlags}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobFlags" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobCost}" />
+                    <Run Text="{x:Static p:Resources.JobCost}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobCost" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobHttpMethod}" />
+                    <Run Text="{x:Static p:Resources.JobHttpMethod}" FontWeight="Bold" />
                     <Run Text="&#09;" />
                     <Run x:Name="uiJobHttpMethod" />
                     <LineBreak />
-                    <Run Text="{x:Static p:Resources.JobCustomHeaders}" />
+                    <Run Text="{x:Static p:Resources.JobCustomHeaders}" FontWeight="Bold" />
                     <Run Text="&#09;" />
-                    <Run x:Name="uiJobCustomHeaders" />
+                    <Run x:Name="uiJobCustomHeaders" FontFamily="Consolas" />
                     </TextBlock>
                 </Grid>
 
                 <!-- Send item is all of the file details -->
-                <TextBlock FontSize="18" Margin="0,10,0,0" Text="{x:Static p:Resources.FileDetails}" />
+                <TextBlock FontSize="18" Margin="0,10,0,0" Text="{x:Static p:Resources.FileDetails}" FontWeight="Bold" />
                 <ItemsControl x:Name="uiFileList" HorizontalAlignment="Stretch"
                             IsTabStop="True">
                 </ItemsControl>

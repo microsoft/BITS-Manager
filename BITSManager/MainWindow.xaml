@@ -10,7 +10,10 @@ Licensed under the MIT License.
         xmlns:p="clr-namespace:BITSManager.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Title}" Height="450" Width="800">
-    <Grid KeyDown="OnKeyDown">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" Executed="OnMenuQuickFileDownload"/>
+    </Window.CommandBindings>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -22,12 +25,21 @@ Licensed under the MIT License.
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu AutomationProperties.Name="{x:Static p:Resources.Menu}" Grid.ColumnSpan="2">
-            <MenuItem Header="{x:Static p:Resources.MenuJob}">
-                <MenuItem Header="{x:Static p:Resources.MenuQuickFileDownload}" Click="OnMenuQuickFileDownload" />
-                <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuJobsAllUsers}" Click="OnMenuAllUsers" x:Name="uiMenuAllUsers" />
 
+            <MenuItem Header="{x:Static p:Resources.MenuFile}">
+                <MenuItem Header="{x:Static p:Resources.MenuFileExit}" Click="OnMenuFileExit" />
+            </MenuItem>
+
+            <MenuItem Header="{x:Static p:Resources.MenuJob}">
+                <MenuItem Header="{x:Static p:Resources.MenuQuickFileDownload}" Click="OnMenuQuickFileDownload" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
                 <MenuItem Header="{x:Static p:Resources.MenuCreateNewJob}" Click="OnMenuCreateNewJob" />
-                <MenuItem Header="{x:Static p:Resources.MenuRefresh}" Click="OnMenuRefresh" />
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuView}">
+                <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuViewAllUsers}" Click="OnMenuAllUsers" x:Name="uiMenuAllUsers" />
+                <MenuItem Header="{x:Static p:Resources.MenuViewRefresh}" Click="OnMenuRefresh" />
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuHelp}">
+                <MenuItem Header="{x:Static p:Resources.MenuHelpAbout}" Click="OnMenuHelpAbout" />
             </MenuItem>
         </Menu>
 

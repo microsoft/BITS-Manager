@@ -61,6 +61,27 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BITS Manager
+        ///Utility to examine and modify BITS jobs.
+        ///For more information see {1}
+        ///Version {0}.
+        /// </summary>
+        public static string AboutMessage {
+            get {
+                return ResourceManager.GetString("AboutMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About BITS Manager.
+        /// </summary>
+        public static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add file to job.
         /// </summary>
         public static string AddFileToJob {
@@ -1069,20 +1090,47 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _File.
+        /// </summary>
+        public static string MenuFile {
+            get {
+                return ResourceManager.GetString("MenuFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E_xit.
+        /// </summary>
+        public static string MenuFileExit {
+            get {
+                return ResourceManager.GetString("MenuFileExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Help.
+        /// </summary>
+        public static string MenuHelp {
+            get {
+                return ResourceManager.GetString("MenuHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _About BITS Manager.
+        /// </summary>
+        public static string MenuHelpAbout {
+            get {
+                return ResourceManager.GetString("MenuHelpAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Jobs.
         /// </summary>
         public static string MenuJob {
             get {
                 return ResourceManager.GetString("MenuJob", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _All Users.
-        /// </summary>
-        public static string MenuJobsAllUsers {
-            get {
-                return ResourceManager.GetString("MenuJobsAllUsers", resourceCulture);
             }
         }
         
@@ -1096,11 +1144,29 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _View.
+        /// </summary>
+        public static string MenuView {
+            get {
+                return ResourceManager.GetString("MenuView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _All Users.
+        /// </summary>
+        public static string MenuViewAllUsers {
+            get {
+                return ResourceManager.GetString("MenuViewAllUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Refresh.
         /// </summary>
-        public static string MenuRefresh {
+        public static string MenuViewRefresh {
             get {
-                return ResourceManager.GetString("MenuRefresh", resourceCulture);
+                return ResourceManager.GetString("MenuViewRefresh", resourceCulture);
             }
         }
         
