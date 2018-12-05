@@ -6,7 +6,6 @@ using System.Text;
 
 // Set up the BITS namespaces
 using BITS = BITSReference1_5;
-
 //using BITS4 = BITSReference4_0;
 //using BITS5 = BITSReference5_0;
 //using BITS10_2 = BITSReference10_2;
@@ -158,7 +157,7 @@ namespace BITSManager
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED: return "😁";
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED: return "😎";
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED: return "😧";
-                default: return $"{(int)jobState}";
+                default: return String.Format ("{0:X}", jobState);
             }
         }
 
@@ -173,15 +172,15 @@ namespace BITSManager
             }
         }
 
-        public static string ConvertPriorityToString(BITS.BG_JOB_PRIORITY priority)
+        public static string ConvertJobPriorityToString(BITS.BG_JOB_PRIORITY jobPriority)
         {
-            switch (priority)
+            switch (jobPriority)
             {
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_FOREGROUND: return Properties.Resources.JobPriorityForeground;
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_HIGH: return Properties.Resources.JobPriorityHigh;
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_LOW: return Properties.Resources.JobPriorityLow;
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_NORMAL: return Properties.Resources.JobPriorityNormal;
-                default: return String.Format("{0:X}", priority);
+                default: return String.Format("{0:X}", jobPriority);
             }
         }
     }

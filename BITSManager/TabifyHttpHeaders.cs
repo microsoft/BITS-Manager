@@ -1,9 +1,8 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace BITSManager
 {
-    internal class TabifyHttpHeaders
+    public class TabifyHttpHeaders
     {
         /// <summary>
         /// Header:Value prettifier; converts HEADER:VALUE into \tHEADER:\t\t\tVALUE.
@@ -13,7 +12,7 @@ namespace BITSManager
         public static string AddTabs(string str)
         {
             var sb = new StringBuilder();
-            int nColonFound = 1;
+            int nColonFound = 0;
             int charsBeforeFirstColon = 0;
             foreach (var ch in str)
             {
@@ -50,11 +49,24 @@ namespace BITSManager
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        static private string GetTabs(int length)
+        public static string GetTabs(int length)
         {
-            const double TargetLength = 24.0;
+            const int TabSize = 8;
+            const int TargetLength = 3 * TabSize;
 
-            var missingLength = TargetLength - length;
+            // Handle the case of length being larger than TargetLength.
+            // We want some N such that (length + N) % TabSize == 0
+            // Otherwise we just want to know how many spaces it takes
+            // to get to the desired size.
+            // What makes this a little more complex is that if we're
+            // bigger than the target size then we still want things
+            // to line up a little bit neatly.
+            var missingLength = length < 0
+                ? 1
+                : (length >= TargetLength)
+                    ? TabSize - (length % TabSize)
+                    : TargetLength - length;
+
             string tabs = "";
             for (int i = 0; i < missingLength; i++)
             {

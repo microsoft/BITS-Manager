@@ -148,7 +148,7 @@ namespace BITSManager
             // Job priority details
             BITS.BG_JOB_PRIORITY jobPriority;
             Job.GetPriority(out jobPriority);
-            uiJobPriority.Text = BitsConversions.ConvertPriorityToString(jobPriority);
+            uiJobPriority.Text = BitsConversions.ConvertJobPriorityToString(jobPriority);
 
             // Job Type details
             BITS.BG_JOB_TYPE jobType;
