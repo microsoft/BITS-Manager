@@ -154,7 +154,7 @@ namespace BITSManager
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED: return "😁";
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED: return "😎";
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED: return "😧";
-                default: return String.Format ("{0:X}", jobState);
+                default: return String.Format("{0:X}", jobState);
             }
         }
 

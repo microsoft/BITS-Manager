@@ -9,7 +9,6 @@ using System.Windows.Input;
 // Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
 
-
 namespace BITSManager
 {
     /// <summary>
@@ -61,7 +60,6 @@ namespace BITSManager
             }
             Job = DownloadFile(uiUri.Text, uiFile.Text);
         }
-
 
         private void OnUriChanged(object sender, TextChangedEventArgs e)
         {
@@ -123,7 +121,7 @@ namespace BITSManager
                     }
                     // Job is in a final state (cancelled or acknowledged)
                 }
-                catch (Exception)
+                catch (System.Runtime.InteropServices.COMException)
                 {
                     ; // Handle job exception
                 }

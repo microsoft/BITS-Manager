@@ -41,7 +41,7 @@ namespace BITSManager.Tests
             Assert.AreEqual(Properties.Resources.JobStateCancelled, BitsConversions.ConvertJobStateToString(BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED));
 
             // Validate the unknown states
-            Assert.AreEqual(String.Format (Properties.Resources.JobStateUnknown, 0x11223300), BitsConversions.ConvertJobStateToString((BITS.BG_JOB_STATE)0x11223300));
+            Assert.AreEqual(String.Format(Properties.Resources.JobStateUnknown, 0x11223300), BitsConversions.ConvertJobStateToString((BITS.BG_JOB_STATE)0x11223300));
         }
 
         [TestMethod()]

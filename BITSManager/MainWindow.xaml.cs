@@ -14,7 +14,7 @@ namespace BITSManager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IRefreshJobList, BITS.IBackgroundCopyCallback
+    public partial class MainWindow : Window, BITS.IBackgroundCopyCallback
     {
         private const uint BG_JOB_ENUM_ALL_USERS = 1;
         private uint _jobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
@@ -23,11 +23,11 @@ namespace BITSManager
         private bool _shouldNotifyUserOnAccessError = false;
 
         public static readonly RoutedCommand QuickFileDownloadCommand = new RoutedUICommand(
-            "QuickFileDownload", 
-            "QuickFileDownloadCommand", 
-            typeof(MainWindow), 
+            "QuickFileDownload",
+            "QuickFileDownloadCommand",
+            typeof(MainWindow),
             new InputGestureCollection(
-                new InputGesture[] { new KeyGesture(Key.K, ModifierKeys.Control)}
+                new InputGesture[] { new KeyGesture(Key.K, ModifierKeys.Control) }
                 )
             );
 
@@ -43,7 +43,7 @@ namespace BITSManager
             {
                 _mgr = new BITS.BackgroundCopyManager1_5();
             }
-            catch (Exception ex)
+            catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
                     String.Format(
@@ -62,7 +62,6 @@ namespace BITSManager
             _timer.Tick += Timer_Tick;
             _timer.Interval = new TimeSpan(0, 0, 10);
             _timer.Start();
-            uiJobDetails.RefreshJobList = this;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -80,7 +79,7 @@ namespace BITSManager
             {
                 _mgr.EnumJobs(_jobEnumType, out jobsEnum);
             }
-            catch (Exception ex)
+            catch (System.Runtime.InteropServices.COMException ex)
             {
                 // The most common error is trying to enumerate all users jobs
                 // when you are not running as admin. Don't keep telling the user
@@ -115,10 +114,9 @@ namespace BITSManager
             }
 
             uint njobFetched = 0;
-            BITS.IBackgroundCopyJob job = null;
-
             do
             {
+                BITS.IBackgroundCopyJob job = null;
                 jobsEnum.Next(1, out job, ref njobFetched); // Can only pull a single job out at a time
                 if (njobFetched > 0)
                 {
@@ -151,6 +149,7 @@ namespace BITSManager
                 }
             }
 
+            var jobMenuEnabled = true;
             if (uiJobList.Items.Count > 0)
             {
                 uiJobDetails.Visibility = Visibility.Visible;
@@ -163,11 +162,34 @@ namespace BITSManager
                     var control = uiJobList.SelectedItem as JobViewControl;
                     uiJobDetails.SetJob(control.Job);
                 }
+
+                // Update the jobs menus based on the job state
+                var job = (uiJobList.SelectedItem as JobViewControl).Job;
+                BITS.BG_JOB_STATE state;
+                job.GetState(out state);
+                switch (state)
+                {
+                    case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
+                    case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
+                        jobMenuEnabled = false;
+                        break;
+                    default:
+
+                        break;
+                }
             }
             else
             {
                 uiJobDetails.Visibility = Visibility.Hidden;
+                jobMenuEnabled = false;
             }
+
+            uiMenuJobCancel.IsEnabled = jobMenuEnabled;
+            uiMenuJobComplete.IsEnabled = jobMenuEnabled;
+            uiMenuJobResume.IsEnabled = jobMenuEnabled;
+            uiMenuJobSuspend.IsEnabled = jobMenuEnabled;
+            uiMenuJobAddFile.IsEnabled = jobMenuEnabled;
+
         }
 
         /// <summary>
@@ -234,7 +256,7 @@ namespace BITSManager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMenuQuickFileDownload(object sender, RoutedEventArgs e)
+        private void OnMenuJobQuickFileDownload(object sender, RoutedEventArgs e)
         {
             var dlg = new QuickFileDownloadWindow();
             dlg.Owner = this;
@@ -250,7 +272,7 @@ namespace BITSManager
             }
         }
 
-        private void OnMenuCreateNewJob(object sender, RoutedEventArgs e)
+        private void OnMenuJobCreateNewJob(object sender, RoutedEventArgs e)
         {
             var dlg = new CreateNewJobWindow();
             dlg.Owner = this;
@@ -310,6 +332,124 @@ namespace BITSManager
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             var text = String.Format(Properties.Resources.AboutMessage, version, moreUrl);
             MessageBox.Show(text, Properties.Resources.AboutTitle);
+        }
+
+        private void OnSuspend(object sender, RoutedEventArgs e)
+        {
+            var job = uiJobDetails.Job;
+            try
+            {
+                job?.Suspend();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobCancel(object sender, RoutedEventArgs e)
+        {
+            var job = uiJobDetails.Job;
+            try
+            {
+                job?.Cancel();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobComplete(object sender, RoutedEventArgs e)
+        {
+            var job = uiJobDetails.Job;
+            try
+            {
+                job?.Complete();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobResume(object sender, RoutedEventArgs e)
+        {
+            var job = uiJobDetails.Job;
+            try
+            {
+                job?.Resume();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobSuspend(object sender, RoutedEventArgs e)
+        {
+            var job = uiJobDetails.Job;
+            try
+            {
+                job?.Suspend();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobAddFile(object sender, RoutedEventArgs e)
+        {
+            var job = uiJobDetails.Job;
+            if (job == null)
+            {
+                return;
+            }
+            var dlg = new AddFileToJobWindow();
+            dlg.Owner = Window.GetWindow(this);
+            var result = dlg.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                var remoteUri = dlg.RemoteUri;
+                var localFile = dlg.LocalFile;
+                if (!string.IsNullOrEmpty(remoteUri) && !string.IsNullOrEmpty(localFile))
+                {
+                    try
+                    {
+                        job.AddFile(remoteUri, localFile);
+                    }
+                    catch (System.Runtime.InteropServices.COMException ex)
+                    {
+                        var message = String.Format(
+                            Properties.Resources.JobCantAddFileMessage,
+                            localFile,
+                            ex.Message);
+                        MessageBox.Show(message, Properties.Resources.JobCantAddFileTitle);
+                    }
+                }
+            }
+            RefreshJobList();
         }
     }
 }

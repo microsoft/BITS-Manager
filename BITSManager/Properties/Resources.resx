@@ -491,7 +491,7 @@
     <value>Application Menu</value>
     <comment>Title of the menu for Keros accessibility</comment>
   </data>
-  <data name="MenuCreateNewJob" xml:space="preserve">
+  <data name="MenuJobCreateNewJob" xml:space="preserve">
     <value>New _Job</value>
     <comment>Create New Job menu item</comment>
   </data>
@@ -503,7 +503,7 @@
     <value>_All Users</value>
     <comment>Menu to read jobs for all users or just the one. </comment>
   </data>
-  <data name="MenuQuickFileDownload" xml:space="preserve">
+  <data name="MenuJobQuickFileDownload" xml:space="preserve">
     <value>Quic_k File Download</value>
     <comment>Menu item in the MainWindow for quick file download</comment>
   </data>
@@ -556,5 +556,20 @@ Version {0}</value>
   </data>
   <data name="AboutTitle" xml:space="preserve">
     <value>About BITS Manager</value>
+  </data>
+  <data name="MenuJobAddFile" xml:space="preserve">
+    <value>Add File to Job</value>
+  </data>
+  <data name="MenuJobCancel" xml:space="preserve">
+    <value>Cancel Job</value>
+  </data>
+  <data name="MenuJobComplete" xml:space="preserve">
+    <value>Complete Job</value>
+  </data>
+  <data name="MenuJobResume" xml:space="preserve">
+    <value>Resume Job</value>
+  </data>
+  <data name="MenuJobSuspend" xml:space="preserve">
+    <value>Suspend Job</value>
   </data>
 </root>

@@ -70,7 +70,7 @@ namespace BITSManager
                 uiFileHttpResponseData.Text = str;
             }
 
-            // Enable the Open File button only when the file can't be 
+            // Enable the Open File button only when the file can't be
             // opened by bits.
             BITS.BG_JOB_STATE state;
             job.GetState(out state);
@@ -92,7 +92,12 @@ namespace BITSManager
             {
                 System.Diagnostics.Process.Start(Filename);
             }
-            catch (Exception ex)
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    Properties.Resources.ErrorTitle);
+            }
+            catch (PlatformNotSupportedException ex)
             {
                 MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message),
                     Properties.Resources.ErrorTitle);

@@ -16,7 +16,7 @@ Licensed under the MIT License.
                 <Run Text="&#09;" /> <!-- Tab character -->
                 <Run x:Name="uiFileLocal" FontSize="16" />
                 <LineBreak />
-                <Run Text="{x:Static p:Resources.FileRemote}" FontSize="16"  FontWeight="Bold"/>
+                <Run Text="{x:Static p:Resources.FileRemote}" FontSize="16"  FontWeight="Bold" />
                 <Run Text="&#09;" />
                 <Run x:Name="uiFileRemote" FontSize="16" />
                 <LineBreak />

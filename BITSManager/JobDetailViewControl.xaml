@@ -15,7 +15,6 @@ Licensed under the MIT License.
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <ScrollViewer Grid.Row="1">
@@ -90,21 +89,5 @@ Licensed under the MIT License.
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-
-        <!-- Job actions pause/resume/cancel -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="4">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="1" />
-                    <Setter Property="Padding" Value="5,0,5,0" />
-                    <Setter Property="MinWidth" Value="70" />
-                </Style>
-            </StackPanel.Resources>
-            <Button Content="{x:Static p:Resources.JobButtonAddFile}" Click="OnAddFile" x:Name="uiAddFileButton" />
-            <Button Content="{x:Static p:Resources.JobButtonCancel}" Click="OnCancel" x:Name="uiCancelButton" />
-            <Button Content="{x:Static p:Resources.JobButtonComplete}" Click="OnComplete" x:Name="uiCompleteButton" />
-            <Button Content="{x:Static p:Resources.JobButtonSuspend}" Click="OnSuspend" x:Name="uiSuspendButton" />
-            <Button Content="{x:Static p:Resources.JobButtonResume}" Click="OnResume" x:Name="uiResumeButton" />
-        </StackPanel>
     </Grid>
 </UserControl>

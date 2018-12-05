@@ -118,7 +118,6 @@
     <Compile Include="CreateNewJobWindow.xaml.cs">
       <DependentUpon>CreateNewJobWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IRefreshJobList.cs" />
     <Compile Include="QuickFileDownloadWindow.xaml.cs">
       <DependentUpon>QuickFileDownloadWindow.xaml</DependentUpon>
     </Compile>

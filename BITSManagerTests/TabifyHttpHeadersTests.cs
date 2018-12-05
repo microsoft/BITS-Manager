@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BITSManager;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BITSManager.Tests
 {
@@ -16,7 +10,7 @@ namespace BITSManager.Tests
         {
             const string TAB = "        ";
             Assert.AreEqual("HEADER: " + TAB + TAB + "VALUE:VALUE2", TabifyHttpHeaders.AddTabs("HEADER:VALUE:VALUE2"));
-            Assert.AreEqual("HEADER: " + TAB + TAB + "VALUE:VALUE2\r\n\theader: " + TAB + TAB + "value:value2", 
+            Assert.AreEqual("HEADER: " + TAB + TAB + "VALUE:VALUE2\r\n\theader: " + TAB + TAB + "value:value2",
                 TabifyHttpHeaders.AddTabs("HEADER:VALUE:VALUE2\r\nheader:value:value2"));
 
             // Try some unusual values

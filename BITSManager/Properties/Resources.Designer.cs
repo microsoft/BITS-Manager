@@ -1081,15 +1081,6 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New _Job.
-        /// </summary>
-        public static string MenuCreateNewJob {
-            get {
-                return ResourceManager.GetString("MenuCreateNewJob", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to _File.
         /// </summary>
         public static string MenuFile {
@@ -1135,11 +1126,65 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add File to Job.
+        /// </summary>
+        public static string MenuJobAddFile {
+            get {
+                return ResourceManager.GetString("MenuJobAddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel Job.
+        /// </summary>
+        public static string MenuJobCancel {
+            get {
+                return ResourceManager.GetString("MenuJobCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete Job.
+        /// </summary>
+        public static string MenuJobComplete {
+            get {
+                return ResourceManager.GetString("MenuJobComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New _Job.
+        /// </summary>
+        public static string MenuJobCreateNewJob {
+            get {
+                return ResourceManager.GetString("MenuJobCreateNewJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quic_k File Download.
         /// </summary>
-        public static string MenuQuickFileDownload {
+        public static string MenuJobQuickFileDownload {
             get {
-                return ResourceManager.GetString("MenuQuickFileDownload", resourceCulture);
+                return ResourceManager.GetString("MenuJobQuickFileDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resume Job.
+        /// </summary>
+        public static string MenuJobResume {
+            get {
+                return ResourceManager.GetString("MenuJobResume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspend Job.
+        /// </summary>
+        public static string MenuJobSuspend {
+            get {
+                return ResourceManager.GetString("MenuJobSuspend", resourceCulture);
             }
         }
         

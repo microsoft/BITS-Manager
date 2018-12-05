@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 using System;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 
 // Set up the BITS namespaces
@@ -23,11 +22,6 @@ namespace BITSManager
         /// to the main program (for example, to list the files in the job)
         /// </summary>
         public BITS.IBackgroundCopyJob Job { get; internal set; } = null;
-
-        /// <summary>
-        /// Interface to the object that can refresh the job list. Hint: it's the MainWindow.
-        /// </summary>
-        public IRefreshJobList RefreshJobList { get; set; } = null;
 
         public JobDetailViewControl()
         {
@@ -123,7 +117,7 @@ namespace BITSManager
                             + $"{Properties.Resources.JobErrorContext} \t{ErrorContextDescription}";
                         uiJobError.Text = error;
                     }
-                    catch (Exception)
+                    catch (System.Runtime.InteropServices.COMException)
                     {
                         uiJobError.Text = Properties.Resources.JobErrorException;
                     }
@@ -229,7 +223,7 @@ namespace BITSManager
                     httpOptions2.GetHttpMethod(out httpMethod);
                     uiJobHttpMethod.Text = httpMethod ?? Properties.Resources.JobHttpMethodNotSet;
                 }
-                catch (Exception ex)
+                catch (System.Runtime.InteropServices.COMException ex)
                 {
                     uiJobHttpMethod.Text = String.Format(Properties.Resources.JobHttpMethodException, ex.Message);
                 }
@@ -251,7 +245,7 @@ namespace BITSManager
                     headers = TabifyHttpHeaders.AddTabs(headers);
                     uiJobCustomHeaders.Text = headers;
                 }
-                catch (Exception ex)
+                catch (System.Runtime.InteropServices.COMException ex)
                 {
                     uiJobCustomHeaders.Text = String.Format(
                         Properties.Resources.JobCustomHeadersException,
@@ -261,9 +255,6 @@ namespace BITSManager
 
             // Update the list of files associated with the job.
             ListBITSJobFiles(Job);
-
-            // Update the buttons based on the state
-            EnableActionButtons(currState);
         }
 
         /// <summary>
@@ -299,118 +290,6 @@ namespace BITSManager
                 }
             }
             while (nfilesFetched > 0);
-        }
-
-        /// <summary>
-        /// Enable the action button based on the current job state
-        /// </summary>
-        /// <param name="state"></param>
-        private void EnableActionButtons(BITS.BG_JOB_STATE state)
-        {
-            bool isNotFinalState = state != BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED
-                && state != BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED;
-
-            uiAddFileButton.IsEnabled = isNotFinalState;
-            uiCancelButton.IsEnabled = isNotFinalState;
-            uiCompleteButton.IsEnabled = isNotFinalState;
-            uiResumeButton.IsEnabled = isNotFinalState;
-            uiSuspendButton.IsEnabled = isNotFinalState;
-        }
-
-        private void OnAddFile(object sender, RoutedEventArgs e)
-        {
-            if (Job == null)
-            {
-                return;
-            }
-            var dlg = new AddFileToJobWindow();
-            dlg.Owner = Window.GetWindow(this);
-            var result = dlg.ShowDialog();
-            if (result.HasValue && result.Value)
-            {
-                var remoteUri = dlg.RemoteUri;
-                var localFile = dlg.LocalFile;
-                if (!string.IsNullOrEmpty(remoteUri) && !string.IsNullOrEmpty(localFile))
-                {
-                    try
-                    {
-                        Job.AddFile(remoteUri, localFile);
-                    }
-                    catch (Exception ex)
-                    {
-                        var message = String.Format(
-                            Properties.Resources.JobCantAddFileMessage,
-                            localFile,
-                            ex.Message);
-                        MessageBox.Show(message, Properties.Resources.JobCantAddFileTitle);
-                    }
-                }
-            }
-            RefreshJobList.RefreshJobList();
-        }
-
-        private void OnCancel(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Job.Cancel();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
-                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonCancel)
-                    );
-            }
-            RefreshJobList?.RefreshJobList();
-        }
-
-        private void OnComplete(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Job.Complete();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
-                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonComplete)
-                    );
-            }
-            RefreshJobList?.RefreshJobList();
-        }
-
-        private void OnResume(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Job.Resume();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
-                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonResume)
-                    );
-            }
-            RefreshJobList?.RefreshJobList();
-        }
-
-        private void OnSuspend(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Job.Suspend();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
-                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
-                    );
-            }
-            RefreshJobList?.RefreshJobList();
         }
     }
 }

@@ -11,7 +11,7 @@ Licensed under the MIT License.
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Title}" Height="450" Width="800">
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" Executed="OnMenuQuickFileDownload"/>
+        <CommandBinding Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" Executed="OnMenuJobQuickFileDownload" />
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,8 +31,13 @@ Licensed under the MIT License.
             </MenuItem>
 
             <MenuItem Header="{x:Static p:Resources.MenuJob}">
-                <MenuItem Header="{x:Static p:Resources.MenuQuickFileDownload}" Click="OnMenuQuickFileDownload" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
-                <MenuItem Header="{x:Static p:Resources.MenuCreateNewJob}" Click="OnMenuCreateNewJob" />
+                <MenuItem Header="{x:Static p:Resources.MenuJobQuickFileDownload}" Click="OnMenuJobQuickFileDownload" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
+                <MenuItem Header="{x:Static p:Resources.MenuJobCreateNewJob}" Click="OnMenuJobCreateNewJob" />
+                <MenuItem x:Name="uiMenuJobCancel" Header="{x:Static p:Resources.MenuJobCancel}" Click="OnMenuJobCancel" />
+                <MenuItem x:Name="uiMenuJobComplete" Header="{x:Static p:Resources.MenuJobComplete}" Click="OnMenuJobComplete" />
+                <MenuItem x:Name="uiMenuJobResume" Header="{x:Static p:Resources.MenuJobResume}" Click="OnMenuJobResume" />
+                <MenuItem x:Name="uiMenuJobSuspend" Header="{x:Static p:Resources.MenuJobSuspend}" Click="OnMenuJobSuspend" />
+                <MenuItem x:Name="uiMenuJobAddFile" Header="{x:Static p:Resources.MenuJobAddFile}" Click="OnMenuJobAddFile" />
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuView}">
                 <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuViewAllUsers}" Click="OnMenuAllUsers" x:Name="uiMenuAllUsers" />
