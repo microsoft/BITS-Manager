@@ -272,13 +272,13 @@ namespace BITSManager
         /// <param name="value">FILETIME from a BITS _BG_JOB_TIMES</param>
         /// <returns>DateTime based on the local (not UTC) FILETIME
         /// or DateTime.MinValue for FILETIMES that are all-zeros</returns>
-        public static DateTime MakeDateTime(BITS._FILETIME value)
+        private static DateTime MakeDateTime(BITS._FILETIME value)
         {
             long ticks = ((long)value.dwHighDateTime << 32) + (long)value.dwLowDateTime;
             return ticks == 0 ? DateTime.MinValue : DateTime.FromFileTime(ticks);
         }
 
-        public void ListBITSJobFiles(BITS.IBackgroundCopyJob Job)
+        private void ListBITSJobFiles(BITS.IBackgroundCopyJob Job)
         {
             uiFileList.Items.Clear();
 

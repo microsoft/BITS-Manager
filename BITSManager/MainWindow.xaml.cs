@@ -6,11 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-
-//using BITS4 = BITSReference4_0;
-//using BITS5 = BITSReference5_0;
 
 namespace BITSManager
 {
@@ -20,9 +17,10 @@ namespace BITSManager
     public partial class MainWindow : Window, IRefreshJobList, BITS.IBackgroundCopyCallback
     {
         private const uint BG_JOB_ENUM_ALL_USERS = 1;
-        private uint JobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
-        private BITS.IBackgroundCopyManager Mgr = null;
-        private DispatcherTimer timer;
+        private uint _jobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
+        private BITS.IBackgroundCopyManager _mgr = null;
+        private DispatcherTimer _timer;
+        private bool _shouldNotifyUserOnAccessError = false;
 
         public static readonly RoutedCommand QuickFileDownloadCommand = new RoutedUICommand(
             "QuickFileDownload", 
@@ -36,14 +34,14 @@ namespace BITSManager
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
+            Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                Mgr = new BITS.BackgroundCopyManager1_5();
+                _mgr = new BITS.BackgroundCopyManager1_5();
             }
             catch (Exception ex)
             {
@@ -53,17 +51,17 @@ namespace BITSManager
                     ex.HResult,
                     ex.Message));
             }
-            if (Mgr == null)
+            if (_mgr == null)
             {
                 MessageBox.Show(Properties.Resources.ErrorCantConnectToBits, Properties.Resources.ErrorTitle);
             }
 
             RefreshJobList();
             bool focusStatus = uiJobList.Focus();
-            timer = new DispatcherTimer();
-            timer.Tick += Timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 10);
-            timer.Start();
+            _timer = new DispatcherTimer();
+            _timer.Tick += Timer_Tick;
+            _timer.Interval = new TimeSpan(0, 0, 10);
+            _timer.Start();
             uiJobDetails.RefreshJobList = this;
         }
 
@@ -80,18 +78,18 @@ namespace BITSManager
             BITS.IEnumBackgroundCopyJobs jobsEnum = null;
             try
             {
-                Mgr.EnumJobs(JobEnumType, out jobsEnum);
+                _mgr.EnumJobs(_jobEnumType, out jobsEnum);
             }
             catch (Exception ex)
             {
                 // The most common error is trying to enumerate all users jobs
                 // when you are not running as admin. Don't keep telling the user
                 // that they are not the admin.
-                if (JobEnumType == BG_JOB_ENUM_ALL_USERS && (uint)ex.HResult == 0x80070005) // E_ACCESS_DENIED
+                if (_jobEnumType == BG_JOB_ENUM_ALL_USERS && (uint)ex.HResult == 0x80070005) // E_ACCESS_DENIED
                 {
-                    if (ShouldNotifyUserOnError)
+                    if (_shouldNotifyUserOnAccessError)
                     {
-                        ShouldNotifyUserOnError = false; // only display this dialog once.
+                        _shouldNotifyUserOnAccessError = false; // only display this dialog once.
                         MessageBox.Show(
                             Properties.Resources.ErrorInsufficientPrivilegesMessage,
                             Properties.Resources.ErrorInsufficientPrivilegesTitle);
@@ -172,6 +170,12 @@ namespace BITSManager
             }
         }
 
+        /// <summary>
+        /// Given a job, return the index in the visible job list that matches the job.
+        /// Uses the job guid as the key.
+        /// </summary>
+        /// <param name="job">The IBackgroundCopyJob to look for</param>
+        /// <returns>An index 0..n for a job that's found and -1 if not found</returns>
         private int GetJobIndex(BITS.IBackgroundCopyJob job)
         {
             BITS.GUID searchFor;
@@ -251,13 +255,13 @@ namespace BITSManager
             var dlg = new CreateNewJobWindow();
             dlg.Owner = this;
             var result = dlg.ShowDialog();
-            if (result.HasValue && result.Value && Mgr != null)
+            if (result.HasValue && result.Value && _mgr != null)
             {
                 var jobName = dlg.JobName;
                 var jobType = dlg.JobType;
                 BITS.GUID jobId;
                 BITS.IBackgroundCopyJob job;
-                Mgr.CreateJob(jobName, jobType, out jobId, out job);
+                _mgr.CreateJob(jobName, jobType, out jobId, out job);
                 dlg.SetJobProperties(job);
                 RefreshJobList();
 
@@ -272,12 +276,10 @@ namespace BITSManager
             RefreshJobList();
         }
 
-        private bool ShouldNotifyUserOnError = false;
-
         private void OnMenuAllUsers(object sender, RoutedEventArgs e)
         {
-            ShouldNotifyUserOnError = true;
-            JobEnumType = uiMenuAllUsers.IsChecked ? BG_JOB_ENUM_ALL_USERS : 0;
+            _shouldNotifyUserOnAccessError = true;
+            _jobEnumType = uiMenuAllUsers.IsChecked ? BG_JOB_ENUM_ALL_USERS : 0;
             RefreshJobList();
         }
 

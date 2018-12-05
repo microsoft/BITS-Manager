@@ -3,12 +3,8 @@
 using System.Windows;
 using System.Windows.Controls;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-
-//using BITS4 = BITSReference4_0;
-//using BITS5 = BITSReference5_0;
-//using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
@@ -17,10 +13,15 @@ namespace BITSManager
     /// </summary>
     public partial class CreateNewJobWindow : Window
     {
+        /// <summary>
+        /// JobName that the user typed in; will be used by the caller to create the BITS job.
+        /// </summary>
+        public string JobName { get { return uiJobName.Text; } }
+
         public CreateNewJobWindow()
         {
             InitializeComponent();
-            this.Loaded += CreateNewJobWindow_Loaded;
+            Loaded += CreateNewJobWindow_Loaded;
         }
 
         public void SetJobProperties(BITS.IBackgroundCopyJob job)
@@ -35,15 +36,13 @@ namespace BITSManager
 
         private void OnCancel(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         private void OnOK(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
         }
-
-        public string JobName { get { return uiJobName.Text; } }
 
         public BITS.BG_JOB_TYPE JobType
         {

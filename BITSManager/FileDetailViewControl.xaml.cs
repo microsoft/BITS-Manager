@@ -4,13 +4,9 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-
-//using BITS4 = BITSReference4_0;
 using BITS5 = BITSReference5_0;
-
-//using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
@@ -19,28 +15,26 @@ namespace BITSManager
     /// </summary>
     public partial class FileDetailViewControl : UserControl
     {
-        private BITS.IBackgroundCopyJob Job;
-        private BITS.IBackgroundCopyFile File;
+        private BITS.IBackgroundCopyFile _file;
 
         public FileDetailViewControl(BITS.IBackgroundCopyJob job, BITS.IBackgroundCopyFile file)
         {
-            Job = job;
-            File = file;
+            _file = file;
 
             InitializeComponent();
 
             // Set the different parts of the UI
             string localName;
-            File.GetLocalName(out localName);
+            file.GetLocalName(out localName);
             uiFileLocal.Text = localName;
 
             string remoteName;
-            File.GetRemoteName(out remoteName);
+            file.GetRemoteName(out remoteName);
             uiFileRemote.Text = remoteName;
 
             // Add in the current progress
             BITS._BG_FILE_PROGRESS progress;
-            File.GetProgress(out progress);
+            file.GetProgress(out progress);
             var bytes = progress.BytesTotal == ulong.MaxValue
                 ? String.Format(
                     Properties.Resources.FileProgressByteCountUnknown,
@@ -79,7 +73,7 @@ namespace BITSManager
             // Enable the Open File button only when the file can't be 
             // opened by bits.
             BITS.BG_JOB_STATE state;
-            Job.GetState(out state);
+            job.GetState(out state);
             switch (state)
             {
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
@@ -93,7 +87,7 @@ namespace BITSManager
         private void OnOpenFile(object sender, RoutedEventArgs e)
         {
             string Filename;
-            File.GetLocalName(out Filename);
+            _file.GetLocalName(out Filename);
             try
             {
                 System.Diagnostics.Process.Start(Filename);

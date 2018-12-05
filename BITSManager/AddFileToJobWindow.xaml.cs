@@ -12,12 +12,12 @@ namespace BITSManager
     {
         public string RemoteUri { get { return uiUri.Text; } }
         public string LocalFile { get { return uiFile.Text; } }
-        private bool FileHasChanged = false;
+        private bool _fileHasChanged = false;
 
         public AddFileToJobWindow()
         {
             InitializeComponent();
-            this.Loaded += AddFileToJobWindowControl_Loaded;
+            Loaded += AddFileToJobWindowControl_Loaded;
         }
 
         private void AddFileToJobWindowControl_Loaded(object sender, RoutedEventArgs e)
@@ -27,12 +27,12 @@ namespace BITSManager
 
         private void OnCancel(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         private void OnOK(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
         }
 
         private void OnUriChanged(object sender, TextChangedEventArgs e)
@@ -40,7 +40,7 @@ namespace BITSManager
             string newUriText = uiUri.Text;
             Uri uri;
             var parseStatus = Uri.TryCreate(newUriText, UriKind.Absolute, out uri);
-            if (parseStatus && uri.Segments.Length >= 1 && !FileHasChanged)
+            if (parseStatus && uri.Segments.Length >= 1 && !_fileHasChanged)
             {
                 // Make a corresponding file name. If the user has changed the file text,
                 // don't update it when the URL changes.
@@ -56,7 +56,7 @@ namespace BITSManager
 
         private void OnFileChangedViaKeyboard(object sender, KeyEventArgs e)
         {
-            FileHasChanged = true;
+            _fileHasChanged = true;
         }
     }
 }

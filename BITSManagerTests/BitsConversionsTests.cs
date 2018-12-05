@@ -1,11 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-//using BITS4 = BITSReference4_0;
-//using BITS5 = BITSReference5_0;
-//using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager.Tests
 {

@@ -6,12 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
 
-//using BITS4 = BITSReference4_0;
-//using BITS5 = BITSReference5_0;
-//using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
@@ -21,12 +18,12 @@ namespace BITSManager
     public partial class QuickFileDownloadWindow : Window, BITS.IBackgroundCopyCallback
     {
         public BITS.IBackgroundCopyJob Job { get; internal set; } = null;
-        private bool FileHasChanged = false;
+        private bool _fileHasChanged = false;
 
         public QuickFileDownloadWindow()
         {
             InitializeComponent();
-            this.Loaded += QuickFileDownloadControl_Loaded;
+            Loaded += QuickFileDownloadControl_Loaded;
         }
 
         /// <summary>
@@ -45,35 +42,33 @@ namespace BITSManager
 
         private void OnCancel(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         private void OnOK(object sender, RoutedEventArgs e)
         {
             Job = null; // Clear out the old value, if any.
-            this.DialogResult = true;
-            if (String.IsNullOrEmpty(RemoteUri))
+            DialogResult = true;
+            if (String.IsNullOrEmpty(uiUri.Text))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyRemoteUrl, Properties.Resources.ErrorTitle);
                 return;
             }
-            if (String.IsNullOrEmpty(LocalFile))
+            if (String.IsNullOrEmpty(uiFile.Text))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyLocalFile, Properties.Resources.ErrorTitle);
                 return;
             }
-            Job = DownloadFile(RemoteUri, LocalFile);
+            Job = DownloadFile(uiUri.Text, uiFile.Text);
         }
 
-        public string RemoteUri { get { return uiUri.Text; } }
-        public string LocalFile { get { return uiFile.Text; } }
 
         private void OnUriChanged(object sender, TextChangedEventArgs e)
         {
             string newUriText = uiUri.Text;
             Uri uri;
             var parseStatus = Uri.TryCreate(newUriText, UriKind.Absolute, out uri);
-            if (parseStatus && uri.Segments.Length >= 1 && !FileHasChanged)
+            if (parseStatus && uri.Segments.Length >= 1 && !_fileHasChanged)
             {
                 // Make a corresponding file name. If the user has changed the file text,
                 // don't update it when the URL changes.
@@ -89,7 +84,7 @@ namespace BITSManager
 
         private void OnFileChangedViaKeyboard(object sender, KeyEventArgs e)
         {
-            FileHasChanged = true;
+            _fileHasChanged = true;
         }
 
         /// <summary>

@@ -3,13 +3,9 @@
 using System;
 using System.Windows.Controls;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-
-//using BITS4 = BITSReference4_0;
 using BITS5 = BITSReference5_0;
-
-//using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
@@ -29,7 +25,7 @@ namespace BITSManager
             if (job5 != null) // job5 will be null on, e.g., Windows 7 and earlier.
             {
                 // Set the job properties.
-                var costs = JobCosts;
+                var costs = _jobCosts;
                 if (costs.HasValue)
                 {
                     var value = new BITS5.BITS_JOB_PROPERTY_VALUE();
@@ -37,7 +33,7 @@ namespace BITSManager
                     job5.SetProperty(BITS5.BITS_JOB_PROPERTY_ID.BITS_JOB_PROPERTY_ID_COST_FLAGS, value);
                 }
 
-                var isDynamic = JobIsDynamic;
+                var isDynamic = _jobIsDynamic;
                 if (isDynamic.HasValue)
                 {
                     var value = new BITS5.BITS_JOB_PROPERTY_VALUE();
@@ -45,7 +41,7 @@ namespace BITSManager
                     job5.SetProperty(BITS5.BITS_JOB_PROPERTY_ID.BITS_JOB_PROPERTY_DYNAMIC_CONTENT, value);
                 }
 
-                var isHighPerformance = JobIsHighPerformance;
+                var isHighPerformance = _jobIsHighPerformance;
                 if (isHighPerformance.HasValue)
                 {
                     var value = new BITS5.BITS_JOB_PROPERTY_VALUE();
@@ -54,13 +50,13 @@ namespace BITSManager
                 }
             }
 
-            var priority = JobPriority;
+            var priority = _jobPriority;
             if (priority.HasValue)
             {
                 job.SetPriority(priority.Value);
             }
 
-            var authScheme = AuthScheme;
+            var authScheme = _authScheme;
             if (authScheme.HasValue)
             {
                 var job2 = (BITS.IBackgroundCopyJob2)job; // Job2 exists on all supported version of Windows.
@@ -68,46 +64,28 @@ namespace BITSManager
                 credentials.Scheme = (BITS.BG_AUTH_SCHEME)authScheme.Value;
                 credentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_SERVER;
                 // This app doesn't support setting proxy auth.
-                credentials.Credentials.Password = Password;
-                credentials.Credentials.UserName = UserName;
+                credentials.Credentials.Password = uiPassword.Text;
+                credentials.Credentials.UserName = uiUserName.Text;
                 job2.SetCredentials(credentials);
             }
         }
 
-        private bool? JobIsDynamic
+        private BITS.BG_AUTH_SCHEME? _authScheme
         {
             get
             {
-                var isChecked = uiDynamic.IsChecked;
-                return isChecked;
-            }
-        }
-
-        private bool? JobIsHighPerformance
-        {
-            get
-            {
-                var isChecked = uiHighPerformance.IsChecked;
-                return isChecked;
-            }
-        }
-
-        private BITS.BG_JOB_PRIORITY? JobPriority
-        {
-            get
-            {
-                if (uiPriority.SelectedItem == null)
+                if (uiAuthScheme.SelectedItem == null)
                 {
                     return null;
                 }
-                // The Tag for each ComboBoxItem is selected to match the BITS priority values.
-                var tag = (uiPriority.SelectedItem as ComboBoxItem).Tag as string;
+                // The Tag for each ComboBoxItem is selected to match the BITS auth scheme values.
+                var tag = (uiAuthScheme.SelectedItem as ComboBoxItem).Tag as string;
                 int value = Int32.Parse(tag);
-                return (BITS.BG_JOB_PRIORITY)value;
+                return (BITS.BG_AUTH_SCHEME)value;
             }
         }
 
-        private BitsCosts? JobCosts
+        private BitsCosts? _jobCosts
         {
             get
             {
@@ -121,21 +99,36 @@ namespace BITSManager
             }
         }
 
-        public string UserName { get { return uiUserName.Text; } }
-        public string Password { get { return uiUserName.Text; } }
-
-        public BITS.BG_AUTH_SCHEME? AuthScheme
+        private bool? _jobIsDynamic
         {
             get
             {
-                if (uiAuthScheme.SelectedItem == null)
+                var isChecked = uiDynamic.IsChecked;
+                return isChecked;
+            }
+        }
+
+        private bool? _jobIsHighPerformance
+        {
+            get
+            {
+                var isChecked = uiHighPerformance.IsChecked;
+                return isChecked;
+            }
+        }
+
+        private BITS.BG_JOB_PRIORITY? _jobPriority
+        {
+            get
+            {
+                if (uiPriority.SelectedItem == null)
                 {
                     return null;
                 }
-                // The Tag for each ComboBoxItem is selected to match the BITS auth scheme values.
-                var tag = (uiAuthScheme.SelectedItem as ComboBoxItem).Tag as string;
+                // The Tag for each ComboBoxItem is selected to match the BITS priority values.
+                var tag = (uiPriority.SelectedItem as ComboBoxItem).Tag as string;
                 int value = Int32.Parse(tag);
-                return (BITS.BG_AUTH_SCHEME)value;
+                return (BITS.BG_JOB_PRIORITY)value;
             }
         }
     }
