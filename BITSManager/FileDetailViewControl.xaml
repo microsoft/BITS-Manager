@@ -30,6 +30,6 @@ Licensed under the MIT License.
                 <LineBreak />
         </TextBlock>
 
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="{x:Static p:Resources.FileOpen}" ToolTip="{x:Static p:Resources.FileOpenTooltip}" Click="OnOpenFile" />
+        <Button x:Name="uiOpenButton" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{x:Static p:Resources.FileOpen}" ToolTip="{x:Static p:Resources.FileOpenTooltip}" Click="OnOpenFile" IsEnabled="False" />
     </Grid>
 </UserControl>

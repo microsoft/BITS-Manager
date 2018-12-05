@@ -75,6 +75,19 @@ namespace BITSManager
                 str = TabifyHttpHeaders.AddTabs(str);
                 uiFileHttpResponseData.Text = str;
             }
+
+            // Enable the Open File button only when the file can't be 
+            // opened by bits.
+            BITS.BG_JOB_STATE state;
+            Job.GetState(out state);
+            switch (state)
+            {
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
+                    uiOpenButton.IsEnabled = true;
+                    break;
+            }
         }
 
         private void OnOpenFile(object sender, RoutedEventArgs e)

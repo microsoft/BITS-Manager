@@ -123,7 +123,7 @@ namespace BITSManager
                             + $"{Properties.Resources.JobErrorContext} \t{ErrorContextDescription}";
                         uiJobError.Text = error;
                     }
-                    catch (Exception) //TODO: catch specific exceptions
+                    catch (Exception)
                     {
                         uiJobError.Text = Properties.Resources.JobErrorException;
                     }
