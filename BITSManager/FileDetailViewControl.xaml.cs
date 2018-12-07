@@ -79,8 +79,8 @@ namespace BITSManager
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
-                    uiOpenButton.IsEnabled = true;
-                    break;
+                uiOpenButton.IsEnabled = true;
+                break;
             }
         }
 

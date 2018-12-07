@@ -171,11 +171,12 @@ namespace BITSManager
                 {
                     case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
                     case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
-                        jobMenuEnabled = false;
-                        break;
+                    jobMenuEnabled = false;
+                    break;
+
                     default:
 
-                        break;
+                    break;
                 }
             }
             else
@@ -189,7 +190,6 @@ namespace BITSManager
             uiMenuJobResume.IsEnabled = jobMenuEnabled;
             uiMenuJobSuspend.IsEnabled = jobMenuEnabled;
             uiMenuJobAddFile.IsEnabled = jobMenuEnabled;
-
         }
 
         /// <summary>

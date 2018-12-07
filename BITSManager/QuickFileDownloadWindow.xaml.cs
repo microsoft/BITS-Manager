@@ -93,8 +93,7 @@ namespace BITSManager
         private void Poll(BITS.IBackgroundCopyJob job)
         {
             // Poll for the job to be complete in a separate thread.
-            new System.Threading.Thread(() =>
-            {
+            new System.Threading.Thread(() => {
                 try
                 {
                     bool jobIsFinal = false;
@@ -106,17 +105,17 @@ namespace BITSManager
                         {
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR:
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
-                                job.Complete();
-                                break;
+                            job.Complete();
+                            break;
 
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
-                                jobIsFinal = true;
-                                break;
+                            jobIsFinal = true;
+                            break;
 
                             default:
-                                Task.Delay(500); // delay a little bit
-                                break;
+                            Task.Delay(500); // delay a little bit
+                            break;
                         }
                     }
                     // Job is in a final state (cancelled or acknowledged)
@@ -143,6 +142,9 @@ namespace BITSManager
                 out jobGuid, out job);
             job.AddFile(URL, filename);
             SetJobProperties(job); // Set job properties as needed
+            job.SetNotifyFlags(
+                (UInt32)BitsNotifyFlags.BG_NOTIFY_JOB_TRANSFERRED
+                + (UInt32)BitsNotifyFlags.BG_NOTIFY_JOB_ERROR);
             job.SetNotifyInterface(this); // Will call JobTransferred, JobError, JobModification
             job.Resume();
             // Job is now running. We can exit and it will continue automatically.
@@ -156,12 +158,14 @@ namespace BITSManager
 
         public void JobError(BITS.IBackgroundCopyJob pJob, BITS.IBackgroundCopyError pError)
         {
-            pJob.Complete();
+            pJob.Cancel();
         }
 
         public void JobModification(BITS.IBackgroundCopyJob pJob, uint dwReserved)
         {
-            // Don't need to do anything on job modification
+            // JobModification has to exist to satify the interface. But unless
+            // the call to job.SetNotifyInterface includes the BG_NOTIFY_JOB_MODIFICATION flag,
+            // this method won't be called.
         }
     }
 }

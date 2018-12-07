@@ -1,5 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // Set up the needed BITS namespaces
 using BITS = BITSReference1_5;

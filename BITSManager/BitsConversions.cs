@@ -53,6 +53,23 @@ namespace BITSManager
         TRANSFER_ALWAYS = (IGNORE_CONGESTION | ROAMING | USAGE_BASED | OVERCAP_THROTTLED | OVERCAP_CHARGED | NEAR_CAP | BELOW_CAP | CAPPED_USAGE_UNKNOWN | UNRESTRICTED),
     }
 
+    // Must recreate the BG_NOTIFY flags
+    // cpp_quote("#define   BG_NOTIFY_JOB_TRANSFERRED         0x0001")
+    // cpp_quote("#define   BG_NOTIFY_JOB_ERROR               0x0002")
+    // cpp_quote("#define   BG_NOTIFY_DISABLE                 0x0004")
+    // cpp_quote("#define   BG_NOTIFY_JOB_MODIFICATION        0x0008")
+    // cpp_quote("#define   BG_NOTIFY_FILE_TRANSFERRED        0x0010")
+    // cpp_quote("#define   BG_NOTIFY_FILE_RANGES_TRANSFERRED 0x0020")
+    public enum BitsNotifyFlags : UInt32
+    {
+        BG_NOTIFY_JOB_TRANSFERRED = 0x0001,
+        BG_NOTIFY_JOB_ERROR = 0x0002,
+        BG_NOTIFY_DISABLE = 0x0004,
+        BG_NOTIFY_JOB_MODIFICATION = 0x0008,
+        BG_NOTIFY_FILE_TRANSFERRED = 0x0010,
+        BG_NOTIFY_FILE_RANGES_TRANSFERRED = 0x0020,
+    }
+
     public class BitsConversions
     {
         /// <summary>
