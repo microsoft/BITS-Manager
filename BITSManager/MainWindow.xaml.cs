@@ -207,37 +207,12 @@ namespace BITSManager
                 var control = uiJobList.Items[i] as JobViewControl;
                 BITS.GUID id;
                 control.Job.GetId(out id);
-                if (GuidEqual(searchFor, id))
+                if (searchFor.GuidEquals(id))
                 {
                     return i;
                 }
             }
             return -1;
-        }
-
-        private static bool GuidEqual(BITS.GUID a, BITS.GUID b)
-        {
-            bool field4equal = true;
-            if (a.Data4.Length != b.Data4.Length)
-            {
-                field4equal = false;
-            }
-            else
-            {
-                for (int i = 0; i < a.Data4.Length; i++)
-                {
-                    if (a.Data4[i] != b.Data4[i])
-                    {
-                        field4equal = false;
-                    }
-                }
-            }
-
-            var Retval = (a.Data1 == b.Data1
-                && a.Data2 == b.Data2
-                && a.Data3 == b.Data3
-                && field4equal);
-            return Retval;
         }
 
         private void OnJobSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -70,7 +70,7 @@ namespace BITSManager
         BG_NOTIFY_FILE_RANGES_TRANSFERRED = 0x0020,
     }
 
-    public class BitsConversions
+    public static class BitsConversions
     {
         /// <summary>
         ///  Converts the cost dword (uint) into a string. This is non-trivial because the cost values
@@ -196,6 +196,20 @@ namespace BITSManager
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_NORMAL: return Properties.Resources.JobPriorityNormal;
                 default: return String.Format("{0:X}", jobPriority);
             }
+        }
+
+        public static Guid ToGuid(this BITS.GUID guid)
+        {
+            // BITS.GUID defines all the fields to be unsigned
+            // The .NET Guid constructor uses signed values
+            Guid newGuid = new Guid((int)guid.Data1, (short)guid.Data2, (short)guid.Data3, guid.Data4);
+            return newGuid;
+        }
+
+        public static bool GuidEquals(this BITS.GUID a, BITS.GUID b)
+        {
+            var areEquals = a.ToGuid().Equals(b.ToGuid());
+            return areEquals;
         }
     }
 }

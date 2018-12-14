@@ -32,7 +32,7 @@ namespace BITSManager
 
                     if (nColonFound == 0)
                     {
-                        var tabs = GetTabs(charsBeforeFirstColon + 1); // Include the colon
+                        var tabs = GetAlignedSpaces(charsBeforeFirstColon + 1); // Include the colon
                         sb.Append(tabs);
                     }
                     nColonFound++;
@@ -47,12 +47,12 @@ namespace BITSManager
         }
 
         /// <summary>
-        /// Given a string, return the right number of tabs needed after the string
+        /// Given a string, return the right number of spaces needed after the string
         /// so that a series of strings is neatly aligned.
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string GetTabs(int length)
+        public static string GetAlignedSpaces(int length)
         {
             const int TabSize = 8;
             const int TargetLength = 3 * TabSize;

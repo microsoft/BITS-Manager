@@ -112,10 +112,13 @@ namespace BITSManager
                         Error.GetErrorDescription((uint)langid, out ErrorDescription);
                         Error.GetErrorContextDescription((uint)langid, out ErrorContextDescription);
 
-                        var error = $"{Properties.Resources.JobErrorHRESULT} \t0x{ErrorHRESULT:X08}\n"
-                            + $"{Properties.Resources.JobErrorDescription} \t{ErrorDescription}\n"
-                            + $"{Properties.Resources.JobErrorContext} \t{ErrorContextDescription}";
-                        uiJobError.Text = error;
+                        var errorText = String.Format ("\t{0} \t0x{1:X08}\n\t{2} \t{3}{4}\t{5} \t{6}",
+                            Properties.Resources.JobErrorHRESULT, ErrorHRESULT,
+                            Properties.Resources.JobErrorDescription, ErrorDescription,
+                            ErrorDescription.EndsWith("\n") ? "" : "\n",
+                            Properties.Resources.JobErrorContext, ErrorContextDescription
+                            );
+                        uiJobError.Text = errorText;
                     }
                     catch (System.Runtime.InteropServices.COMException)
                     {

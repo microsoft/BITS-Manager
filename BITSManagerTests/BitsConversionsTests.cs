@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿using BITSManager;
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -26,7 +27,7 @@ namespace BITSManager.Tests
             Assert.AreEqual($"{BitsCosts.BELOW_CAP}, {BitsCosts.NEAR_CAP}", BitsConversions.ConvertCostToString(BitsCosts.BELOW_CAP | BitsCosts.NEAR_CAP));
 
             // Check the unknown flags
-            Assert.AreEqual($"11223300", BitsConversions.ConvertCostToString((BitsCosts)0x11223300));
+            Assert.AreEqual("11223300", BitsConversions.ConvertCostToString((BitsCosts)0x11223300));
             Assert.AreEqual($"{BitsCosts.BELOW_CAP}, 11223300", BitsConversions.ConvertCostToString(BitsCosts.BELOW_CAP | (BitsCosts)0x11223300));
         }
 
@@ -85,6 +86,38 @@ namespace BITSManager.Tests
 
             // Validate the unknown states
             Assert.AreEqual("11223300", BitsConversions.ConvertJobPriorityToString((BITS.BG_JOB_PRIORITY)0x11223300));
+        }
+
+        [TestMethod()]
+        public void ToGuidTest()
+        {
+            BITS.GUID bitsGuid = MakeGuid (0xF0000001, 0xF002, 0xF003);
+            Guid dotNetGuid = bitsGuid.ToGuid();
+            string text = dotNetGuid.ToString();
+
+            Assert.AreEqual("f0000001-f002-f003-0001-020304050607", text);
+        }
+
+        private BITS.GUID MakeGuid(uint data1, ushort data2, ushort data3, byte b0=0, byte b1=1, byte b2=2, byte b3=3, byte b4=4, byte b5=5, byte b6=6, byte b7=7 )
+        {
+            BITS.GUID bitsGuid = new BITS.GUID();
+            bitsGuid.Data1 = data1;
+            bitsGuid.Data2 = data2;
+            bitsGuid.Data3 = data3;
+            bitsGuid.Data4 = new byte[8] { b0, b1, b2, b3, b4, b5, b6, b7 };
+            return bitsGuid;
+        }
+
+        [TestMethod()]
+        public void GuidEqualsTest()
+        {
+            var a1 = MakeGuid(0xF00001, 0xF002, 0xF003);
+            var a2 = MakeGuid(0xF00001, 0xF002, 0xF003);
+            var b = MakeGuid(2, 2, 2);
+
+            Assert.AreEqual (true, a1.GuidEquals (a2));
+            Assert.AreEqual (true, a1.GuidEquals (a1));
+            Assert.AreEqual (false, a1.GuidEquals (b));
         }
     }
 }
