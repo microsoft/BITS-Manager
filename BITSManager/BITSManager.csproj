@@ -224,21 +224,21 @@ Licensed under the MIT License.
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll">
+    <None Include="BITSReferenceDLLs\BITSReference10_1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference10_2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference1_5.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference4_0.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference5_0.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

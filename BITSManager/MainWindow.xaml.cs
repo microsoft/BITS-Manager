@@ -149,7 +149,6 @@ namespace BITSManager
                 }
             }
 
-            var jobMenuEnabled = true;
             if (uiJobList.Items.Count > 0)
             {
                 uiJobDetails.Visibility = Visibility.Visible;
@@ -162,7 +161,20 @@ namespace BITSManager
                     var control = uiJobList.SelectedItem as JobViewControl;
                     uiJobDetails.SetJob(control.Job);
                 }
+            }
+            else
+            {
+                uiJobDetails.Visibility = Visibility.Hidden;
+            }
 
+            UpdateMenu();
+        }
+
+        private void UpdateMenu()
+        {
+            var jobMenuEnabled = true;
+            if (uiJobList.Items.Count > 0 && uiJobList.SelectedItem != null)
+            {
                 // Update the jobs menus based on the job state
                 var job = (uiJobList.SelectedItem as JobViewControl).Job;
                 BITS.BG_JOB_STATE state;
@@ -173,15 +185,10 @@ namespace BITSManager
                     case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
                     jobMenuEnabled = false;
                     break;
-
-                    default:
-
-                    break;
                 }
             }
             else
             {
-                uiJobDetails.Visibility = Visibility.Hidden;
                 jobMenuEnabled = false;
             }
 
@@ -224,6 +231,7 @@ namespace BITSManager
             var control = e.AddedItems[0] as JobViewControl;
             uiJobList.ScrollIntoView(control);
             uiJobDetails.SetJob(control.Job);
+            UpdateMenu();
         }
 
         /// <summary>

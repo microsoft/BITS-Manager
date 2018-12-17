@@ -1126,7 +1126,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add File to Job.
+        ///   Looks up a localized string similar to _Add File to Job.
         /// </summary>
         public static string MenuJobAddFile {
             get {
@@ -1135,7 +1135,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Job.
+        ///   Looks up a localized string similar to _Cancel Job.
         /// </summary>
         public static string MenuJobCancel {
             get {
@@ -1144,7 +1144,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Complete Job.
+        ///   Looks up a localized string similar to Com_plete Job.
         /// </summary>
         public static string MenuJobComplete {
             get {
@@ -1171,7 +1171,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resume Job.
+        ///   Looks up a localized string similar to _Resume Job.
         /// </summary>
         public static string MenuJobResume {
             get {
@@ -1180,7 +1180,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Suspend Job.
+        ///   Looks up a localized string similar to _Suspend Job.
         /// </summary>
         public static string MenuJobSuspend {
             get {
