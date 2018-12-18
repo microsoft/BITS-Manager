@@ -572,4 +572,8 @@ Version {0}</value>
   <data name="MenuJobSuspend" xml:space="preserve">
     <value>_Suspend Job</value>
   </data>
+  <data name="DialogMoreProperties" xml:space="preserve">
+    <value>More Properties</value>
+    <comment>The header in the Quick File Download (etc) dialogs for more properties</comment>
+  </data>
 </root>

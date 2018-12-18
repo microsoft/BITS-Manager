@@ -31,7 +31,7 @@ Licensed under the MIT License.
             </MenuItem>
 
             <MenuItem Header="{x:Static p:Resources.MenuJob}">
-                <MenuItem Header="{x:Static p:Resources.MenuJobQuickFileDownload}" Click="OnMenuJobQuickFileDownload" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
+                <MenuItem Header="{x:Static p:Resources.MenuJobQuickFileDownload}" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
                 <MenuItem Header="{x:Static p:Resources.MenuJobCreateNewJob}" Click="OnMenuJobCreateNewJob" />
                 <MenuItem x:Name="uiMenuJobCancel" Header="{x:Static p:Resources.MenuJobCancel}" Click="OnMenuJobCancel" />
                 <MenuItem x:Name="uiMenuJobComplete" Header="{x:Static p:Resources.MenuJobComplete}" Click="OnMenuJobComplete" />

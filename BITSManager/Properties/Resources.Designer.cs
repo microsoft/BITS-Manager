@@ -136,6 +136,15 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More Properties.
+        /// </summary>
+        public static string DialogMoreProperties {
+            get {
+                return ResourceManager.GetString("DialogMoreProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string DialogOK {
