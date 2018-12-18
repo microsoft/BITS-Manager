@@ -964,6 +964,87 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 😎.
+        /// </summary>
+        public static string JobStateIconAcknowledged {
+            get {
+                return ResourceManager.GetString("JobStateIconAcknowledged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😧.
+        /// </summary>
+        public static string JobStateIconCancelled {
+            get {
+                return ResourceManager.GetString("JobStateIconCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😵.
+        /// </summary>
+        public static string JobStateIconConnecting {
+            get {
+                return ResourceManager.GetString("JobStateIconConnecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😡.
+        /// </summary>
+        public static string JobStateIconError {
+            get {
+                return ResourceManager.GetString("JobStateIconError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🙂.
+        /// </summary>
+        public static string JobStateIconQueued {
+            get {
+                return ResourceManager.GetString("JobStateIconQueued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😴.
+        /// </summary>
+        public static string JobStateIconSuspended {
+            get {
+                return ResourceManager.GetString("JobStateIconSuspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😁.
+        /// </summary>
+        public static string JobStateIconTransferred {
+            get {
+                return ResourceManager.GetString("JobStateIconTransferred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😏.
+        /// </summary>
+        public static string JobStateIconTransferring {
+            get {
+                return ResourceManager.GetString("JobStateIconTransferring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😬.
+        /// </summary>
+        public static string JobStateIconTransientError {
+            get {
+                return ResourceManager.GetString("JobStateIconTransientError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Queued.
         /// </summary>
         public static string JobStateQueued {

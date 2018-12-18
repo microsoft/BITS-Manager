@@ -576,4 +576,40 @@ Version {0}</value>
     <value>More Properties</value>
     <comment>The header in the Quick File Download (etc) dialogs for more properties</comment>
   </data>
+  <data name="JobStateIconAcknowledged" xml:space="preserve">
+    <value>😎</value>
+    <comment>Unicode SMILING FACE WITH SUNGLASSES \U+1F60E 😎</comment>
+  </data>
+  <data name="JobStateIconCancelled" xml:space="preserve">
+    <value>😧</value>
+    <comment>Unicode ANGUISHED FACE \U+1f627 😧</comment>
+  </data>
+  <data name="JobStateIconConnecting" xml:space="preserve">
+    <value>😵</value>
+    <comment>Unicode DIZZY FACE \U+1F635 😵</comment>
+  </data>
+  <data name="JobStateIconError" xml:space="preserve">
+    <value>😡</value>
+    <comment>Unicode POUTING FACE \U+1F621 😡</comment>
+  </data>
+  <data name="JobStateIconQueued" xml:space="preserve">
+    <value>🙂</value>
+    <comment>Unicode SLIGHTLY SMILING FACE \U+1F642</comment>
+  </data>
+  <data name="JobStateIconSuspended" xml:space="preserve">
+    <value>😴</value>
+    <comment>Unicode SLEEPING FACE \U+1F634 😴</comment>
+  </data>
+  <data name="JobStateIconTransferred" xml:space="preserve">
+    <value>😁</value>
+    <comment>Unicode GRINNING FACE WITH SMILING EYES \U+1F601 😁</comment>
+  </data>
+  <data name="JobStateIconTransferring" xml:space="preserve">
+    <value>😏</value>
+    <comment>Unicode SMIRKING FACE \U+1F60F 😏</comment>
+  </data>
+  <data name="JobStateIconTransientError" xml:space="preserve">
+    <value>😬</value>
+    <comment>Unicode GRIMACING FACE \U+1F62C 😬</comment>
+  </data>
 </root>

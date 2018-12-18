@@ -162,15 +162,42 @@ namespace BITSManager
         {
             switch (jobState)
             {
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_QUEUED: return "🙂";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_CONNECTING: return "😵";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRING: return "😏";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_SUSPENDED: return "😴";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR: return "😡";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSIENT_ERROR: return "😬";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED: return "😁";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED: return "😎";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED: return "😧";
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_QUEUED:
+                // Unicode SLIGHTLY SMILING FACE \U+1F642 🙂
+                return Properties.Resources.JobStateIconQueued;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_CONNECTING:
+                // Unicode DIZZY FACE \U+1F635 😵
+                return Properties.Resources.JobStateIconConnecting;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRING:
+                // Unicode SMIRKING FACE \U+1F60F 😏
+                return Properties.Resources.JobStateIconTransferring;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_SUSPENDED:
+                // Unicode SLEEPING FACE \U+1F634 😴
+                return Properties.Resources.JobStateIconSuspended;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR:
+                // Unicode POUTING FACE \U+1F621 😡
+                return Properties.Resources.JobStateIconError;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSIENT_ERROR:
+                // Unicode GRIMACING FACE \U+1F62C 😬
+                return Properties.Resources.JobStateIconTransientError;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
+                // Unicode GRINNING FACE WITH SMILING EYES \U+1F601 😁
+                return Properties.Resources.JobStateIconTransferred;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
+                // Unicode SMILING FACE WITH SUNGLASSES \U+1F60E 😎
+                return Properties.Resources.JobStateIconAcknowledged;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
+                // Unicode ANGUISHED FACE \U+1f627 😧
+                return Properties.Resources.JobStateIconCancelled;
+
                 default: return String.Format("{0:X}", jobState);
             }
         }
