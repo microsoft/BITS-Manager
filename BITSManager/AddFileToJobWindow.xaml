@@ -15,10 +15,10 @@ Licensed under the MIT License.
     <Border Margin="2">
         <StackPanel VerticalAlignment="Stretch">
             <TextBlock Text="{x:Static p:Resources.DialogUrl}" />
-            <TextBox x:Name="uiUri" HorizontalAlignment="Stretch" Margin="20,0,0,0" TabIndex="1" TextChanged="OnUriChanged" />
+            <TextBox x:Name="_uiUri" HorizontalAlignment="Stretch" Margin="20,0,0,0" TabIndex="1" TextChanged="OnUriChanged" />
 
             <TextBlock Text="{x:Static p:Resources.DialogFile}" />
-            <TextBox x:Name="uiFile" Margin="20,0,0,0" HorizontalAlignment="Stretch" TabIndex="2" KeyDown="OnFileChangedViaKeyboard" />
+            <TextBox x:Name="_uiFile" Margin="20,0,0,0" HorizontalAlignment="Stretch" TabIndex="2" KeyDown="OnFileChangedViaKeyboard" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
                 <Button Content="{x:Static p:Resources.DialogOK}" IsDefault="True" Click="OnOK" MinWidth="60" TabIndex="3" />

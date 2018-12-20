@@ -26,11 +26,11 @@ namespace BITSManager
             // Set the different parts of the UI
             string localName;
             file.GetLocalName(out localName);
-            uiFileLocal.Text = localName;
+            _uiFileLocal.Text = localName;
 
             string remoteName;
             file.GetRemoteName(out remoteName);
-            uiFileRemote.Text = remoteName;
+            _uiFileRemote.Text = remoteName;
 
             // Add in the current progress
             BITS._BG_FILE_PROGRESS progress;
@@ -44,13 +44,13 @@ namespace BITSManager
                     progress.BytesTransferred,
                     progress.BytesTotal);
 
-            uiFileByteProgress.Text = bytes;
+            _uiFileByteProgress.Text = bytes;
 
             // Get the data from the file as a IBackgroundCopyFile5 (available starting in Windows 8)
             var file5 = file as BITS5.IBackgroundCopyFile5;
             if (file5 == null)
             {
-                uiFileHttpResponseData.Text = Properties.Resources.FileHttpResponseDataNotAvailable;
+                _uiFileHttpResponseData.Text = Properties.Resources.FileHttpResponseDataNotAvailable;
             }
             else
             {
@@ -67,7 +67,7 @@ namespace BITSManager
                 file5.GetProperty(BITS5.BITS_FILE_PROPERTY_ID.BITS_FILE_PROPERTY_ID_HTTP_RESPONSE_HEADERS, out value);
                 var str = System.Runtime.InteropServices.Marshal.PtrToStringAuto(value.String);
                 str = TabifyHttpHeaders.AddTabs(str);
-                uiFileHttpResponseData.Text = str;
+                _uiFileHttpResponseData.Text = str;
             }
 
             // Enable the Open File button only when the file can't be
@@ -79,7 +79,7 @@ namespace BITSManager
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
                 case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
-                uiOpenButton.IsEnabled = true;
+                _uiOpenButton.IsEnabled = true;
                 break;
             }
         }

@@ -23,7 +23,8 @@ namespace BITSManager
 
         public void MarkAsOld()
         {
-            uiJobOld.Text = "⧆";
+            _uiJobOld.Text = "⧆";
+            _uiJobOld.ToolTip = Properties.Resources.JobMarkAsOldTooltip;
         }
 
         public JobViewControl(BITS.IBackgroundCopyJob job)
@@ -34,11 +35,11 @@ namespace BITSManager
             // Set the different parts of the UI
             string displayName;
             Job.GetDisplayName(out displayName);
-            uiJobName.Text = displayName;
+            _uiJobName.Text = displayName;
 
             string description;
             Job.GetDescription(out description);
-            uiJobDescription.Text = description;
+            _uiJobDescription.Text = description;
 
             UpdateState();
         }
@@ -47,8 +48,8 @@ namespace BITSManager
         {
             BITS.BG_JOB_STATE jobState;
             Job.GetState(out jobState);
-            uiJobState.Text = BitsConversions.ConvertJobStateToIconString(jobState);
-            uiJobState.ToolTip = BitsConversions.ConvertJobStateToString(jobState);
+            _uiJobState.Text = BitsConversions.ConvertJobStateToIconString(jobState);
+            _uiJobState.ToolTip = BitsConversions.ConvertJobStateToString(jobState);
             JobIsFinal = (jobState == BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED)
                 || (jobState == BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED);
         }

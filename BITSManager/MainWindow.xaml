@@ -33,14 +33,14 @@ Licensed under the MIT License.
             <MenuItem Header="{x:Static p:Resources.MenuJob}">
                 <MenuItem Header="{x:Static p:Resources.MenuJobQuickFileDownload}" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
                 <MenuItem Header="{x:Static p:Resources.MenuJobCreateNewJob}" Click="OnMenuJobCreateNewJob" />
-                <MenuItem x:Name="uiMenuJobCancel" Header="{x:Static p:Resources.MenuJobCancel}" Click="OnMenuJobCancel" />
-                <MenuItem x:Name="uiMenuJobComplete" Header="{x:Static p:Resources.MenuJobComplete}" Click="OnMenuJobComplete" />
-                <MenuItem x:Name="uiMenuJobResume" Header="{x:Static p:Resources.MenuJobResume}" Click="OnMenuJobResume" />
-                <MenuItem x:Name="uiMenuJobSuspend" Header="{x:Static p:Resources.MenuJobSuspend}" Click="OnMenuJobSuspend" />
-                <MenuItem x:Name="uiMenuJobAddFile" Header="{x:Static p:Resources.MenuJobAddFile}" Click="OnMenuJobAddFile" />
+                <MenuItem x:Name="_uiMenuJobCancel" Header="{x:Static p:Resources.MenuJobCancel}" Click="OnMenuJobCancel" />
+                <MenuItem x:Name="_uiMenuJobComplete" Header="{x:Static p:Resources.MenuJobComplete}" Click="OnMenuJobComplete" />
+                <MenuItem x:Name="_uiMenuJobResume" Header="{x:Static p:Resources.MenuJobResume}" Click="OnMenuJobResume" />
+                <MenuItem x:Name="_uiMenuJobSuspend" Header="{x:Static p:Resources.MenuJobSuspend}" Click="OnMenuJobSuspend" />
+                <MenuItem x:Name="_uiMenuJobAddFile" Header="{x:Static p:Resources.MenuJobAddFile}" Click="OnMenuJobAddFile" />
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuView}">
-                <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuViewAllUsers}" Click="OnMenuAllUsers" x:Name="uiMenuAllUsers" />
+                <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuViewAllUsers}" Click="OnMenuAllUsers" x:Name="_uiMenuAllUsers" />
                 <MenuItem Header="{x:Static p:Resources.MenuViewRefresh}" Click="OnMenuRefresh" />
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuHelp}">
@@ -49,8 +49,8 @@ Licensed under the MIT License.
         </Menu>
 
         <!-- The list of all BITS Jobs -->
-        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="uiJobListHeader" Text="{x:Static p:Resources.Jobs}" FontSize="18" FontWeight="Bold" />
-        <ListView Grid.Row="2" Grid.Column="0" x:Name="uiJobList"
+        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="_uiJobListHeader" Text="{x:Static p:Resources.Jobs}" FontSize="18" FontWeight="Bold" />
+        <ListView Grid.Row="2" Grid.Column="0" x:Name="_uiJobList"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
                   SelectionMode="Single" SelectionChanged="OnJobSelectionChanged"
                   AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}"
@@ -58,8 +58,8 @@ Licensed under the MIT License.
         </ListView>
 
         <!-- The selected job details -->
-        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
-        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="uiJobDetails"
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="_uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
+        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="_uiJobDetails"
                                     AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}"
                                     IsTabStop="True" />
     </Grid>

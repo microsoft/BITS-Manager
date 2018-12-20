@@ -16,11 +16,13 @@ namespace BITSManager
     /// </summary>
     public partial class QuickFileDownloadWindow : Window, BITS.IBackgroundCopyCallback
     {
+        private BITS.IBackgroundCopyManager _mgr = null;
         public BITS.IBackgroundCopyJob Job { get; internal set; } = null;
-        private bool _fileHasChanged = false;
+        private bool _fileHasChangedViaKeyboard = false;
 
-        public QuickFileDownloadWindow()
+        public QuickFileDownloadWindow(BITS.IBackgroundCopyManager mgr)
         {
+            _mgr = mgr;
             InitializeComponent();
             Loaded += QuickFileDownloadControl_Loaded;
         }
@@ -31,12 +33,12 @@ namespace BITSManager
         /// <param name="job"></param>
         public void SetJobProperties(BITS.IBackgroundCopyJob job)
         {
-            uiJobProperty.SetJobProperties(job);
+            _uiJobProperty.SetJobProperties(job);
         }
 
         private void QuickFileDownloadControl_Loaded(object sender, RoutedEventArgs e)
         {
-            uiUri.Focus();
+            _uiUri.Focus();
         }
 
         private void OnCancel(object sender, RoutedEventArgs e)
@@ -48,25 +50,25 @@ namespace BITSManager
         {
             Job = null; // Clear out the old value, if any.
             DialogResult = true;
-            if (String.IsNullOrEmpty(uiUri.Text))
+            if (String.IsNullOrEmpty(_uiUri.Text))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyRemoteUrl, Properties.Resources.ErrorTitle);
                 return;
             }
-            if (String.IsNullOrEmpty(uiFile.Text))
+            if (String.IsNullOrEmpty(_uiFile.Text))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyLocalFile, Properties.Resources.ErrorTitle);
                 return;
             }
-            Job = DownloadFile(uiUri.Text, uiFile.Text);
+            Job = DownloadFile(_uiUri.Text, _uiFile.Text);
         }
 
         private void OnUriChanged(object sender, TextChangedEventArgs e)
         {
-            string newUriText = uiUri.Text;
+            string newUriText = _uiUri.Text;
             Uri uri;
-            var parseStatus = Uri.TryCreate(newUriText, UriKind.Absolute, out uri);
-            if (parseStatus && uri.Segments.Length >= 1 && !_fileHasChanged)
+            var createSucceeded = Uri.TryCreate(newUriText, UriKind.Absolute, out uri);
+            if (createSucceeded && uri.Segments.Length >= 1 && !_fileHasChangedViaKeyboard)
             {
                 // Make a corresponding file name. If the user has changed the file text,
                 // don't update it when the URL changes.
@@ -75,14 +77,18 @@ namespace BITSManager
                 {
                     var dir = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     var fullpath = System.IO.Path.Combine(dir, file);
-                    uiFile.Text = fullpath;
+                    _uiFile.Text = fullpath;
                 }
             }
         }
 
+        // We should stop automatically updating the File field as soon as the user enters anything into it.
+        // The code traps the KeyDown event because that's the raw "change" event. We can't use the normal
+        // TextChanged event because our code automatically changes the text when the URL changes and includes
+        // a file name and we don't want to stop updating the field after automatic changes.
         private void OnFileChangedViaKeyboard(object sender, KeyEventArgs e)
         {
-            _fileHasChanged = true;
+            _fileHasChangedViaKeyboard = true;
         }
 
         /// <summary>
@@ -104,6 +110,9 @@ namespace BITSManager
                         switch (state)
                         {
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR:
+                            job.Cancel();
+                            break;
+
                             case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
                             job.Complete();
                             break;
@@ -120,9 +129,12 @@ namespace BITSManager
                     }
                     // Job is in a final state (cancelled or acknowledged)
                 }
-                catch (System.Runtime.InteropServices.COMException)
+                catch (System.Runtime.InteropServices.COMException ex)
                 {
-                    ; // Handle job exception
+                    MessageBox.Show(
+                        String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                        Properties.Resources.ErrorTitle
+                        );
                 }
             }
             ).Start();
@@ -135,18 +147,38 @@ namespace BITSManager
         /// <param name="filename">Local file name to download to; e.g. @"C:\Server2016.pdf" </param>
         private BITS.IBackgroundCopyJob DownloadFile(string URL, string filename)
         {
-            var mgr = new BITS.BackgroundCopyManager1_5();
+            if (_mgr == null)
+            {
+                return null;
+            }
             BITS.GUID jobGuid;
             BITS.IBackgroundCopyJob job;
-            mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD,
+            _mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD,
                 out jobGuid, out job);
-            job.AddFile(URL, filename);
-            SetJobProperties(job); // Set job properties as needed
-            job.SetNotifyFlags(
-                (UInt32)BitsNotifyFlags.BG_NOTIFY_JOB_TRANSFERRED
-                + (UInt32)BitsNotifyFlags.BG_NOTIFY_JOB_ERROR);
-            job.SetNotifyInterface(this); // Will call JobTransferred, JobError, JobModification
-            job.Resume();
+            try
+            {
+                job.AddFile(URL, filename);
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                MessageBox.Show(Properties.Resources.ErrorUnauthorizedAccessMessage, Properties.Resources.ErrorUnauthorizedAccessTitle);
+                job.Cancel();
+                return job;
+            }
+            try
+            {
+                SetJobProperties(job); // Set job properties as needed
+                job.SetNotifyFlags(
+                    (UInt32)BitsNotifyFlags.JOB_TRANSFERRED
+                    + (UInt32)BitsNotifyFlags.JOB_ERROR);
+                job.SetNotifyInterface(this); // Will call JobTransferred, JobError, JobModification based on the notify flags
+                job.Resume();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message), Properties.Resources.ErrorTitle);
+                job.Cancel();
+            }
             // Job is now running. We can exit and it will continue automatically.
             return job; // Return the job that was created
         }

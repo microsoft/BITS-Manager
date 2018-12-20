@@ -36,7 +36,6 @@ namespace BITSManager
         // See https://msdn.microsoft.com/library/9dc2c020-06c0-41dd-bf36-203432ad9d4f for a full discussion
         // of how network metering is measures.
         UNRESTRICTED = 0x1,
-
         CAPPED_USAGE_UNKNOWN = 0x2,
         BELOW_CAP = 0x4,
         NEAR_CAP = 0x8,
@@ -62,12 +61,12 @@ namespace BITSManager
     // cpp_quote("#define   BG_NOTIFY_FILE_RANGES_TRANSFERRED 0x0020")
     public enum BitsNotifyFlags : UInt32
     {
-        BG_NOTIFY_JOB_TRANSFERRED = 0x0001,
-        BG_NOTIFY_JOB_ERROR = 0x0002,
-        BG_NOTIFY_DISABLE = 0x0004,
-        BG_NOTIFY_JOB_MODIFICATION = 0x0008,
-        BG_NOTIFY_FILE_TRANSFERRED = 0x0010,
-        BG_NOTIFY_FILE_RANGES_TRANSFERRED = 0x0020,
+        JOB_TRANSFERRED = 0x0001,
+        JOB_ERROR = 0x0002,
+        DISABLE = 0x0004,
+        JOB_MODIFICATION = 0x0008,
+        FILE_TRANSFERRED = 0x0010,
+        FILE_RANGES_TRANSFERRED = 0x0020,
     }
 
     public static class BitsConversions
@@ -80,25 +79,13 @@ namespace BITSManager
         /// <returns></returns>
         public static string ConvertCostToString(BitsCosts cost)
         {
-            if (cost == BitsCosts.TRANSFER_NOT_ROAMING)
+            switch (cost)
             {
-                return Properties.Resources.JobCostNotRoaming;
-            }
-            if (cost == BitsCosts.TRANSFER_NO_SURCHARGE)
-            {
-                return Properties.Resources.JobCostNoSurcharge;
-            }
-            if (cost == BitsCosts.TRANSFER_STANDARD)
-            {
-                return Properties.Resources.JobCostStandard;
-            }
-            if (cost == BitsCosts.TRANSFER_UNRESTRICTED)
-            {
-                return Properties.Resources.JobCostUnrestricted;
-            }
-            if (cost == BitsCosts.TRANSFER_ALWAYS)
-            {
-                return Properties.Resources.JobCostAlways;
+                case BitsCosts.TRANSFER_NOT_ROAMING: return Properties.Resources.JobCostNotRoaming;
+                case BitsCosts.TRANSFER_NO_SURCHARGE: return Properties.Resources.JobCostNoSurcharge;
+                case BitsCosts.TRANSFER_STANDARD: return Properties.Resources.JobCostStandard;
+                case BitsCosts.TRANSFER_UNRESTRICTED: return Properties.Resources.JobCostUnrestricted;
+                case BitsCosts.TRANSFER_ALWAYS: return Properties.Resources.JobCostAlways;
             }
 
             // It wasn't one of the standard sets. Break it into the known cost values plus "all the rest"

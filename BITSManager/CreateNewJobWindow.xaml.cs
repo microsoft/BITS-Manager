@@ -16,7 +16,7 @@ namespace BITSManager
         /// <summary>
         /// JobName that the user typed in; will be used by the caller to create the BITS job.
         /// </summary>
-        public string JobName { get { return uiJobName.Text; } }
+        public string JobName { get { return _uiJobName.Text; } }
 
         public CreateNewJobWindow()
         {
@@ -26,12 +26,12 @@ namespace BITSManager
 
         public void SetJobProperties(BITS.IBackgroundCopyJob job)
         {
-            uiJobProperty.SetJobProperties(job);
+            _uiJobProperty.SetJobProperties(job);
         }
 
         private void CreateNewJobWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            uiJobName.Focus();
+            _uiJobName.Focus();
         }
 
         private void OnCancel(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace BITSManager
             get
             {
                 // The value of the tag is a fixed string; it's not presented to the user and is not localized.
-                switch ((uiJobType.SelectedValue as ComboBoxItem).Tag as string)
+                switch ((_uiJobType.SelectedValue as ComboBoxItem).Tag as string)
                 {
                     default:
                     case "Download": return BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD;

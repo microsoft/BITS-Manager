@@ -11,11 +11,11 @@ namespace BITSManager
         /// Header:Value prettifier; converts HEADER:VALUE into \tHEADER:\t\t\tVALUE.
         /// </summary>
         /// <param name="str">Input HTTP headers, possibly split on multiple lines with \r\n</param>
-        /// <returns>String with all the headers and value but seperated with tabs</returns>
+        /// <returns>String with all the headers and value but separated with tabs</returns>
         public static string AddTabs(string str)
         {
             var sb = new StringBuilder();
-            int nColonFound = 0;
+            int colonFoundCount = 0;
             int charsBeforeFirstColon = 0;
             foreach (var ch in str)
             {
@@ -23,19 +23,19 @@ namespace BITSManager
                 {
                     sb.Append(ch);
                     sb.Append('\t');
-                    nColonFound = 0;
+                    colonFoundCount = 0;
                     charsBeforeFirstColon = 0;
                 }
                 else if (ch == ':')
                 {
                     sb.Append(ch);
 
-                    if (nColonFound == 0)
+                    if (colonFoundCount == 0)
                     {
                         var tabs = GetAlignedSpaces(charsBeforeFirstColon + 1); // Include the colon
                         sb.Append(tabs);
                     }
-                    nColonFound++;
+                    colonFoundCount++;
                 }
                 else
                 {

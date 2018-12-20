@@ -253,6 +253,24 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have authorization to access that file.
+        /// </summary>
+        public static string ErrorUnauthorizedAccessMessage {
+            get {
+                return ResourceManager.GetString("ErrorUnauthorizedAccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized Access.
+        /// </summary>
+        public static string ErrorUnauthorizedAccessTitle {
+            get {
+                return ResourceManager.GetString("ErrorUnauthorizedAccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error on {0}.
         /// </summary>
         public static string ErrorWhenTitle {
@@ -478,7 +496,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cost	.
+        ///   Looks up a localized string similar to Cost.
         /// </summary>
         public static string JobCost {
             get {
@@ -492,15 +510,6 @@ namespace BITSManager.Properties {
         public static string JobCostAlways {
             get {
                 return ResourceManager.GetString("JobCostAlways", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cost	.
-        /// </summary>
-        public static string JobCostFlag {
-            get {
-                return ResourceManager.GetString("JobCostFlag", resourceCulture);
             }
         }
         
@@ -780,6 +789,15 @@ namespace BITSManager.Properties {
         public static string JobHttpMethodNotSet {
             get {
                 return ResourceManager.GetString("JobHttpMethodNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job is final.
+        /// </summary>
+        public static string JobMarkAsOldTooltip {
+            get {
+                return ResourceManager.GetString("JobMarkAsOldTooltip", resourceCulture);
             }
         }
         

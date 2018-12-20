@@ -64,8 +64,8 @@ namespace BITSManager
                 credentials.Scheme = (BITS.BG_AUTH_SCHEME)authScheme.Value;
                 credentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_SERVER;
                 // This app doesn't support setting proxy auth.
-                credentials.Credentials.Password = uiPassword.Text;
-                credentials.Credentials.UserName = uiUserName.Text;
+                credentials.Credentials.Password = _uiPassword.Text;
+                credentials.Credentials.UserName = _uiUserName.Text;
                 job2.SetCredentials(credentials);
             }
         }
@@ -74,12 +74,12 @@ namespace BITSManager
         {
             get
             {
-                if (uiAuthScheme.SelectedItem == null)
+                if (_uiAuthScheme.SelectedItem == null)
                 {
                     return null;
                 }
                 // The Tag for each ComboBoxItem is selected to match the BITS auth scheme values.
-                var tag = (uiAuthScheme.SelectedItem as ComboBoxItem).Tag as string;
+                var tag = (_uiAuthScheme.SelectedItem as ComboBoxItem).Tag as string;
                 int value = Int32.Parse(tag);
                 return (BITS.BG_AUTH_SCHEME)value;
             }
@@ -89,12 +89,12 @@ namespace BITSManager
         {
             get
             {
-                if (uiCosts.SelectedItem == null)
+                if (_uiCosts.SelectedItem == null)
                 {
                     return null;
                 }
                 // The Tag for each ComboBoxItem is already a BitsCosts enum.
-                var tag = (uiCosts.SelectedItem as ComboBoxItem).Tag as BitsCosts?;
+                var tag = (_uiCosts.SelectedItem as ComboBoxItem).Tag as BitsCosts?;
                 return tag;
             }
         }
@@ -103,7 +103,7 @@ namespace BITSManager
         {
             get
             {
-                var isChecked = uiDynamic.IsChecked;
+                var isChecked = _uiDynamic.IsChecked;
                 return isChecked;
             }
         }
@@ -112,7 +112,7 @@ namespace BITSManager
         {
             get
             {
-                var isChecked = uiHighPerformance.IsChecked;
+                var isChecked = _uiHighPerformance.IsChecked;
                 return isChecked;
             }
         }
@@ -121,12 +121,12 @@ namespace BITSManager
         {
             get
             {
-                if (uiPriority.SelectedItem == null)
+                if (_uiPriority.SelectedItem == null)
                 {
                     return null;
                 }
                 // The Tag for each ComboBoxItem is selected to match the BITS priority values.
-                var tag = (uiPriority.SelectedItem as ComboBoxItem).Tag as string;
+                var tag = (_uiPriority.SelectedItem as ComboBoxItem).Tag as string;
                 int value = Int32.Parse(tag);
                 return (BITS.BG_JOB_PRIORITY)value;
             }

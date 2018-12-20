@@ -14,22 +14,22 @@ Licensed under the MIT License.
         <TextBlock TextWrapping="Wrap" FontSize="14">
                 <Run Text="{x:Static p:Resources.FileLocal}" FontSize="16" FontWeight="Bold" />
                 <Run Text="&#09;" /> <!-- Tab character -->
-                <Run x:Name="uiFileLocal" FontSize="16" />
+                <Run x:Name="_uiFileLocal" FontSize="16" />
                 <LineBreak />
                 <Run Text="{x:Static p:Resources.FileRemote}" FontSize="16"  FontWeight="Bold" />
                 <Run Text="&#09;" />
-                <Run x:Name="uiFileRemote" FontSize="16" />
+                <Run x:Name="_uiFileRemote" FontSize="16" />
                 <LineBreak />
                 <Run Text="{x:Static p:Resources.FileByteProgress}" FontWeight="Bold" />
                 <Run Text="&#09;" />
-                <Run x:Name="uiFileByteProgress" />
+                <Run x:Name="_uiFileByteProgress" />
                 <LineBreak />
                 <Run Text="{x:Static p:Resources.FileHttpResponseData}" FontWeight="Bold" />
                 <Run Text="&#09;" />
-                <Run x:Name="uiFileHttpResponseData" FontFamily="Consolas" />
+                <Run x:Name="_uiFileHttpResponseData" FontFamily="Consolas" />
                 <LineBreak />
         </TextBlock>
 
-        <Button x:Name="uiOpenButton" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{x:Static p:Resources.FileOpen}" ToolTip="{x:Static p:Resources.FileOpenTooltip}" Click="OnOpenFile" IsEnabled="False" />
+        <Button x:Name="_uiOpenButton" HorizontalAlignment="Right" VerticalAlignment="Top" Content="{x:Static p:Resources.FileOpen}" ToolTip="{x:Static p:Resources.FileOpenTooltip}" Click="OnOpenFile" IsEnabled="False" />
     </Grid>
 </UserControl>

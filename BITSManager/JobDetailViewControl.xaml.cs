@@ -46,17 +46,17 @@ namespace BITSManager
             Job.GetTimes(out times);
 
             var time = MakeDateTime(times.CreationTime);
-            uiJobCreationTime.Text = time > DateTime.MinValue
+            _uiJobCreationTime.Text = time > DateTime.MinValue
                 ? time.ToString("F")
                 : Properties.Resources.JobTimeNotSet;
 
             time = MakeDateTime(times.ModificationTime);
-            uiJobModificationTime.Text = time > DateTime.MinValue
+            _uiJobModificationTime.Text = time > DateTime.MinValue
                 ? time.ToString("F")
                 : Properties.Resources.JobTimeNotSet;
 
             time = MakeDateTime(times.TransferCompletionTime);
-            uiJobTransferCompletionTime.Text = time > DateTime.MinValue
+            _uiJobTransferCompletionTime.Text = time > DateTime.MinValue
                 ? time.ToString("F")
                 : Properties.Resources.JobTimeNotSet;
 
@@ -67,7 +67,7 @@ namespace BITSManager
                 Properties.Resources.JobProgressFileCount,
                 progress.FilesTransferred,
                 progress.FilesTotal);
-            var bytes = progress.BytesTotal == UInt64.MaxValue
+            var bytes = progress.BytesTotal == ulong.MaxValue
                 ? String.Format(
                     Properties.Resources.JobProgressByteCountUnknown,
                     progress.BytesTransferred)
@@ -75,8 +75,8 @@ namespace BITSManager
                     Properties.Resources.JobProgressByteCount,
                     progress.BytesTransferred, progress.BytesTotal);
 
-            uiJobProgressFiles.Text = files;
-            uiJobProgressBytes.Text = bytes;
+            _uiJobProgressFiles.Text = files;
+            _uiJobProgressBytes.Text = bytes;
 
             // Error details (HRESULT, Context, Description)
             uint NError = 0;
@@ -91,17 +91,17 @@ namespace BITSManager
             Job.GetErrorCount(out NError);
             if (NError == 0)
             {
-                uiJobErrorCount.Text = Properties.Resources.JobErrorNoErrors;
-                uiJobError.Text = "";
+                _uiJobErrorCount.Text = Properties.Resources.JobErrorNoErrors;
+                _uiJobError.Text = "";
             }
             else // (NError > 0)
             {
-                uiJobErrorCount.Text = NError.ToString("N0"); // Locale-specific numeric with no decimal places
+                _uiJobErrorCount.Text = NError.ToString("N0"); // Locale-specific numeric with no decimal places
 
                 if (currState != BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR
                     && currState != BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSIENT_ERROR)
                 {
-                    uiJobError.Text = Properties.Resources.JobErrorWhenError;
+                    _uiJobError.Text = Properties.Resources.JobErrorWhenError;
                 }
                 else
                 {
@@ -113,16 +113,19 @@ namespace BITSManager
                         Error.GetErrorContextDescription((uint)langid, out ErrorContextDescription);
 
                         var errorText = String.Format ("\t{0} \t0x{1:X08}\n\t{2} \t{3}{4}\t{5} \t{6}",
-                            Properties.Resources.JobErrorHRESULT, ErrorHRESULT,
-                            Properties.Resources.JobErrorDescription, ErrorDescription,
+                            Properties.Resources.JobErrorHRESULT, 
+                            ErrorHRESULT,
+                            Properties.Resources.JobErrorDescription, 
+                            ErrorDescription,
                             ErrorDescription.EndsWith("\n") ? "" : "\n",
-                            Properties.Resources.JobErrorContext, ErrorContextDescription
+                            Properties.Resources.JobErrorContext, 
+                            ErrorContextDescription
                             );
-                        uiJobError.Text = errorText;
+                        _uiJobError.Text = errorText;
                     }
                     catch (System.Runtime.InteropServices.COMException)
                     {
-                        uiJobError.Text = Properties.Resources.JobErrorException;
+                        _uiJobError.Text = Properties.Resources.JobErrorException;
                     }
                 }
             }
@@ -135,42 +138,42 @@ namespace BITSManager
             if (identifier.IsValidTargetType(typeof(System.Security.Principal.NTAccount)))
             {
                 string account = identifier.Translate(typeof(System.Security.Principal.NTAccount)).ToString();
-                uiJobOwner.Text = account;
+                _uiJobOwner.Text = account;
             }
             else
             {
-                uiJobOwner.Text = jobOwner;
+                _uiJobOwner.Text = jobOwner;
             }
 
             // Job priority details
             BITS.BG_JOB_PRIORITY jobPriority;
             Job.GetPriority(out jobPriority);
-            uiJobPriority.Text = BitsConversions.ConvertJobPriorityToString(jobPriority);
+            _uiJobPriority.Text = BitsConversions.ConvertJobPriorityToString(jobPriority);
 
             // Job Type details
             BITS.BG_JOB_TYPE jobType;
             Job.GetType(out jobType);
-            uiJobType.Text = BitsConversions.ConvertJobTypeToString(jobType);
+            _uiJobType.Text = BitsConversions.ConvertJobTypeToString(jobType);
 
             // Job State details
             BITS.BG_JOB_STATE jobState;
             Job.GetState(out jobState);
-            uiJobState.Text = BitsConversions.ConvertJobStateToString(jobState);
+            _uiJobState.Text = BitsConversions.ConvertJobStateToString(jobState);
 
-            // Values from ICopyJob5 Property interface
+            // Values from IBackgroundCopyJob5 Property interface
             // COST_FLAGS, DYNAMIC_CONTENT, HIGH_PERFORMANCE, ON_DEMAND_MODE
             BITS5.IBackgroundCopyJob5 job5 = job as BITS5.IBackgroundCopyJob5;
             if (job5 == null)
             {
-                uiJobCost.Text = Properties.Resources.JobCostNotAvailable;
-                uiJobFlags.Text = Properties.Resources.JobFlagsNotAvailable;
+                _uiJobCost.Text = Properties.Resources.JobCostNotAvailable;
+                _uiJobFlags.Text = Properties.Resources.JobFlagsNotAvailable;
             }
             else
             {
                 BITS5.BITS_JOB_PROPERTY_VALUE cost;
                 job5.GetProperty(BITS5.BITS_JOB_PROPERTY_ID.BITS_JOB_PROPERTY_ID_COST_FLAGS, out cost);
                 var costString = BitsConversions.ConvertCostToString((BitsCosts)cost.Dword);
-                uiJobCost.Text = costString;
+                _uiJobCost.Text = costString;
 
                 var flagBuilder = new StringBuilder();
                 BITS5.BITS_JOB_PROPERTY_VALUE flagValue;
@@ -208,15 +211,15 @@ namespace BITSManager
                 {
                     flagBuilder.Append(Properties.Resources.JobFlagsNoneSet);
                 }
-                uiJobFlags.Text = flagBuilder.ToString();
+                _uiJobFlags.Text = flagBuilder.ToString();
             }
 
-            // Get the HttpJobOptions custom method
+            // Get the JobHttpOptions custom method
             var httpOptions2 = Job as BITS10_2.IBackgroundCopyJobHttpOptions2;
 
             if (httpOptions2 == null)
             {
-                uiJobHttpMethod.Text = Properties.Resources.JobHttpMethodNotAvailable;
+                _uiJobHttpMethod.Text = Properties.Resources.JobHttpMethodNotAvailable;
             }
             else
             {
@@ -224,11 +227,11 @@ namespace BITSManager
                 try
                 {
                     httpOptions2.GetHttpMethod(out httpMethod);
-                    uiJobHttpMethod.Text = httpMethod ?? Properties.Resources.JobHttpMethodNotSet;
+                    _uiJobHttpMethod.Text = httpMethod ?? Properties.Resources.JobHttpMethodNotSet;
                 }
                 catch (System.Runtime.InteropServices.COMException ex)
                 {
-                    uiJobHttpMethod.Text = String.Format(Properties.Resources.JobHttpMethodException, ex.Message);
+                    _uiJobHttpMethod.Text = String.Format(Properties.Resources.JobHttpMethodException, ex.Message);
                 }
             }
 
@@ -236,7 +239,7 @@ namespace BITSManager
             var httpOptions = Job as BITS4.IBackgroundCopyJobHttpOptions;
             if (httpOptions == null)
             {
-                uiJobCustomHeaders.Text = Properties.Resources.JobCustomHeadersNotAvailable;
+                _uiJobCustomHeaders.Text = Properties.Resources.JobCustomHeadersNotAvailable;
             }
             else
             {
@@ -246,11 +249,11 @@ namespace BITSManager
                     httpOptions.GetCustomHeaders(out customHeaders);
                     var headers = customHeaders ?? Properties.Resources.JobCustomHeadersNotSet;
                     headers = TabifyHttpHeaders.AddTabs(headers);
-                    uiJobCustomHeaders.Text = headers;
+                    _uiJobCustomHeaders.Text = headers;
                 }
                 catch (System.Runtime.InteropServices.COMException ex)
                 {
-                    uiJobCustomHeaders.Text = String.Format(
+                    _uiJobCustomHeaders.Text = String.Format(
                         Properties.Resources.JobCustomHeadersException,
                         ex.Message);
                 }
@@ -274,7 +277,7 @@ namespace BITSManager
 
         private void ListBITSJobFiles(BITS.IBackgroundCopyJob Job)
         {
-            uiFileList.Items.Clear();
+            _uiFileList.Items.Clear();
 
             // Iterate through the jobs
             BITS.IEnumBackgroundCopyFiles filesEnum;
@@ -289,7 +292,7 @@ namespace BITSManager
                 if (nfilesFetched > 0)
                 {
                     var control = new FileDetailViewControl(Job, file);
-                    uiFileList.Items.Add(control);
+                    _uiFileList.Items.Add(control);
                 }
             }
             while (nfilesFetched > 0);
