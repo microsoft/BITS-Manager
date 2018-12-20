@@ -99,6 +99,7 @@ namespace BITSManager
                         _shouldNotifyUserOnAccessError = false; // Only display this dialog once
                         _uiMenuAllUsers.IsChecked = false; // Checked is clearly not going to work
                         _uiMenuAllUsers.IsEnabled = false; // Don't allow the user to try again
+                        _jobEnumType = 0; // Reset to 0. Just setting IsChecked doesn't trigger the callback.
                         MessageBox.Show(
                             Properties.Resources.ErrorInsufficientPrivilegesMessage,
                             Properties.Resources.ErrorInsufficientPrivilegesTitle);
