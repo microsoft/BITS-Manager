@@ -289,10 +289,6 @@
     <value>Error: Unable to add file</value>
     <comment>Title of message box when a file can't be added to a job</comment>
   </data>
-  <data name="JobCost" xml:space="preserve">
-    <value>Cost</value>
-    <comment>One of the Job properties</comment>
-  </data>
   <data name="JobCostAlways" xml:space="preserve">
     <value>Always</value>
     <comment>One of the Job cost property values</comment>
@@ -703,5 +699,9 @@ Version {0}</value>
   <data name="JobAuthProxyImplicit" xml:space="preserve">
     <value>Allow implicit proxy credentials</value>
     <comment>One of the Job properties</comment>
+  </data>
+  <data name="JobCost" xml:space="preserve">
+    <value>Cost          </value>
+    <comment>One of the Job properties. There are 10 extra spaces so that the field values line up neatly. For EN-US, any number of spaces from 7 to 20 results in good alignment; the value will be different in different languages and fonts.</comment>
   </data>
 </root>

@@ -55,7 +55,7 @@ namespace BITSManager
         public static string GetAlignedSpaces(int length)
         {
             const int TabSize = 8;
-            const int TargetLength = 3 * TabSize;
+            const int TargetLength = 2 * TabSize;
 
             // Handle the case of length being larger than TargetLength.
             // We want some N such that (length + N) % TabSize == 0
