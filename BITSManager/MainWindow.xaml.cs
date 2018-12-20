@@ -46,10 +46,9 @@ namespace BITSManager
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
-                    String.Format(
-                    Properties.Resources.ErrorCantConnectToBitsException,
-                    ex.HResult,
-                    ex.Message));
+                    String.Format(Properties.Resources.ErrorCantConnectToBitsException, ex.HResult, ex.Message),
+                    Properties.Resources.ErrorTitle
+                    );
             }
             if (_mgr == null)
             {
@@ -97,7 +96,9 @@ namespace BITSManager
                 {
                     if (_shouldNotifyUserOnAccessError)
                     {
-                        _shouldNotifyUserOnAccessError = false; // only display this dialog once.
+                        _shouldNotifyUserOnAccessError = false; // Only display this dialog once
+                        _uiMenuAllUsers.IsChecked = false; // Checked is clearly not going to work
+                        _uiMenuAllUsers.IsEnabled = false; // Don't all the user to try again
                         MessageBox.Show(
                             Properties.Resources.ErrorInsufficientPrivilegesMessage,
                             Properties.Resources.ErrorInsufficientPrivilegesTitle);
@@ -283,13 +284,16 @@ namespace BITSManager
                 _mgr.CreateJob(jobName, jobType, out jobId, out job);
                 try
                 {
-                dlg.SetJobProperties(job);
+                    dlg.SetJobProperties(job);
                 }
                 catch (System.Runtime.InteropServices.COMException ex)
                 {
-                    MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message), Properties.Resources.ErrorTitle);
                     // No need to cancel; the job will show up in the job list and
                     // will be selected. The user should deal with it as they see fit.
+                    MessageBox.Show(
+                        String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                        Properties.Resources.ErrorTitle
+                        );
                 }
 
                 RefreshJobList();
@@ -351,9 +355,9 @@ namespace BITSManager
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
-                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
-                    );
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                );
             }
             RefreshJobList();
         }
@@ -368,7 +372,7 @@ namespace BITSManager
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
                     String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonCancel)
                     );
             }
@@ -385,7 +389,7 @@ namespace BITSManager
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
                     String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonComplete)
                     );
             }
@@ -402,7 +406,7 @@ namespace BITSManager
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
                     String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonResume)
                     );
             }
@@ -419,7 +423,7 @@ namespace BITSManager
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 MessageBox.Show(
-                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
                     String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
                     );
             }

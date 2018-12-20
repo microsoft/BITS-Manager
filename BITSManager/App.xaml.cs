@@ -17,8 +17,8 @@ namespace BITSManager
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            // This doesn't set e.Handled because I want to show a reasonable dialog box on exception,
-            // but I am still willing to have the app crash
+            // This doesn't set e.Handled because we want to show a reasonable dialog box on exception,
+            // but we are still willing to have the app crash
             var message = String.Format(
                 BITSManager.Properties.Resources.UnhandledExceptionMessage,
                 e.Exception.Message,

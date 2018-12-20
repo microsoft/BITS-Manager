@@ -21,8 +21,10 @@ namespace BITSManager
 
         public void SetJobProperties(BITS.IBackgroundCopyJob job)
         {
-            var job5 = job as BITS5.IBackgroundCopyJob5;
-            if (job5 != null) // job5 will be null on, e.g., Windows 7 and earlier.
+            var job2 = (BITS.IBackgroundCopyJob2)job; // Job2 exists on all supported version of Windows.
+            var job5 = job as BITS5.IBackgroundCopyJob5; // Job5 will be null on, e.g., Windows 7 and earlier.
+
+            if (job5 != null)
             {
                 // Set the job properties.
                 var costs = _jobCosts;
@@ -59,15 +61,32 @@ namespace BITSManager
             var authScheme = _authScheme;
             if (authScheme.HasValue)
             {
-                var job2 = (BITS.IBackgroundCopyJob2)job; // Job2 exists on all supported version of Windows.
-                var credentials = new BITS.BG_AUTH_CREDENTIALS();
-                credentials.Scheme = (BITS.BG_AUTH_SCHEME)authScheme.Value;
-                credentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_SERVER;
-                // This app doesn't support setting proxy auth.
-                credentials.Credentials.Password = _uiPassword.Text;
-                credentials.Credentials.UserName = _uiUserName.Text;
-                job2.SetCredentials(credentials);
+                var serverCredentials = new BITS.BG_AUTH_CREDENTIALS();
+                serverCredentials.Scheme = (BITS.BG_AUTH_SCHEME)authScheme.Value;
+                serverCredentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_SERVER;
+                serverCredentials.Credentials.Password = _uiPassword.Text;
+                serverCredentials.Credentials.UserName = _uiUserName.Text;
+                job2.SetCredentials(serverCredentials);
             }
+
+            // Some enterprises have a proxy that requires implicit credentials. For
+            // those places, allow the user to add the NEGOTIAGE and NTLM schemes.
+            // NEGOTIATE is newer and is more common.
+            if (_jobIsAuthProxyImplicit.HasValue && _jobIsAuthProxyImplicit.Value)
+            {
+                var proxyCredentials = new BITS.BG_AUTH_CREDENTIALS();
+                proxyCredentials.Target = BITS.BG_AUTH_TARGET.BG_AUTH_TARGET_PROXY;
+                proxyCredentials.Scheme = BITS.BG_AUTH_SCHEME.BG_AUTH_SCHEME_NEGOTIATE;
+                proxyCredentials.Credentials.Password = null;
+                proxyCredentials.Credentials.UserName = null;
+                job2.SetCredentials(proxyCredentials);
+
+                // Some enterprises won't have Nego set up; for them, also allow
+                // plain NTLM without the possibility of Kerberos.
+                proxyCredentials.Scheme = BITS.BG_AUTH_SCHEME.BG_AUTH_SCHEME_NTLM;
+                job2.SetCredentials(proxyCredentials);
+            }
+
         }
 
         private BITS.BG_AUTH_SCHEME? _authScheme
@@ -96,6 +115,15 @@ namespace BITSManager
                 // The Tag for each ComboBoxItem is already a BitsCosts enum.
                 var tag = (_uiCosts.SelectedItem as ComboBoxItem).Tag as BitsCosts?;
                 return tag;
+            }
+        }
+
+        private bool? _jobIsAuthProxyImplicit
+        {
+            get
+            {
+                var isChecked = _uiAuthProxyImplicit.IsChecked;
+                return isChecked;
             }
         }
 

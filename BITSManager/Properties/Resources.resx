@@ -234,7 +234,7 @@
     <comment>One of the file properties</comment>
   </data>
   <data name="JobAuthScheme" xml:space="preserve">
-    <value>Authentication Type</value>
+    <value>Server Authentication Type</value>
     <comment>One of the Job properties</comment>
   </data>
   <data name="JobAuthSchemeBasic" xml:space="preserve">
@@ -695,5 +695,13 @@ Version {0}</value>
   <data name="ErrorUnauthorizedAccessTitle" xml:space="preserve">
     <value>Unauthorized Access</value>
     <comment>Title of the message when user doesn't have permission to access a file</comment>
+  </data>
+  <data name="ErrorBitsException" xml:space="preserve">
+    <value>BITS exception {0:X} {1}</value>
+    <comment>Shown when there's some other BITS exception. {0} is the HResult and {1} is the message.</comment>
+  </data>
+  <data name="JobAuthProxyImplicit" xml:space="preserve">
+    <value>Allow implicit proxy credentials</value>
+    <comment>One of the Job properties</comment>
   </data>
 </root>

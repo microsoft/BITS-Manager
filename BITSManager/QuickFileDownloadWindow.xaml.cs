@@ -132,7 +132,7 @@ namespace BITSManager
                 catch (System.Runtime.InteropServices.COMException ex)
                 {
                     MessageBox.Show(
-                        String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                        String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
                         Properties.Resources.ErrorTitle
                         );
                 }
@@ -151,6 +151,7 @@ namespace BITSManager
             {
                 return null;
             }
+
             BITS.GUID jobGuid;
             BITS.IBackgroundCopyJob job;
             _mgr.CreateJob("Quick download", BITS.BG_JOB_TYPE.BG_JOB_TYPE_DOWNLOAD,
@@ -159,12 +160,31 @@ namespace BITSManager
             {
                 job.AddFile(URL, filename);
             }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                    Properties.Resources.ErrorTitle
+                    );
+                job.Cancel();
+                return job;
+            }
             catch (System.UnauthorizedAccessException)
             {
                 MessageBox.Show(Properties.Resources.ErrorUnauthorizedAccessMessage, Properties.Resources.ErrorUnauthorizedAccessTitle);
                 job.Cancel();
                 return job;
             }
+            catch (System.ArgumentException ex)
+            {
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorMessage, ex.Message),
+                    Properties.Resources.ErrorTitle
+                    );
+                job.Cancel();
+                return job;
+            }
+
             try
             {
                 SetJobProperties(job); // Set job properties as needed
@@ -176,10 +196,13 @@ namespace BITSManager
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
-                MessageBox.Show(String.Format(Properties.Resources.ErrorMessage, ex.Message), Properties.Resources.ErrorTitle);
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                    Properties.Resources.ErrorTitle
+                    );
                 job.Cancel();
             }
-            // Job is now running. We can exit and it will continue automatically.
+            // Unless there was an error, the job is now running. We can exit and it will continue automatically.
             return job; // Return the job that was created
         }
 

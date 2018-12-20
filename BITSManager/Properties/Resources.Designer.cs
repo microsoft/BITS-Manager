@@ -163,6 +163,15 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BITS exception {0:X} {1}.
+        /// </summary>
+        public static string ErrorBitsException {
+            get {
+                return ResourceManager.GetString("ErrorBitsException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to add file to job.
         /// </summary>
         public static string ErrorCantAddFile {
@@ -370,7 +379,16 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication Type.
+        ///   Looks up a localized string similar to Allow implicit proxy credentials.
+        /// </summary>
+        public static string JobAuthProxyImplicit {
+            get {
+                return ResourceManager.GetString("JobAuthProxyImplicit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Authentication Type.
         /// </summary>
         public static string JobAuthScheme {
             get {

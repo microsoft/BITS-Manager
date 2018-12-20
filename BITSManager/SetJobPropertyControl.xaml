@@ -41,6 +41,7 @@ Licensed under the MIT License.
             <ComboBoxItem Tag="3" Content="{x:Static p:Resources.JobAuthSchemeNtlm}" />
             <ComboBoxItem Tag="4" Content="{x:Static p:Resources.JobAuthSchemePassport}" />
         </ComboBox>
+        <CheckBox x:Name="_uiAuthProxyImplicit" Content="{x:Static p:Resources.JobAuthProxyImplicit}" IsChecked="{x:Null}" />
         <TextBlock Text="{x:Static p:Resources.JobUserName}" />
         <TextBox x:Name="_uiUserName" HorizontalAlignment="Stretch" />
         <TextBlock Text="{x:Static p:Resources.JobPassword}" />
