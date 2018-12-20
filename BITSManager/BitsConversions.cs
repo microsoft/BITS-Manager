@@ -2,21 +2,16 @@
 // Licensed under the MIT License.
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-//using BITS4 = BITSReference4_0;
-//using BITS5 = BITSReference5_0;
-//using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
-    //Must recreate the BITS COST values; they don't transfer over when converting the IDL file.
+    // Must recreate the BITS COST values; they don't transfer over when converting the IDL file.
     // From bits5_0.idl.
-    // The transfer policy is a two-step conversion: there are 5 documented high-level values 
+    // The transfer policy is a two-step conversion: there are 5 documented high-level values
     // (e.g., BITS_COST_STATE_TRANSFER_NOT_ROAMING) which are composed from a series of
     // low-level values (e.g., BITS_COST_STATE_UNRESTRICTED)
     // #define BITS_COST_STATE_UNRESTRICTED          0x1
@@ -39,7 +34,7 @@ namespace BITSManager
     public enum BitsCosts : UInt32
     {
         // See https://msdn.microsoft.com/library/9dc2c020-06c0-41dd-bf36-203432ad9d4f for a full discussion
-        // of how network metering is measures. 
+        // of how network metering is measures.
         UNRESTRICTED = 0x1,
         CAPPED_USAGE_UNKNOWN = 0x2,
         BELOW_CAP = 0x4,
@@ -57,8 +52,24 @@ namespace BITSManager
         TRANSFER_ALWAYS = (IGNORE_CONGESTION | ROAMING | USAGE_BASED | OVERCAP_THROTTLED | OVERCAP_CHARGED | NEAR_CAP | BELOW_CAP | CAPPED_USAGE_UNKNOWN | UNRESTRICTED),
     }
 
+    // Must recreate the BG_NOTIFY flags
+    // cpp_quote("#define   BG_NOTIFY_JOB_TRANSFERRED         0x0001")
+    // cpp_quote("#define   BG_NOTIFY_JOB_ERROR               0x0002")
+    // cpp_quote("#define   BG_NOTIFY_DISABLE                 0x0004")
+    // cpp_quote("#define   BG_NOTIFY_JOB_MODIFICATION        0x0008")
+    // cpp_quote("#define   BG_NOTIFY_FILE_TRANSFERRED        0x0010")
+    // cpp_quote("#define   BG_NOTIFY_FILE_RANGES_TRANSFERRED 0x0020")
+    public enum BitsNotifyFlags : UInt32
+    {
+        JOB_TRANSFERRED = 0x0001,
+        JOB_ERROR = 0x0002,
+        DISABLE = 0x0004,
+        JOB_MODIFICATION = 0x0008,
+        FILE_TRANSFERRED = 0x0010,
+        FILE_RANGES_TRANSFERRED = 0x0020,
+    }
 
-    public class BitsConversions
+    public static class BitsConversions
     {
         /// <summary>
         ///  Converts the cost dword (uint) into a string. This is non-trivial because the cost values
@@ -68,27 +79,38 @@ namespace BITSManager
         /// <returns></returns>
         public static string ConvertCostToString(BitsCosts cost)
         {
-            if (cost == BitsCosts.TRANSFER_NOT_ROAMING) return Properties.Resources.JobCostNotRoaming;
-            if (cost == BitsCosts.TRANSFER_NO_SURCHARGE) return Properties.Resources.JobCostNoSurcharge;
-            if (cost == BitsCosts.TRANSFER_STANDARD) return Properties.Resources.JobCostStandard;
-            if (cost == BitsCosts.TRANSFER_UNRESTRICTED) return Properties.Resources.JobCostUnrestricted;
-            if (cost == BitsCosts.TRANSFER_ALWAYS) return Properties.Resources.JobCostAlways;
+            switch (cost)
+            {
+                case BitsCosts.TRANSFER_NOT_ROAMING: return Properties.Resources.JobCostNotRoaming;
+                case BitsCosts.TRANSFER_NO_SURCHARGE: return Properties.Resources.JobCostNoSurcharge;
+                case BitsCosts.TRANSFER_STANDARD: return Properties.Resources.JobCostStandard;
+                case BitsCosts.TRANSFER_UNRESTRICTED: return Properties.Resources.JobCostUnrestricted;
+                case BitsCosts.TRANSFER_ALWAYS: return Properties.Resources.JobCostAlways;
+            }
 
             // It wasn't one of the standard sets. Break it into the known cost values plus "all the rest"
             // Because these values are never encounted in real life, it's OK to use the ENUM value
             // as the output value instead of a translated string.
             var costBuilder = new StringBuilder();
-            List<BitsCosts> AllCostsToCheck = new List<BitsCosts>() {  BitsCosts.UNRESTRICTED, BitsCosts.CAPPED_USAGE_UNKNOWN,
-                BitsCosts.BELOW_CAP, BitsCosts.NEAR_CAP, BitsCosts.OVERCAP_CHARGED, BitsCosts.OVERCAP_THROTTLED,
-                BitsCosts.USAGE_BASED, BitsCosts.ROAMING, BitsCosts.IGNORE_CONGESTION};
+            List<BitsCosts> allCostsToCheck = new List<BitsCosts>() {
+                BitsCosts.UNRESTRICTED,
+                BitsCosts.CAPPED_USAGE_UNKNOWN,
+                BitsCosts.BELOW_CAP,
+                BitsCosts.NEAR_CAP,
+                BitsCosts.OVERCAP_CHARGED,
+                BitsCosts.OVERCAP_THROTTLED,
+                BitsCosts.USAGE_BASED,
+                BitsCosts.ROAMING,
+                BitsCosts.IGNORE_CONGESTION};
 
-
-            AllCostsToCheck = new List<BitsCosts>() { BitsCosts.UNRESTRICTED };
-            foreach (var item in AllCostsToCheck)
+            foreach (var item in allCostsToCheck)
             {
                 if ((cost & item) != 0)
                 {
-                    if (costBuilder.Length > 0) costBuilder.Append(", ");
+                    if (costBuilder.Length > 0)
+                    {
+                        costBuilder.Append(", ");
+                    }
                     costBuilder.Append(item.ToString());
                     cost &= ~item;
                 }
@@ -97,7 +119,10 @@ namespace BITSManager
             // be printed as a simple hex value.
             if (cost != 0)
             {
-                if (costBuilder.Length > 0) costBuilder.Append(", ");
+                if (costBuilder.Length > 0)
+                {
+                    costBuilder.Append(", ");
+                }
                 costBuilder.Append(string.Format("{0:X}", cost));
             }
             return costBuilder.ToString();
@@ -120,24 +145,49 @@ namespace BITSManager
             }
         }
 
-
         public static string ConvertJobStateToIconString(BITS.BG_JOB_STATE jobState)
         {
             switch (jobState)
             {
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_QUEUED: return "🙂";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_CONNECTING: return "😵";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRING: return "😏";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_SUSPENDED: return "😴";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR: return "😡";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSIENT_ERROR: return "😬";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED: return "😁";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED: return "😎";
-                case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED: return "😧";
-                default:return $"{(int)jobState}";
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_QUEUED:
+                // Unicode SLIGHTLY SMILING FACE \U+1F642 🙂
+                return Properties.Resources.JobStateIconQueued;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_CONNECTING:
+                // Unicode DIZZY FACE \U+1F635 😵
+                return Properties.Resources.JobStateIconConnecting;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRING:
+                // Unicode SMIRKING FACE \U+1F60F 😏
+                return Properties.Resources.JobStateIconTransferring;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_SUSPENDED:
+                // Unicode SLEEPING FACE \U+1F634 😴
+                return Properties.Resources.JobStateIconSuspended;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_ERROR:
+                // Unicode POUTING FACE \U+1F621 😡
+                return Properties.Resources.JobStateIconError;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSIENT_ERROR:
+                // Unicode GRIMACING FACE \U+1F62C 😬
+                return Properties.Resources.JobStateIconTransientError;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_TRANSFERRED:
+                // Unicode GRINNING FACE WITH SMILING EYES \U+1F601 😁
+                return Properties.Resources.JobStateIconTransferred;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
+                // Unicode SMILING FACE WITH SUNGLASSES \U+1F60E 😎
+                return Properties.Resources.JobStateIconAcknowledged;
+
+                case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
+                // Unicode ANGUISHED FACE \U+1f627 😧
+                return Properties.Resources.JobStateIconCancelled;
+
+                default: return String.Format("{0:X}", jobState);
             }
         }
-
 
         public static string ConvertJobTypeToString(BITS.BG_JOB_TYPE jobType)
         {
@@ -150,17 +200,30 @@ namespace BITSManager
             }
         }
 
-
-        public static string ConvertPriorityToString(BITS.BG_JOB_PRIORITY priority)
+        public static string ConvertJobPriorityToString(BITS.BG_JOB_PRIORITY jobPriority)
         {
-            switch (priority)
+            switch (jobPriority)
             {
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_FOREGROUND: return Properties.Resources.JobPriorityForeground;
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_HIGH: return Properties.Resources.JobPriorityHigh;
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_LOW: return Properties.Resources.JobPriorityLow;
                 case BITS.BG_JOB_PRIORITY.BG_JOB_PRIORITY_NORMAL: return Properties.Resources.JobPriorityNormal;
-                default: return String.Format("{0:X}", priority);
+                default: return String.Format("{0:X}", jobPriority);
             }
+        }
+
+        public static Guid ToGuid(this BITS.GUID guid)
+        {
+            // BITS.GUID defines all the fields to be unsigned
+            // The .NET Guid constructor uses signed values
+            Guid newGuid = new Guid((int)guid.Data1, (short)guid.Data2, (short)guid.Data3, guid.Data4);
+            return newGuid;
+        }
+
+        public static bool GuidEquals(this BITS.GUID a, BITS.GUID b)
+        {
+            var areEquals = a.ToGuid().Equals(b.ToGuid());
+            return areEquals;
         }
     }
 }

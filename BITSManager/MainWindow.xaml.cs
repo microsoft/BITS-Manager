@@ -1,100 +1,108 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
-// Set up the BITS namespaces
+// Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
-//using BITS4 = BITSReference4_0;
-//using BITS5 = BITSReference5_0;
-using BITS10_2 = BITSReference10_2;
 
 namespace BITSManager
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IRefreshJobList, BITS.IBackgroundCopyCallback
+    public partial class MainWindow : Window, BITS.IBackgroundCopyCallback
     {
-        const uint BG_JOB_ENUM_ALL_USERS = 1;
-        uint JobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
-        BITS.IBackgroundCopyManager Mgr = null;
-        DispatcherTimer timer;
+        private const uint BG_JOB_ENUM_ALL_USERS = 1;
+        private uint _jobEnumType = 0; // is either 0 or BG_JOB_ENUM_ALL_USERS
+        private BITS.IBackgroundCopyManager _mgr = null;
+        private DispatcherTimer _timer;
+        private bool _shouldNotifyUserOnAccessError = false;
+
+        public static readonly RoutedCommand QuickFileDownloadCommand = new RoutedUICommand(
+            "QuickFileDownload",
+            "QuickFileDownloadCommand",
+            typeof(MainWindow),
+            new InputGestureCollection(
+                new InputGesture[] { new KeyGesture(Key.K, ModifierKeys.Control) }
+                )
+            );
 
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
+            Loaded += MainWindow_Loaded;
         }
-
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                Mgr = new BITS.BackgroundCopyManager1_5();
+                _mgr = new BITS.BackgroundCopyManager1_5();
             }
-            catch (Exception ex)
+            catch (System.Runtime.InteropServices.COMException ex)
             {
-                MessageBox.Show(String.Format(Properties.Resources.ErrorCantConnectToBitsException, ex.HResult, ex.Message));
+                MessageBox.Show(
+                    String.Format(Properties.Resources.ErrorCantConnectToBitsException, ex.HResult, ex.Message),
+                    Properties.Resources.ErrorTitle
+                    );
             }
-            if (Mgr == null)
+            if (_mgr == null)
             {
+                _uiJobDetails.Visibility = Visibility.Hidden;
+                UpdateMenu();
                 MessageBox.Show(Properties.Resources.ErrorCantConnectToBits, Properties.Resources.ErrorTitle);
             }
-
-            RefreshJobList();
-            bool focusStatus = uiJobList.Focus();
-            timer = new DispatcherTimer();
-            timer.Tick += Timer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 10);
-            timer.Start();
-            uiJobDetails.RefreshJobList = this;
+            else
+            {
+                RefreshJobList();
+                _uiJobList.Focus();
+                _timer = new DispatcherTimer();
+                _timer.Tick += Timer_Tick;
+                _timer.Interval = new TimeSpan(0, 0, 10);
+                _timer.Start();
+            }
         }
-
 
         private void Timer_Tick(object sender, EventArgs e)
         {
             RefreshJobList();
         }
 
-
-
-
         public void RefreshJobList()
         {
-            var currIndex = uiJobList.SelectedIndex;
+            if (_mgr == null)
+            {
+                return;
+            }
+
+            var currIndex = _uiJobList.SelectedIndex;
 
             // Get the iterator. Handle the throw when the user doesn't have permissions.
             BITS.IEnumBackgroundCopyJobs jobsEnum = null;
             try
             {
-                Mgr.EnumJobs(JobEnumType, out jobsEnum);
+                _mgr.EnumJobs(_jobEnumType, out jobsEnum);
             }
-            catch (Exception ex)
+            catch (System.UnauthorizedAccessException ex)
             {
                 // The most common error is trying to enumerate all users jobs
                 // when you are not running as admin. Don't keep telling the user
                 // that they are not the admin.
-                if (JobEnumType == BG_JOB_ENUM_ALL_USERS && (uint)ex.HResult == 0x80070005) // E_ACCESS_DENIED
+                if (_jobEnumType == BG_JOB_ENUM_ALL_USERS && (uint)ex.HResult == 0x80070005) // E_ACCESS_DENIED
                 {
-                    if (ShouldNotifyUserOnError)
+                    if (_shouldNotifyUserOnAccessError)
                     {
-                        ShouldNotifyUserOnError = false; // only display this dialog once.
-                        MessageBox.Show(Properties.Resources.ErrorInsufficientPrivilegesMessage, Properties.Resources.ErrorInsufficientPrivilegesTitle);
+                        _shouldNotifyUserOnAccessError = false; // Only display this dialog once
+                        _uiMenuAllUsers.IsChecked = false; // Checked is clearly not going to work
+                        _uiMenuAllUsers.IsEnabled = false; // Don't allow the user to try again
+                        _jobEnumType = 0; // Reset to 0. Just setting IsChecked doesn't trigger the callback.
+                        MessageBox.Show(
+                            Properties.Resources.ErrorInsufficientPrivilegesMessage,
+                            Properties.Resources.ErrorInsufficientPrivilegesTitle);
                     }
                 }
                 else
@@ -103,83 +111,121 @@ namespace BITSManager
                         Properties.Resources.ErrorTitle);
                 }
             }
-            if (jobsEnum == null) return;
 
-            // Set all jobs as not updated at the start. I'll update each active
-            // job, and later mark the inactive jobs as old.
-            foreach (var item in uiJobList.Items)
+            if (jobsEnum == null)
+            {
+                return;
+            }
+
+            // Set all jobs as not updated at the start. The code will then update
+            // each active job, and later mark the inactive jobs as old.
+            foreach (var item in _uiJobList.Items)
             {
                 var control = item as JobViewControl;
                 control.Updated = false;
             }
 
-            uint njobFetched = 0;
-            BITS.IBackgroundCopyJob job = null;
-
+            uint jobFetchedCount = 0;
             do
             {
-                jobsEnum.Next(1, out job, ref njobFetched); // Can only pull a single job out at a time
-                if (njobFetched > 0)
+                BITS.IBackgroundCopyJob job = null;
+                jobsEnum.Next(1, out job, ref jobFetchedCount); // Can only pull a single job out at a time
+                if (jobFetchedCount > 0)
                 {
-                    // Do something with the job
                     var control = new JobViewControl(job);
                     control.Updated = true;
                     int idx = GetJobIndex(job);
                     if (idx >= 0)
                     {
-                        uiJobList.Items[idx] = control;
+                        _uiJobList.Items[idx] = control;
                     }
                     else
                     {
-                        uiJobList.Items.Add(control);
+                        _uiJobList.Items.Add(control);
                     }
                 }
             }
-            while (njobFetched > 0);
+            while (jobFetchedCount > 0);
 
-            foreach (var item in uiJobList.Items)
+            foreach (var item in _uiJobList.Items)
             {
                 var control = item as JobViewControl;
                 if (!control.Updated)
                 {
                     control.MarkAsOld();
-                    if (!control.JobIsFinal) // Once it's final, it will never change.
+                    if (!control.JobIsFinal) // Once it's final, it will never change
                     {
                         control.UpdateState();
                     }
                 }
             }
 
-            if (uiJobList.Items.Count > 0)
+            if (_uiJobList.Items.Count > 0)
             {
-                uiJobDetails.Visibility = Visibility.Visible;
-                var oldIndex = uiJobList.SelectedIndex;
-                uiJobList.SelectedIndex = currIndex >= 0 ? currIndex : 0;
-                if (uiJobList.SelectedIndex == oldIndex)
+                _uiJobDetails.Visibility = Visibility.Visible;
+                var oldIndex = _uiJobList.SelectedIndex;
+                _uiJobList.SelectedIndex = currIndex >= 0 ? currIndex : 0;
+                if (_uiJobList.SelectedIndex == oldIndex)
                 {
                     // Refresh the currently selected item. It won't auto-refresh
                     // because we didn't change the selection.
-                    var control = uiJobList.SelectedItem as JobViewControl;
-                    uiJobDetails.SetJob(control.Job);
+                    var control = _uiJobList.SelectedItem as JobViewControl;
+                    _uiJobDetails.SetJob(control.Job);
                 }
             }
             else
             {
-                uiJobDetails.Visibility = Visibility.Hidden;
+                _uiJobDetails.Visibility = Visibility.Hidden;
             }
+
+            UpdateMenu();
         }
 
+        private void UpdateMenu()
+        {
+            var jobMenuEnabled = true;
+            if (_uiJobList.Items.Count > 0 && _uiJobList.SelectedItem != null)
+            {
+                // Update the jobs menus based on the job state
+                var job = (_uiJobList.SelectedItem as JobViewControl).Job;
+                BITS.BG_JOB_STATE state;
+                job.GetState(out state);
+                switch (state)
+                {
+                    case BITS.BG_JOB_STATE.BG_JOB_STATE_ACKNOWLEDGED:
+                    case BITS.BG_JOB_STATE.BG_JOB_STATE_CANCELLED:
+                    jobMenuEnabled = false;
+                    break;
+                }
+            }
+            else
+            {
+                jobMenuEnabled = false;
+            }
 
+            _uiMenuJobCancel.IsEnabled = jobMenuEnabled;
+            _uiMenuJobComplete.IsEnabled = jobMenuEnabled;
+            _uiMenuJobResume.IsEnabled = jobMenuEnabled;
+            _uiMenuJobSuspend.IsEnabled = jobMenuEnabled;
+            _uiMenuJobAddFile.IsEnabled = jobMenuEnabled;
+        }
+
+        /// <summary>
+        /// Given a job, return the index in the visible job list that matches the job.
+        /// Uses the job guid as the key.
+        /// </summary>
+        /// <param name="job">The IBackgroundCopyJob to look for</param>
+        /// <returns>An index 0..n for a job that's found and -1 if not found</returns>
         private int GetJobIndex(BITS.IBackgroundCopyJob job)
         {
             BITS.GUID searchFor;
             job.GetId(out searchFor);
-            for (int i = 0; i < uiJobList.Items.Count; i++)
+            for (int i = 0; i < _uiJobList.Items.Count; i++)
             {
-                var control = uiJobList.Items[i] as JobViewControl;
+                var control = _uiJobList.Items[i] as JobViewControl;
                 BITS.GUID id;
                 control.Job.GetId(out id);
-                if (GuidEqual(searchFor, id))
+                if (searchFor.GuidEquals(id))
                 {
                     return i;
                 }
@@ -187,53 +233,16 @@ namespace BITSManager
             return -1;
         }
 
-
-        private static bool GuidEqual(BITS.GUID a, BITS.GUID b)
-        {
-            bool field4equal = true;
-            if (a.Data4.Length != b.Data4.Length)
-            {
-                field4equal = false;
-            }
-            else
-            {
-                for (int i = 0; i < a.Data4.Length; i++)
-                {
-                    if (a.Data4[i] != b.Data4[i])
-                    {
-                        field4equal = false;
-                    }
-                }
-            }
-
-            var Retval = (a.Data1 == b.Data1
-                && a.Data2 == b.Data2
-                && a.Data3 == b.Data3
-                && field4equal);
-            return Retval;
-        }
-
-
         private void OnJobSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count != 1) return;
+            if (e.AddedItems.Count != 1)
+            {
+                return;
+            }
             var control = e.AddedItems[0] as JobViewControl;
-            uiJobList.ScrollIntoView(control);
-            uiJobDetails.SetJob(control.Job);
-        }
-
-
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.K && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                // Redirect to the menu handler.
-                OnMenuQuickFileDownload(null, null);
-            }
-            else if (e.Key == Key.F5)
-            {
-                RefreshJobList();
-            }
+            _uiJobList.ScrollIntoView(control);
+            _uiJobDetails.SetJob(control.Job);
+            UpdateMenu();
         }
 
         /// <summary>
@@ -241,9 +250,9 @@ namespace BITSManager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMenuQuickFileDownload(object sender, RoutedEventArgs e)
+        private void OnMenuJobQuickFileDownload(object sender, RoutedEventArgs e)
         {
-            var dlg = new QuickFileDownloadWindow();
+            var dlg = new QuickFileDownloadWindow(_mgr);
             dlg.Owner = this;
             var result = dlg.ShowDialog();
             var job = dlg.Job;
@@ -253,49 +262,62 @@ namespace BITSManager
             {
                 RefreshJobList();
                 var idx = GetJobIndex(job);
-                uiJobList.SelectedIndex = idx;
+                _uiJobList.SelectedIndex = idx;
             }
         }
 
-
-        private void OnMenuCreateNewJob(object sender, RoutedEventArgs e)
+        private void OnMenuJobCreateNewJob(object sender, RoutedEventArgs e)
         {
+            if (_mgr == null)
+            {
+                return;
+            }
+
             var dlg = new CreateNewJobWindow();
             dlg.Owner = this;
             var result = dlg.ShowDialog();
-            if (result.HasValue && result.Value && Mgr != null)
+            if (result.HasValue && result.Value)
             {
                 var jobName = dlg.JobName;
                 var jobType = dlg.JobType;
                 BITS.GUID jobId;
                 BITS.IBackgroundCopyJob job;
-                Mgr.CreateJob(jobName, jobType, out jobId, out job);
-                dlg.SetJobProperties(job);
+                _mgr.CreateJob(jobName, jobType, out jobId, out job);
+                try
+                {
+                    dlg.SetJobProperties(job);
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    // No need to cancel; the job will show up in the job list and
+                    // will be selected. The user should deal with it as they see fit.
+                    MessageBox.Show(
+                        String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                        Properties.Resources.ErrorTitle
+                        );
+                }
+
                 RefreshJobList();
 
-                // Select the newly-created job.
+                // Select the newly-created job
                 var idx = GetJobIndex(job);
-                uiJobList.SelectedIndex = idx;
+                _uiJobList.SelectedIndex = idx;
             }
         }
-
 
         private void OnMenuRefresh(object sender, RoutedEventArgs e)
         {
             RefreshJobList();
         }
 
-
-        bool ShouldNotifyUserOnError = false;
         private void OnMenuAllUsers(object sender, RoutedEventArgs e)
         {
-            ShouldNotifyUserOnError = true;
-            JobEnumType = uiMenuAllUsers.IsChecked ? BG_JOB_ENUM_ALL_USERS : 0;
+            _shouldNotifyUserOnAccessError = true;
+            _jobEnumType = _uiMenuAllUsers.IsChecked ? BG_JOB_ENUM_ALL_USERS : 0;
             RefreshJobList();
         }
 
-
-        // Callbacks for when a job is transferred. 
+        // Callbacks for when a job is transferred
         public void JobTransferred(BITS.IBackgroundCopyJob pJob)
         {
             Dispatcher.Invoke(() => { RefreshJobList(); });
@@ -311,8 +333,135 @@ namespace BITSManager
             Dispatcher.Invoke(() => { RefreshJobList(); });
         }
 
-        public void FileTransferred(BITS.IBackgroundCopyJob pJob, BITS.IBackgroundCopyFile pFile)
+        private void OnMenuFileExit(object sender, RoutedEventArgs e)
         {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void OnMenuHelpAbout(object sender, RoutedEventArgs e)
+        {
+            var moreUrl = "https://github.com/Microsoft/BITS-Manager";
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var text = String.Format(Properties.Resources.AboutMessage, version, moreUrl);
+            MessageBox.Show(text, Properties.Resources.AboutTitle);
+        }
+
+        private void OnSuspend(object sender, RoutedEventArgs e)
+        {
+            var job = _uiJobDetails.Job;
+            try
+            {
+                job?.Suspend();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobCancel(object sender, RoutedEventArgs e)
+        {
+            var job = _uiJobDetails.Job;
+            try
+            {
+                job?.Cancel();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonCancel)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobComplete(object sender, RoutedEventArgs e)
+        {
+            var job = _uiJobDetails.Job;
+            try
+            {
+                job?.Complete();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonComplete)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobResume(object sender, RoutedEventArgs e)
+        {
+            var job = _uiJobDetails.Job;
+            try
+            {
+                job?.Resume();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonResume)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobSuspend(object sender, RoutedEventArgs e)
+        {
+            var job = _uiJobDetails.Job;
+            try
+            {
+                job?.Suspend();
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(
+                String.Format(Properties.Resources.ErrorBitsException, ex.HResult, ex.Message),
+                    String.Format(Properties.Resources.ErrorWhenTitle, Properties.Resources.JobButtonSuspend)
+                    );
+            }
+            RefreshJobList();
+        }
+
+        private void OnMenuJobAddFile(object sender, RoutedEventArgs e)
+        {
+            var job = _uiJobDetails.Job;
+            if (job == null)
+            {
+                return;
+            }
+            var dlg = new AddFileToJobWindow();
+            dlg.Owner = Window.GetWindow(this);
+            var result = dlg.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                var remoteUri = dlg.RemoteUri;
+                var localFile = dlg.LocalFile;
+                if (!string.IsNullOrEmpty(remoteUri) && !string.IsNullOrEmpty(localFile))
+                {
+                    try
+                    {
+                        job.AddFile(remoteUri, localFile);
+                    }
+                    catch (System.Runtime.InteropServices.COMException ex)
+                    {
+                        var message = String.Format(
+                            Properties.Resources.JobCantAddFileMessage,
+                            localFile,
+                            ex.Message);
+                        MessageBox.Show(message, Properties.Resources.JobCantAddFileTitle);
+                    }
+                }
+            }
+            RefreshJobList();
         }
     }
 }

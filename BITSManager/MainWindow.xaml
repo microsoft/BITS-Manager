@@ -10,7 +10,10 @@ Licensed under the MIT License.
         xmlns:p="clr-namespace:BITSManager.Properties"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.Title}" Height="450" Width="800">
-    <Grid KeyDown="OnKeyDown">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" Executed="OnMenuJobQuickFileDownload" />
+    </Window.CommandBindings>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -22,37 +25,42 @@ Licensed under the MIT License.
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Menu AutomationProperties.Name="{x:Static p:Resources.Menu}" Grid.ColumnSpan="2">
-            <MenuItem Header="{x:Static p:Resources.MenuJob}">
-                <MenuItem Header="{x:Static p:Resources.MenuQuickFileDownload}" Click="OnMenuQuickFileDownload" />
-                <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuJobsAllUsers}" Click="OnMenuAllUsers" x:Name="uiMenuAllUsers" />
 
-                <MenuItem Header="{x:Static p:Resources.MenuCreateNewJob}" Click="OnMenuCreateNewJob" />
-                <MenuItem Header="{x:Static p:Resources.MenuRefresh}" Click="OnMenuRefresh" />
+            <MenuItem Header="{x:Static p:Resources.MenuFile}">
+                <MenuItem Header="{x:Static p:Resources.MenuFileExit}" Click="OnMenuFileExit" />
+            </MenuItem>
+
+            <MenuItem Header="{x:Static p:Resources.MenuJob}">
+                <MenuItem Header="{x:Static p:Resources.MenuJobQuickFileDownload}" InputGestureText="^K" Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" />
+                <MenuItem Header="{x:Static p:Resources.MenuJobCreateNewJob}" Click="OnMenuJobCreateNewJob" />
+                <MenuItem x:Name="_uiMenuJobCancel" Header="{x:Static p:Resources.MenuJobCancel}" Click="OnMenuJobCancel" />
+                <MenuItem x:Name="_uiMenuJobComplete" Header="{x:Static p:Resources.MenuJobComplete}" Click="OnMenuJobComplete" />
+                <MenuItem x:Name="_uiMenuJobResume" Header="{x:Static p:Resources.MenuJobResume}" Click="OnMenuJobResume" />
+                <MenuItem x:Name="_uiMenuJobSuspend" Header="{x:Static p:Resources.MenuJobSuspend}" Click="OnMenuJobSuspend" />
+                <MenuItem x:Name="_uiMenuJobAddFile" Header="{x:Static p:Resources.MenuJobAddFile}" Click="OnMenuJobAddFile" />
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuView}">
+                <MenuItem IsCheckable="True" IsChecked="False" Header="{x:Static p:Resources.MenuViewAllUsers}" Click="OnMenuAllUsers" x:Name="_uiMenuAllUsers" />
+                <MenuItem Header="{x:Static p:Resources.MenuViewRefresh}" Click="OnMenuRefresh" />
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuHelp}">
+                <MenuItem Header="{x:Static p:Resources.MenuHelpAbout}" Click="OnMenuHelpAbout" />
             </MenuItem>
         </Menu>
 
         <!-- The list of all BITS Jobs -->
-        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="uiJobListHeader" Text="{x:Static p:Resources.Jobs}" FontSize="18" FontWeight="Bold" />
-        <ListView Grid.Row="2" Grid.Column="0" x:Name="uiJobList"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
-                    SelectionMode="Single" SelectionChanged="OnJobSelectionChanged" 
-                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}" 
-                    IsTabStop="True">
-            <!-- All of the JobView items need to be stretch to the full width.
-            If this isn't done, the state icons won't be neatly adjusted on the right.
-            The uiJobList is filled with JobViewControl items in MainWindow code.
-                -->
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                <Setter Property="Focusable" Value="True" />
-            </Style>
-            </ListView.ItemContainerStyle>
+        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="_uiJobListHeader" Text="{x:Static p:Resources.Jobs}" FontSize="18" FontWeight="Bold" />
+        <ListView Grid.Row="2" Grid.Column="0" x:Name="_uiJobList"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
+                  SelectionMode="Single" SelectionChanged="OnJobSelectionChanged"
+                  AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}"
+                  IsTabStop="True">
         </ListView>
-        
+
         <!-- The selected job details -->
-        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
-        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="uiJobDetails" 
-                                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}" 
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="_uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
+        <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="_uiJobDetails"
+                                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}"
                                     IsTabStop="True" />
     </Grid>
 </Window>

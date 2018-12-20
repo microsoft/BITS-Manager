@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+using System;
 using System.Windows;
 
 namespace BITSManager
@@ -15,21 +12,17 @@ namespace BITSManager
     {
         public App()
         {
-            // This is how to force the app to use a specific UI culture.
-            // The culture must be a valid  BCP-47  https://tools.ietf.org/html/bcp47 .
-            // These in turn must be ISO 639 codes. 
-            // Only cultures supported by the app should be used!
-            // You should only set to a culture supported by the OS; otherwise the BITS
-            // error methods will fail to get error messages for BITS errors.
-
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
-
-            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
         }
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            var message = String.Format (BITSManager.Properties.Resources.UnhandledExceptionMessage, e.Exception.Message, e.Exception.GetType().ToString());
+            // This doesn't set e.Handled because we want to show a reasonable dialog box on exception,
+            // but we are still willing to have the app crash
+            var message = String.Format(
+                BITSManager.Properties.Resources.UnhandledExceptionMessage,
+                e.Exception.Message,
+                e.Exception.GetType().ToString());
             MessageBox.Show(message, BITSManager.Properties.Resources.UnhandledExceptionTitle);
         }
     }

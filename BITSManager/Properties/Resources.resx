@@ -127,9 +127,11 @@
   </data>
   <data name="CreateNewJobJobName" xml:space="preserve">
     <value>Job Name</value>
+    <comment>Header for job name field in Create New Job dialog</comment>
   </data>
   <data name="CreateNewJobJobType" xml:space="preserve">
     <value>Job Type</value>
+    <comment>Header for job type in Create New Job dialog</comment>
   </data>
   <data name="DialogCancel" xml:space="preserve">
     <value>Cancel</value>
@@ -149,6 +151,7 @@
   </data>
   <data name="ErrorCantAddFile" xml:space="preserve">
     <value>Unable to add file to job</value>
+    <comment>Shown when we can't add a file to a job</comment>
   </data>
   <data name="ErrorCantConnectToBits" xml:space="preserve">
     <value>Unable to connect to BITS</value>
@@ -164,27 +167,35 @@
   </data>
   <data name="ErrorEmptyLocalFile" xml:space="preserve">
     <value>The local file must not be blank</value>
+    <comment>Shown when adding a file to a job and the local file is blank</comment>
   </data>
   <data name="ErrorEmptyRemoteUrl" xml:space="preserve">
     <value>The remote URL must not be blank</value>
+    <comment>Shown when adding a file to a job and the remote URL is blank</comment>
   </data>
   <data name="ErrorInsufficientPrivilegesMessage" xml:space="preserve">
     <value>You must be an administrator to read job information for all users</value>
+    <comment>Shown when refreshing the job list</comment>
   </data>
   <data name="ErrorInsufficientPrivilegesTitle" xml:space="preserve">
     <value>Insufficient Privileges</value>
+    <comment>Title of error when refreshing the job list</comment>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error: {0}</value>
+    <comment>Used for generic errors only</comment>
   </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>Error</value>
+    <comment>Used for generic errors only</comment>
   </data>
   <data name="ErrorWhenTitle" xml:space="preserve">
     <value>Error on {0}</value>
+    <comment>Used for generic errors only</comment>
   </data>
   <data name="FileByteProgress" xml:space="preserve">
     <value>Progress</value>
+    <comment>One of the file properties</comment>
   </data>
   <data name="FileDetails" xml:space="preserve">
     <value>File Details</value>
@@ -192,6 +203,7 @@
   </data>
   <data name="FileHttpResponseData" xml:space="preserve">
     <value>HTTP Response</value>
+    <comment>One of the file properties</comment>
   </data>
   <data name="FileHttpResponseDataNotAvailable" xml:space="preserve">
     <value>(not available)</value>
@@ -199,39 +211,51 @@
   </data>
   <data name="FileLocal" xml:space="preserve">
     <value>Filename</value>
+    <comment>One of the file properties</comment>
   </data>
   <data name="FileOpen" xml:space="preserve">
     <value>Open</value>
+    <comment>Text of the file open button</comment>
   </data>
   <data name="FileOpenTooltip" xml:space="preserve">
     <value>Open the completed file</value>
+    <comment>Tooltip for the file open button</comment>
   </data>
   <data name="FileProgressByteCount" xml:space="preserve">
     <value>{0:N0} of {1:N0} bytes</value>
+    <comment>One of the file properties</comment>
   </data>
   <data name="FileProgressByteCountUnknown" xml:space="preserve">
     <value>{0:N0} bytes</value>
+    <comment>One of the file properties</comment>
   </data>
   <data name="FileRemote" xml:space="preserve">
     <value>URL	</value>
+    <comment>One of the file properties</comment>
   </data>
   <data name="JobAuthScheme" xml:space="preserve">
-    <value>Authentication Type</value>
+    <value>Server Authentication Type</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobAuthSchemeBasic" xml:space="preserve">
     <value>BASIC</value>
+    <comment>One of the Job auth scheme property values</comment>
   </data>
   <data name="JobAuthSchemeDigest" xml:space="preserve">
     <value>Digest</value>
+    <comment>One of the Job auth scheme property values</comment>
   </data>
   <data name="JobAuthSchemeNegotiate" xml:space="preserve">
-    <value>Nego</value>
+    <value>Negotiate</value>
+    <comment>One of the Job auth scheme property values</comment>
   </data>
   <data name="JobAuthSchemeNtlm" xml:space="preserve">
     <value>NTLM</value>
+    <comment>One of the Job auth scheme property values</comment>
   </data>
   <data name="JobAuthSchemePassport" xml:space="preserve">
     <value>Passport</value>
+    <comment>One of the Job auth scheme property values</comment>
   </data>
   <data name="JobButtonAddFile" xml:space="preserve">
     <value>Add File</value>
@@ -255,6 +279,7 @@
   </data>
   <data name="JobByteProgress" xml:space="preserve">
     <value>Byte Progress</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobCantAddFileMessage" xml:space="preserve">
     <value>Can't add file {0} because {1}</value>
@@ -265,35 +290,40 @@
     <comment>Title of message box when a file can't be added to a job</comment>
   </data>
   <data name="JobCost" xml:space="preserve">
-    <value>Cost	</value>
+    <value>Cost</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobCostAlways" xml:space="preserve">
     <value>Always</value>
-  </data>
-  <data name="JobCostFlag" xml:space="preserve">
-    <value>Cost	</value>
+    <comment>One of the Job cost property values</comment>
   </data>
   <data name="JobCostNoSurcharge" xml:space="preserve">
     <value>No surcharge</value>
+    <comment>One of the Job cost property values</comment>
   </data>
   <data name="JobCostNotAvailable" xml:space="preserve">
     <value>Not available</value>
-    <comment>Shown when job cost isn't availble (e.g., on Windows 7)</comment>
+    <comment>Shown when job cost isn't available (e.g., on Windows 7)</comment>
   </data>
   <data name="JobCostNotRoaming" xml:space="preserve">
     <value>Not roaming</value>
+    <comment>One of the Job cost property values</comment>
   </data>
   <data name="JobCostStandard" xml:space="preserve">
     <value>Standard</value>
+    <comment>One of the Job cost property values</comment>
   </data>
   <data name="JobCostUnrestricted" xml:space="preserve">
     <value>Unrestricted</value>
+    <comment>One of the Job cost property values</comment>
   </data>
   <data name="JobCreationTime" xml:space="preserve">
     <value>Created On</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobCustomHeaders" xml:space="preserve">
     <value>Custom HTTP</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobCustomHeadersException" xml:space="preserve">
     <value>HTTP headers not available because {0}</value>
@@ -301,6 +331,7 @@
   </data>
   <data name="JobCustomHeadersNotAvailable" xml:space="preserve">
     <value>Not available</value>
+    <comment>Used when we can't get the custom headers</comment>
   </data>
   <data name="JobCustomHeadersNotSet" xml:space="preserve">
     <value>(no custom headers set)</value>
@@ -320,12 +351,15 @@
   </data>
   <data name="JobErrorContext" xml:space="preserve">
     <value>Context	</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobErrorCount" xml:space="preserve">
     <value>Error Count</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobErrorDescription" xml:space="preserve">
     <value>Description</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobErrorException" xml:space="preserve">
     <value>Can't read error details</value>
@@ -333,19 +367,23 @@
   </data>
   <data name="JobErrorHRESULT" xml:space="preserve">
     <value>HRESULT</value>
+    <comment>The very technical "HRESULT" is correctly spelled and capitalized here.</comment>
   </data>
   <data name="JobErrorNoErrors" xml:space="preserve">
     <value>No errors</value>
+    <comment>Shown when a job has no errors</comment>
   </data>
   <data name="JobErrorWhenError" xml:space="preserve">
     <value>Can't get error details</value>
-    <comment>Shown when a job has errors, but it's not in an ERROR or TRANSIENT_ERROR state (e.g., SUSPENDED)</comment>
+    <comment>Shown when a job previously had errors, but it's not currently in an ERROR or TRANSIENT_ERROR state (e.g., SUSPENDED)</comment>
   </data>
   <data name="JobFileProgress" xml:space="preserve">
     <value>File Progress</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobFlags" xml:space="preserve">
     <value>Flags	</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobFlagsDynamic" xml:space="preserve">
     <value>Dynamic</value>
@@ -369,6 +407,7 @@
   </data>
   <data name="JobHttpMethod" xml:space="preserve">
     <value>HTTP Method</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobHttpMethodException" xml:space="preserve">
     <value>HTTP method not available because {0}</value>
@@ -376,18 +415,23 @@
   </data>
   <data name="JobHttpMethodNotAvailable" xml:space="preserve">
     <value>Not available</value>
+    <comment>Shown when the specific job property is not available</comment>
   </data>
   <data name="JobHttpMethodNotSet" xml:space="preserve">
     <value>(not set)</value>
+    <comment>Shown when the specific job property was not set</comment>
   </data>
   <data name="JobModificationTime" xml:space="preserve">
     <value>Modified On</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobOwner" xml:space="preserve">
     <value>Job Owner</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobPassword" xml:space="preserve">
     <value>Password</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobPriority" xml:space="preserve">
     <value>Priority	</value>
@@ -395,15 +439,19 @@
   </data>
   <data name="JobPriorityForeground" xml:space="preserve">
     <value>Foreground</value>
+    <comment>One of the job priorities</comment>
   </data>
   <data name="JobPriorityHigh" xml:space="preserve">
     <value>High</value>
+    <comment>One of the job priorities</comment>
   </data>
   <data name="JobPriorityLow" xml:space="preserve">
     <value>Low</value>
+    <comment>One of the job priorities</comment>
   </data>
   <data name="JobPriorityNormal" xml:space="preserve">
     <value>Normal</value>
+    <comment>One of the job priorities</comment>
   </data>
   <data name="JobProgress" xml:space="preserve">
     <value>Progress</value>
@@ -423,9 +471,11 @@
   </data>
   <data name="JobPropertyDynamic" xml:space="preserve">
     <value>Job is Dynamic</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="JobPropertyHighPerformance" xml:space="preserve">
     <value>Job is High Performance</value>
+    <comment>One of the Job properties</comment>
   </data>
   <data name="Jobs" xml:space="preserve">
     <value>BITS Jobs</value>
@@ -433,37 +483,47 @@
   </data>
   <data name="JobState" xml:space="preserve">
     <value>Job State</value>
+    <comment>Job state title</comment>
   </data>
   <data name="JobStateAcknowledged" xml:space="preserve">
     <value>Acknowledged</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateCancelled" xml:space="preserve">
     <value>Cancelled</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateConnecting" xml:space="preserve">
     <value>Connecting</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateError" xml:space="preserve">
     <value>Error</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateQueued" xml:space="preserve">
     <value>Queued</value>
-    <comment>BITS JobState hover text for queued</comment>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateSuspended" xml:space="preserve">
     <value>Suspended</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateTransferred" xml:space="preserve">
     <value>Transferred</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateTransferring" xml:space="preserve">
     <value>Transferring</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateTransientError" xml:space="preserve">
     <value>Transient Error</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobStateUnknown" xml:space="preserve">
     <value>Job State Unknown ({0})</value>
+    <comment>BITS JobState hover text for specific job state</comment>
   </data>
   <data name="JobTimeNotSet" xml:space="preserve">
     <value>not set</value>
@@ -471,45 +531,51 @@
   </data>
   <data name="JobTransferCompletionTime" xml:space="preserve">
     <value>Completed On</value>
+    <comment>One of the job detail field names</comment>
   </data>
   <data name="JobType" xml:space="preserve">
     <value>Job Type</value>
+    <comment>Job type header</comment>
   </data>
   <data name="JobTypeDownload" xml:space="preserve">
     <value>Download</value>
+    <comment>One of the job detail field names for job type</comment>
   </data>
   <data name="JobTypeUpload" xml:space="preserve">
     <value>Upload</value>
+    <comment>One of the job detail field names for job type</comment>
   </data>
   <data name="JobTypeUploadReply" xml:space="preserve">
     <value>Upload Reply</value>
+    <comment>One of the job detail field names for job type</comment>
   </data>
   <data name="JobUserName" xml:space="preserve">
     <value>User Name</value>
+    <comment>One of the job detail field names</comment>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Application Menu</value>
     <comment>Title of the menu for Keros accessibility</comment>
   </data>
-  <data name="MenuCreateNewJob" xml:space="preserve">
+  <data name="MenuJobCreateNewJob" xml:space="preserve">
     <value>New _Job</value>
     <comment>Create New Job menu item</comment>
   </data>
   <data name="MenuJob" xml:space="preserve">
     <value>_Jobs</value>
-    <comment>Edit menu header</comment>
+    <comment>Jobs menu header</comment>
   </data>
-  <data name="MenuJobsAllUsers" xml:space="preserve">
+  <data name="MenuViewAllUsers" xml:space="preserve">
     <value>_All Users</value>
     <comment>Menu to read jobs for all users or just the one. </comment>
   </data>
-  <data name="MenuQuickFileDownload" xml:space="preserve">
+  <data name="MenuJobQuickFileDownload" xml:space="preserve">
     <value>Quic_k File Download</value>
     <comment>Menu item in the MainWindow for quick file download</comment>
   </data>
-  <data name="MenuRefresh" xml:space="preserve">
+  <data name="MenuViewRefresh" xml:space="preserve">
     <value>_Refresh</value>
-    <comment>Refresh menu item</comment>
+    <comment>View/Refresh menu item</comment>
   </data>
   <data name="QuickFileDownload" xml:space="preserve">
     <value>Quick file download</value>
@@ -526,5 +592,116 @@
   <data name="UnhandledExceptionTitle" xml:space="preserve">
     <value>Unhandled Exception</value>
     <comment>Title of the message when "some other" exception is thrown.</comment>
+  </data>
+  <data name="MenuFile" xml:space="preserve">
+    <value>_File</value>
+    <comment>File menu header</comment>
+  </data>
+  <data name="MenuFileExit" xml:space="preserve">
+    <value>E_xit</value>
+    <comment>File/Exit menu</comment>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>_Help</value>
+    <comment>Help menu</comment>
+  </data>
+  <data name="MenuHelpAbout" xml:space="preserve">
+    <value>_About BITS Manager</value>
+    <comment>Help/About menu</comment>
+  </data>
+  <data name="MenuView" xml:space="preserve">
+    <value>_View</value>
+    <comment>View menu</comment>
+  </data>
+  <data name="AboutMessage" xml:space="preserve">
+    <value>BITS Manager
+Utility to examine and modify BITS jobs.
+For more information see {1}
+Version {0}</value>
+    <comment>Message in the About box. Arg 0= version number Arg 1=hyperlink</comment>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About BITS Manager</value>
+    <comment>Title in the About box</comment>
+  </data>
+  <data name="MenuJobAddFile" xml:space="preserve">
+    <value>_Add File to Job</value>
+    <comment>Job/Add file menu entry</comment>
+  </data>
+  <data name="MenuJobCancel" xml:space="preserve">
+    <value>_Cancel Job</value>
+    <comment>Job/Cancel menu entry</comment>
+  </data>
+  <data name="MenuJobComplete" xml:space="preserve">
+    <value>Com_plete Job</value>
+    <comment>Job/Complete menu entry</comment>
+  </data>
+  <data name="MenuJobResume" xml:space="preserve">
+    <value>_Resume Job</value>
+    <comment>Job/Resume menu entry</comment>
+  </data>
+  <data name="MenuJobSuspend" xml:space="preserve">
+    <value>_Suspend Job</value>
+    <comment>Job/Suspend menu entry</comment>
+  </data>
+  <data name="DialogMoreProperties" xml:space="preserve">
+    <value>More Properties</value>
+    <comment>The header in the Quick File Download (etc) dialogs for more properties</comment>
+  </data>
+  <data name="JobStateIconAcknowledged" xml:space="preserve">
+    <value>😎</value>
+    <comment>Unicode SMILING FACE WITH SUNGLASSES \U+1F60E 😎</comment>
+  </data>
+  <data name="JobStateIconCancelled" xml:space="preserve">
+    <value>😧</value>
+    <comment>Unicode ANGUISHED FACE \U+1f627 😧</comment>
+  </data>
+  <data name="JobStateIconConnecting" xml:space="preserve">
+    <value>😵</value>
+    <comment>Unicode DIZZY FACE \U+1F635 😵</comment>
+  </data>
+  <data name="JobStateIconError" xml:space="preserve">
+    <value>😡</value>
+    <comment>Unicode POUTING FACE \U+1F621 😡</comment>
+  </data>
+  <data name="JobStateIconQueued" xml:space="preserve">
+    <value>🙂</value>
+    <comment>Unicode SLIGHTLY SMILING FACE \U+1F642</comment>
+  </data>
+  <data name="JobStateIconSuspended" xml:space="preserve">
+    <value>😴</value>
+    <comment>Unicode SLEEPING FACE \U+1F634 😴</comment>
+  </data>
+  <data name="JobStateIconTransferred" xml:space="preserve">
+    <value>😁</value>
+    <comment>Unicode GRINNING FACE WITH SMILING EYES \U+1F601 😁</comment>
+  </data>
+  <data name="JobStateIconTransferring" xml:space="preserve">
+    <value>😏</value>
+    <comment>Unicode SMIRKING FACE \U+1F60F 😏</comment>
+  </data>
+  <data name="JobStateIconTransientError" xml:space="preserve">
+    <value>😬</value>
+    <comment>Unicode GRIMACING FACE \U+1F62C 😬</comment>
+  </data>
+  <data name="JobMarkAsOldTooltip" xml:space="preserve">
+    <value>Job is final</value>
+    <comment>Shown as the tooltip over the little "+" that indicates the job is final</comment>
+  </data>
+  <data name="ErrorUnauthorizedAccessMessage" xml:space="preserve">
+    <value>You don't have authorization to access that file</value>
+    <comment>Message when user doesn't have permission to access a file</comment>
+  </data>
+  <data name="ErrorUnauthorizedAccessTitle" xml:space="preserve">
+    <value>Unauthorized Access</value>
+    <comment>Title of the message when user doesn't have permission to access a file</comment>
+  </data>
+  <data name="ErrorBitsException" xml:space="preserve">
+    <value>BITS exception {0:X} {1}</value>
+    <comment>Shown when there's some other BITS exception. {0} is the HResult and {1} is the message.</comment>
+  </data>
+  <data name="JobAuthProxyImplicit" xml:space="preserve">
+    <value>Allow implicit proxy credentials</value>
+    <comment>One of the Job properties</comment>
   </data>
 </root>

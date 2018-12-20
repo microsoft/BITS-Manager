@@ -61,6 +61,27 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BITS Manager
+        ///Utility to examine and modify BITS jobs.
+        ///For more information see {1}
+        ///Version {0}.
+        /// </summary>
+        public static string AboutMessage {
+            get {
+                return ResourceManager.GetString("AboutMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About BITS Manager.
+        /// </summary>
+        public static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add file to job.
         /// </summary>
         public static string AddFileToJob {
@@ -115,6 +136,15 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More Properties.
+        /// </summary>
+        public static string DialogMoreProperties {
+            get {
+                return ResourceManager.GetString("DialogMoreProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string DialogOK {
@@ -129,6 +159,15 @@ namespace BITSManager.Properties {
         public static string DialogUrl {
             get {
                 return ResourceManager.GetString("DialogUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BITS exception {0:X} {1}.
+        /// </summary>
+        public static string ErrorBitsException {
+            get {
+                return ResourceManager.GetString("ErrorBitsException", resourceCulture);
             }
         }
         
@@ -219,6 +258,24 @@ namespace BITSManager.Properties {
         public static string ErrorTitle {
             get {
                 return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have authorization to access that file.
+        /// </summary>
+        public static string ErrorUnauthorizedAccessMessage {
+            get {
+                return ResourceManager.GetString("ErrorUnauthorizedAccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized Access.
+        /// </summary>
+        public static string ErrorUnauthorizedAccessTitle {
+            get {
+                return ResourceManager.GetString("ErrorUnauthorizedAccessTitle", resourceCulture);
             }
         }
         
@@ -322,7 +379,16 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication Type.
+        ///   Looks up a localized string similar to Allow implicit proxy credentials.
+        /// </summary>
+        public static string JobAuthProxyImplicit {
+            get {
+                return ResourceManager.GetString("JobAuthProxyImplicit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Authentication Type.
         /// </summary>
         public static string JobAuthScheme {
             get {
@@ -349,7 +415,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nego.
+        ///   Looks up a localized string similar to Negotiate.
         /// </summary>
         public static string JobAuthSchemeNegotiate {
             get {
@@ -448,7 +514,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cost	.
+        ///   Looks up a localized string similar to Cost.
         /// </summary>
         public static string JobCost {
             get {
@@ -462,15 +528,6 @@ namespace BITSManager.Properties {
         public static string JobCostAlways {
             get {
                 return ResourceManager.GetString("JobCostAlways", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cost	.
-        /// </summary>
-        public static string JobCostFlag {
-            get {
-                return ResourceManager.GetString("JobCostFlag", resourceCulture);
             }
         }
         
@@ -754,6 +811,15 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job is final.
+        /// </summary>
+        public static string JobMarkAsOldTooltip {
+            get {
+                return ResourceManager.GetString("JobMarkAsOldTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modified On.
         /// </summary>
         public static string JobModificationTime {
@@ -934,6 +1000,87 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 😎.
+        /// </summary>
+        public static string JobStateIconAcknowledged {
+            get {
+                return ResourceManager.GetString("JobStateIconAcknowledged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😧.
+        /// </summary>
+        public static string JobStateIconCancelled {
+            get {
+                return ResourceManager.GetString("JobStateIconCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😵.
+        /// </summary>
+        public static string JobStateIconConnecting {
+            get {
+                return ResourceManager.GetString("JobStateIconConnecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😡.
+        /// </summary>
+        public static string JobStateIconError {
+            get {
+                return ResourceManager.GetString("JobStateIconError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🙂.
+        /// </summary>
+        public static string JobStateIconQueued {
+            get {
+                return ResourceManager.GetString("JobStateIconQueued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😴.
+        /// </summary>
+        public static string JobStateIconSuspended {
+            get {
+                return ResourceManager.GetString("JobStateIconSuspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😁.
+        /// </summary>
+        public static string JobStateIconTransferred {
+            get {
+                return ResourceManager.GetString("JobStateIconTransferred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😏.
+        /// </summary>
+        public static string JobStateIconTransferring {
+            get {
+                return ResourceManager.GetString("JobStateIconTransferring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 😬.
+        /// </summary>
+        public static string JobStateIconTransientError {
+            get {
+                return ResourceManager.GetString("JobStateIconTransientError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Queued.
         /// </summary>
         public static string JobStateQueued {
@@ -1060,11 +1207,38 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New _Job.
+        ///   Looks up a localized string similar to _File.
         /// </summary>
-        public static string MenuCreateNewJob {
+        public static string MenuFile {
             get {
-                return ResourceManager.GetString("MenuCreateNewJob", resourceCulture);
+                return ResourceManager.GetString("MenuFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E_xit.
+        /// </summary>
+        public static string MenuFileExit {
+            get {
+                return ResourceManager.GetString("MenuFileExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Help.
+        /// </summary>
+        public static string MenuHelp {
+            get {
+                return ResourceManager.GetString("MenuHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _About BITS Manager.
+        /// </summary>
+        public static string MenuHelpAbout {
+            get {
+                return ResourceManager.GetString("MenuHelpAbout", resourceCulture);
             }
         }
         
@@ -1078,29 +1252,92 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _All Users.
+        ///   Looks up a localized string similar to _Add File to Job.
         /// </summary>
-        public static string MenuJobsAllUsers {
+        public static string MenuJobAddFile {
             get {
-                return ResourceManager.GetString("MenuJobsAllUsers", resourceCulture);
+                return ResourceManager.GetString("MenuJobAddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Cancel Job.
+        /// </summary>
+        public static string MenuJobCancel {
+            get {
+                return ResourceManager.GetString("MenuJobCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Com_plete Job.
+        /// </summary>
+        public static string MenuJobComplete {
+            get {
+                return ResourceManager.GetString("MenuJobComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New _Job.
+        /// </summary>
+        public static string MenuJobCreateNewJob {
+            get {
+                return ResourceManager.GetString("MenuJobCreateNewJob", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Quic_k File Download.
         /// </summary>
-        public static string MenuQuickFileDownload {
+        public static string MenuJobQuickFileDownload {
             get {
-                return ResourceManager.GetString("MenuQuickFileDownload", resourceCulture);
+                return ResourceManager.GetString("MenuJobQuickFileDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Resume Job.
+        /// </summary>
+        public static string MenuJobResume {
+            get {
+                return ResourceManager.GetString("MenuJobResume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Suspend Job.
+        /// </summary>
+        public static string MenuJobSuspend {
+            get {
+                return ResourceManager.GetString("MenuJobSuspend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _View.
+        /// </summary>
+        public static string MenuView {
+            get {
+                return ResourceManager.GetString("MenuView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _All Users.
+        /// </summary>
+        public static string MenuViewAllUsers {
+            get {
+                return ResourceManager.GetString("MenuViewAllUsers", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to _Refresh.
         /// </summary>
-        public static string MenuRefresh {
+        public static string MenuViewRefresh {
             get {
-                return ResourceManager.GetString("MenuRefresh", resourceCulture);
+                return ResourceManager.GetString("MenuViewRefresh", resourceCulture);
             }
         }
         

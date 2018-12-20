@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the MIT License.
+-->
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -15,6 +18,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,12 +33,11 @@
     <ProductName>BITS Manager</ProductName>
     <PublisherName>BITS-Manager</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>151</ApplicationRevision>
-    <ApplicationVersion>1.4.151.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -118,13 +121,13 @@
     <Compile Include="CreateNewJobWindow.xaml.cs">
       <DependentUpon>CreateNewJobWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IRefreshJobList.cs" />
     <Compile Include="QuickFileDownloadWindow.xaml.cs">
       <DependentUpon>QuickFileDownloadWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SetJobPropertyControl.xaml.cs">
       <DependentUpon>SetJobPropertyControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TabifyHttpHeaders.cs" />
     <Page Include="AddFileToJobWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,7 +192,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -220,23 +222,28 @@
       <ProductName>Microsoft .NET Framework 4.7 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BITSReferenceDLLs\BITSReference10_1.dll">
+    <None Include="BITSReferenceDLLs\BITSReference10_1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference10_2.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference10_2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference1_5.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference1_5.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference4_0.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference4_0.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BITSReferenceDLLs\BITSReference5_0.dll">
+    </None>
+    <None Include="BITSReferenceDLLs\BITSReference5_0.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
