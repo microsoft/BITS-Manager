@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Name="BITS Manager" Version="1.8.4.32" Id="*" UpgradeCode="63107792-32df-418d-a9f1-c93b65d7b614" Language="1033" Codepage="1252" Manufacturer="Contoso.com">
+    <Package Id="*" Keywords="Installer" Description="BITS Manager Installer" Comments="BITS Manager is for internal Microsoft use only" InstallerVersion="100" Languages="1033" Compressed="yes" SummaryCodepage="1252" />
+    <Media Id="1" Cabinet="BITSManager.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
+    <Property Id="DiskPrompt" Value="BITS Manager Installation [1]" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="PFiles">
+        <Directory Id="BITSMANAGER" Name="BITS Manager">
+          <Component Id="COMPONENT" Guid="AE10933A-1557-4876-864A-25A2EFD6F2A7">
+            <File Name="BitsManager.exe" DiskId="1" Source="..\BITSManager\bin\Release\BitsManager.exe" Id="BITSMANAGEREXE" KeyPath="yes">
+              <Shortcut Directory="DesktopFolder" Name="Bits Manager" WorkingDirectory="INSTALLDIR" Id="SHORTCUT_DESKTOP" Icon="BitsManager.exe" IconIndex="0" Advertise="yes" />
+            </File>
+            <File Name="BITSReference1_5.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference1_5.dll" Id="BITSReference1_5DLL" />
+            <File Name="BITSReference4_0.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference4_0.dll" Id="BITSReference4_0DLL" />
+            <File Name="BITSReference5_0.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference5_0.dll" Id="BITSReference5_0DLL" />
+            <File Name="BITSReference10_1.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference10_1.dll" Id="BITSReference10_1DLL" />
+            <File Name="BITSReference10_2.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference10_2.dll" Id="BITSReference10_2DLL" />
+            <File Name="LICENSE" DiskId="1" Source="..\LICENSE" Id="MYAPPLICENCE" />
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+    <Icon Id="BitsManager.exe" SourceFile="..\BITSManager\bin\Release\BITSManager.exe" />
+    <Property Id="ARPPRODUCTICON" Value="BitsManager.exe" />
+    <Feature Id="FEATURE" Level="1">
+      <ComponentRef Id="COMPONENT" />
+    </Feature>
+    <MajorUpgrade DowngradeErrorMessage="Sorry, you already have a more recent version of this program" />
+  </Product>
+</Wix>
