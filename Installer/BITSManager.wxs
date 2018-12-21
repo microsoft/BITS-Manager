@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Name="BITS Manager" Version="1.8.4.32" Id="*" UpgradeCode="63107792-32df-418d-a9f1-c93b65d7b614" Language="1033" Codepage="1252" Manufacturer="Contoso.com">
+  <Product Name="BITS Manager" Version="1.8.7.32" Id="*" UpgradeCode="63107792-32df-418d-a9f1-c93b65d7b614" Language="1033" Codepage="1252" Manufacturer="Contoso.com">
     <Package Id="*" Keywords="Installer" Description="BITS Manager Installer" InstallerVersion="100" Languages="1033" Compressed="yes" SummaryCodepage="1252" />
     <Media Id="1" Cabinet="BITSManager.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
     <Property Id="DiskPrompt" Value="BITS Manager Installation [1]" />
@@ -8,9 +8,7 @@
       <Directory Id="ProgramFilesFolder" Name="PFiles">
         <Directory Id="BITSMANAGER" Name="BITS Manager">
           <Component Id="COMPONENT" Guid="AE10933A-1557-4876-864A-25A2EFD6F2A7">
-            <File Name="BitsManager.exe" DiskId="1" Source="..\BITSManager\bin\Release\BitsManager.exe" Id="BITSMANAGEREXE" KeyPath="yes">
-              <Shortcut Directory="DesktopFolder" Name="Bits Manager" WorkingDirectory="INSTALLDIR" Id="SHORTCUT_DESKTOP" Icon="BitsManager.exe" IconIndex="0" Advertise="yes" />
-            </File>
+            <File Name="BitsManager.exe" DiskId="1" Source="..\BITSManager\bin\Release\BitsManager.exe" Id="BITSMANAGEREXE" />
             <File Name="BITSReference1_5.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference1_5.dll" Id="BITSReference1_5DLL" />
             <File Name="BITSReference4_0.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference4_0.dll" Id="BITSReference4_0DLL" />
             <File Name="BITSReference5_0.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference5_0.dll" Id="BITSReference5_0DLL" />
@@ -20,12 +18,19 @@
           </Component>
         </Directory>
       </Directory>
-      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="0B659D35-F420-4652-8438-1802E11F2955">
+          <Shortcut Id="SHORTCUT_DESKTOP" Name="BITS Manager" Description="Runs the BITS Manager sample program" Target="[BITSMANAGER]BitsManager.exe" WorkingDirectory="INSTALLDIR" Icon="BitsManager.exe" Advertise="no" />
+          <RemoveFolder Id="DesktopFolder" On="uninstall" />
+          <RegistryValue Root="HKCU" Key="Software/BITSManager" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        </Component>
+      </Directory>
     </Directory>
     <Icon Id="BitsManager.exe" SourceFile="..\BITSManager\bin\Release\BITSManager.exe" />
     <Property Id="ARPPRODUCTICON" Value="BitsManager.exe" />
     <Feature Id="FEATURE" Level="1">
       <ComponentRef Id="COMPONENT" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
     </Feature>
     <MajorUpgrade DowngradeErrorMessage="Sorry, you already have a more recent version of this program" />
   </Product>
