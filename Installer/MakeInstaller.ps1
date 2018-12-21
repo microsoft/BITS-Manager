@@ -38,7 +38,7 @@ else
 # Make the installer programing using the WiX Toolset.
 # The version 3.11 was the most recent when this sample was made.
 
-$WIXDIR="c:\Program Files (x86)\WiX Toolset v3.11\bin"
+$WIXDIR="${env:ProgramFiles(x86)}\WiX Toolset v3.11\bin"
 & $WIXDIR"\candle.exe" BITSManager.wxs
 & $WIXDIR"\light.exe" BITSManager.wixobj
 del BITSManager.wixobj

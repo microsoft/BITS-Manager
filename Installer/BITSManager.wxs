@@ -16,7 +16,7 @@
             <File Name="BITSReference5_0.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference5_0.dll" Id="BITSReference5_0DLL" />
             <File Name="BITSReference10_1.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference10_1.dll" Id="BITSReference10_1DLL" />
             <File Name="BITSReference10_2.dll" DiskId="1" Source="..\BITSManager\BITSReferenceDLLs\BITSReference10_2.dll" Id="BITSReference10_2DLL" />
-            <File Name="LICENSE" DiskId="1" Source="..\LICENSE" Id="MYAPPLICENCE" />
+            <File Name="LICENSE" DiskId="1" Source="..\LICENSE" Id="MYAPPLICENSE" />
           </Component>
         </Directory>
       </Directory>
