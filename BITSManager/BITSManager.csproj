@@ -204,6 +204,12 @@ Licensed under the MIT License.
       <Link>README.md</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="..\Installer\BITSManager.wxs">
+      <Link>InstallerFiles\BITSManager.wxs</Link>
+    </None>
+    <None Include="..\Installer\MakeInstaller.ps1">
+      <Link>InstallerFiles\MakeInstaller.ps1</Link>
+    </None>
     <None Include="BITSManager_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
