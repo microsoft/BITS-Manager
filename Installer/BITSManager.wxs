@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Name="BITS Manager" Version="1.8.7.32" Id="*" UpgradeCode="63107792-32df-418d-a9f1-c93b65d7b614" Language="1033" Codepage="1252" Manufacturer="Contoso.com">
+  <Product Name="BITS Manager" Version="1.11.0.4" Id="*" UpgradeCode="63107792-32df-418d-a9f1-c93b65d7b614" Language="1033" Codepage="1252" Manufacturer="Contoso.com">
     <Package Id="*" Keywords="Installer" Description="BITS Manager Installer" InstallerVersion="100" Languages="1033" Compressed="yes" SummaryCodepage="1252" />
     <Media Id="1" Cabinet="BITSManager.cab" EmbedCab="yes" DiskPrompt="CD-ROM #1" />
     <Property Id="DiskPrompt" Value="BITS Manager Installation [1]" />

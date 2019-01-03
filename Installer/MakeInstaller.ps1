@@ -10,13 +10,11 @@
 # Learn more about WiX from https://wixtoolset.org
 #
 
+$relativeFile="..\BITSManager\bin\Release\BITSManager.exe"
+$fullFile=Resolve-Path $relativeFile
+$assemblyVersion=[System.Diagnostics.FileVersionInfo]::GetVersionInfo($fullFile).FileVersion
 
-$infile="..\BITSManager\Properties\AssemblyInfo.cs"
-$regex = '^\[assembly:\s*AssemblyVersion\("(\d*\.\d*\.\d*\.\d*)"\)'
-$results = select-string -Path $infile -Pattern $regex
-$assemblyVersion = $results.Matches.Groups[1].Value
-
-if ($assemblyVersion -ne "")
+if ("$($assemblyVersion)" -ne "")
 {
 	$wixxml=[xml](get-content ".\BITSManager.wxs")
 	$wixVersion=$wixxml.Wix.Product.Version
