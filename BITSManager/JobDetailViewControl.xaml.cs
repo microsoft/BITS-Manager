@@ -257,6 +257,12 @@ namespace BITSManager
                         Properties.Resources.JobCustomHeadersException,
                         ex.Message);
                 }
+                catch (System.UnauthorizedAccessException ex)
+                {
+                    _uiJobCustomHeaders.Text = String.Format(
+                        Properties.Resources.JobCustomHeadersException,
+                        ex.Message);
+                }
             }
 
             // Update the list of files associated with the job.

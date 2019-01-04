@@ -15,11 +15,13 @@ Licensed under the MIT License.
         ShowInTaskbar="False">
     <Border Margin="2">
         <StackPanel Margin="20,10,20,10">
-            <TextBlock Text="{x:Static p:Resources.DialogUrl}" />
-            <TextBox x:Name="_uiUri" HorizontalAlignment="Stretch" TabIndex="1" TextChanged="OnUriChanged" />
+            <TextBlock Text="{x:Static p:Resources.DialogUrl}" x:Name="_uiUrlHeader" />
+            <TextBox x:Name="_uiUrl" HorizontalAlignment="Stretch" TabIndex="1" TextChanged="OnUrlChanged"
+                     AutomationProperties.LabeledBy="{Binding ElementName=_uiUrlHeader}"/>
 
-            <TextBlock Text="{x:Static p:Resources.DialogFile}" />
-            <TextBox x:Name="_uiFile" HorizontalAlignment="Stretch" TabIndex="2" KeyDown="OnFileChangedViaKeyboard" />
+            <TextBlock Text="{x:Static p:Resources.DialogFile}" x:Name="_uiFileHeader" />
+            <TextBox x:Name="_uiFile" HorizontalAlignment="Stretch" TabIndex="2" KeyDown="OnFileChangedViaKeyboard" 
+                     AutomationProperties.LabeledBy="{Binding ElementName=_uiFileHeader}"/>
 
             <Expander Header="{x:Static p:Resources.DialogMoreProperties}">
                 <local:SetJobPropertyControl x:Name="_uiJobProperty" Margin="0,16,0,0" />

@@ -9,7 +9,7 @@ Licensed under the MIT License.
         xmlns:local="clr-namespace:BITSManager"
         xmlns:p="clr-namespace:BITSManager.Properties"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.Title}" Height="450" Width="800">
+        Title="{x:Static p:Resources.Title}" Height="450" Width="900">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.QuickFileDownloadCommand}" Executed="OnMenuJobQuickFileDownload" />
     </Window.CommandBindings>
@@ -53,14 +53,14 @@ Licensed under the MIT License.
         <ListView Grid.Row="2" Grid.Column="0" x:Name="_uiJobList"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
                   SelectionMode="Single" SelectionChanged="OnJobSelectionChanged"
-                  AutomationProperties.LabeledBy="{Binding ElementName=uiJobListHeader}"
+                  AutomationProperties.LabeledBy="{Binding ElementName=_uiJobListHeader}"
                   IsTabStop="True">
         </ListView>
 
         <!-- The selected job details -->
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="_uiJobDetailHeader" Text="{x:Static p:Resources.JobDetails}" FontSize="18" FontWeight="Bold" />
         <local:JobDetailViewControl Grid.Row="2" Grid.Column="1"  x:Name="_uiJobDetails"
-                                    AutomationProperties.LabeledBy="{Binding ElementName=uiJobDetailHeader}"
+                                    AutomationProperties.LabeledBy="{Binding ElementName=_uiJobDetailHeader}"
                                     IsTabStop="True" />
     </Grid>
 </Window>

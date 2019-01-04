@@ -514,7 +514,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cost.
+        ///   Looks up a localized string similar to Cost          .
         /// </summary>
         public static string JobCost {
             get {

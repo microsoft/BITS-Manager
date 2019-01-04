@@ -38,7 +38,7 @@ namespace BITSManager
 
         private void QuickFileDownloadControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _uiUri.Focus();
+            _uiUrl.Focus();
         }
 
         private void OnCancel(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace BITSManager
         {
             Job = null; // Clear out the old value, if any.
             DialogResult = true;
-            if (String.IsNullOrEmpty(_uiUri.Text))
+            if (String.IsNullOrEmpty(_uiUrl.Text))
             {
                 MessageBox.Show(Properties.Resources.ErrorEmptyRemoteUrl, Properties.Resources.ErrorTitle);
                 return;
@@ -60,14 +60,14 @@ namespace BITSManager
                 MessageBox.Show(Properties.Resources.ErrorEmptyLocalFile, Properties.Resources.ErrorTitle);
                 return;
             }
-            Job = DownloadFile(_uiUri.Text, _uiFile.Text);
+            Job = DownloadFile(_uiUrl.Text, _uiFile.Text);
         }
 
-        private void OnUriChanged(object sender, TextChangedEventArgs e)
+        private void OnUrlChanged(object sender, TextChangedEventArgs e)
         {
-            string newUriText = _uiUri.Text;
+            string newUrlText = _uiUrl.Text;
             Uri uri;
-            var createSucceeded = Uri.TryCreate(newUriText, UriKind.Absolute, out uri);
+            var createSucceeded = Uri.TryCreate(newUrlText, UriKind.Absolute, out uri);
             if (createSucceeded && uri.Segments.Length >= 1 && !_fileHasChangedViaKeyboard)
             {
                 // Make a corresponding file name. If the user has changed the file text,

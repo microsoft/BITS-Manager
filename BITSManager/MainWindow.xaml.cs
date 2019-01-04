@@ -443,13 +443,13 @@ namespace BITSManager
             var result = dlg.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                var remoteUri = dlg.RemoteUri;
+                var remoteUrl = dlg.RemoteUrl;
                 var localFile = dlg.LocalFile;
-                if (!string.IsNullOrEmpty(remoteUri) && !string.IsNullOrEmpty(localFile))
+                if (!string.IsNullOrEmpty(remoteUrl) && !string.IsNullOrEmpty(localFile))
                 {
                     try
                     {
-                        job.AddFile(remoteUri, localFile);
+                        job.AddFile(remoteUrl, localFile);
                     }
                     catch (System.Runtime.InteropServices.COMException ex)
                     {
