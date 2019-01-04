@@ -14,9 +14,9 @@ Licensed under the MIT License.
              ShowInTaskbar="False">
     <Border Margin="2">
         <StackPanel VerticalAlignment="Stretch">
-            <TextBlock Text="{x:Static p:Resources.DialogUrl}" x:Name="_uiUriHeader" />
-            <TextBox x:Name="_uiUri" HorizontalAlignment="Stretch" Margin="20,0,0,0" TabIndex="1" TextChanged="OnUriChanged"
-                     AutomationProperties.LabeledBy="{Binding ElementName=_uiUriHeader}"/>
+            <TextBlock Text="{x:Static p:Resources.DialogUrl}" x:Name="_uiUrlHeader" />
+            <TextBox x:Name="_uiUrl" HorizontalAlignment="Stretch" Margin="20,0,0,0" TabIndex="1" TextChanged="OnUrlChanged"
+                     AutomationProperties.LabeledBy="{Binding ElementName=_uiUrlHeader}"/>
 
             <TextBlock Text="{x:Static p:Resources.DialogFile}" x:Name="_uiFileHeader" />
             <TextBox x:Name="_uiFile" Margin="20,0,0,0" HorizontalAlignment="Stretch" TabIndex="2" KeyDown="OnFileChangedViaKeyboard" 

@@ -12,7 +12,7 @@ namespace BITSManager
     /// </summary>
     public partial class AddFileToJobWindow : Window
     {
-        public string RemoteUri { get { return _uiUri.Text; } }
+        public string RemoteUrl { get { return _uiUrl.Text; } }
         public string LocalFile { get { return _uiFile.Text; } }
         private bool _fileHasChanged = false;
 
@@ -24,7 +24,7 @@ namespace BITSManager
 
         private void AddFileToJobWindowControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _uiUri.Focus();
+            _uiUrl.Focus();
         }
 
         private void OnCancel(object sender, RoutedEventArgs e)
@@ -37,11 +37,11 @@ namespace BITSManager
             DialogResult = true;
         }
 
-        private void OnUriChanged(object sender, TextChangedEventArgs e)
+        private void OnUrlChanged(object sender, TextChangedEventArgs e)
         {
-            string newUriText = _uiUri.Text;
+            string newUrlText = _uiUrl.Text;
             Uri uri;
-            var parseSucceeded = Uri.TryCreate(newUriText, UriKind.Absolute, out uri);
+            var parseSucceeded = Uri.TryCreate(newUrlText, UriKind.Absolute, out uri);
             if (parseSucceeded && uri.Segments.Length >= 1 && !_fileHasChanged)
             {
                 // Make a corresponding file name. If the user has changed the file text,
