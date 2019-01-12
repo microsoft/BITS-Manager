@@ -5,6 +5,7 @@ using System.Windows.Controls;
 
 // Set up the needed BITS namespaces
 using BITS = BITSReference1_5;
+using BITS4 = BITSReference4_0;
 using BITS5 = BITSReference5_0;
 
 namespace BITSManager
@@ -23,6 +24,7 @@ namespace BITSManager
         {
             var job2 = (BITS.IBackgroundCopyJob2)job; // Job2 exists on all supported version of Windows.
             var job5 = job as BITS5.IBackgroundCopyJob5; // Job5 will be null on, e.g., Windows 7 and earlier.
+            var jobHttpOptions = job as BITS4.IBackgroundCopyJobHttpOptions;
 
             if (job5 != null)
             {
@@ -49,6 +51,15 @@ namespace BITSManager
                     var value = new BITS5.BITS_JOB_PROPERTY_VALUE();
                     value.Enable = isHighPerformance.Value ? 1 : 0;
                     job5.SetProperty(BITS5.BITS_JOB_PROPERTY_ID.BITS_JOB_PROPERTY_HIGH_PERFORMANCE, value);
+                }
+            }
+
+            if (jobHttpOptions != null)
+            {
+                var text = _uiCustomHeadersAll.Text;
+                if (!String.IsNullOrWhiteSpace (text))
+                {
+                    jobHttpOptions.SetCustomHeaders (text);
                 }
             }
 
@@ -158,6 +169,17 @@ namespace BITSManager
                 int value = Int32.Parse(tag);
                 return (BITS.BG_JOB_PRIORITY)value;
             }
+        }
+
+        private void OnClearCustomHeaders(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _uiCustomHeadersAll.Text = "";
+        }
+
+        private void OnAddNewCustomHeader(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var newHeader = _uiNewCustomHeader.Text + "\r\n";
+            _uiCustomHeadersAll.Text += newHeader;
         }
     }
 }

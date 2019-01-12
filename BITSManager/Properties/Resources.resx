@@ -318,7 +318,7 @@
     <comment>One of the Job properties</comment>
   </data>
   <data name="JobCustomHeaders" xml:space="preserve">
-    <value>Custom HTTP</value>
+    <value>Custom HTTP Headers</value>
     <comment>One of the Job properties</comment>
   </data>
   <data name="JobCustomHeadersException" xml:space="preserve">
@@ -703,5 +703,29 @@ Version {0}</value>
   <data name="JobCost" xml:space="preserve">
     <value>Cost          </value>
     <comment>One of the Job properties. There are 10 extra spaces so that the field values line up neatly. For EN-US, any number of spaces from 7 to 20 results in good alignment; the value will be different in different languages and fonts.</comment>
+  </data>
+  <data name="JobCustomHeadersTitle" xml:space="preserve">
+    <value>Add custom HTTP headers</value>
+    <comment>Title of the text box for entering custom HTTP headers</comment>
+  </data>
+  <data name="JobAddHeader" xml:space="preserve">
+    <value>Add</value>
+    <comment>Button content for adding headers</comment>
+  </data>
+  <data name="JobAddHeaderToolTip" xml:space="preserve">
+    <value>Adds the custom HTTP header</value>
+    <comment>Hover text for adding a custom HTTP header to a job</comment>
+  </data>
+  <data name="JobAllCustomHeaders" xml:space="preserve">
+    <value>All custom HTTP headers</value>
+    <comment>Header for the textblock with all custom HTTP headers</comment>
+  </data>
+  <data name="JobClearHeader" xml:space="preserve">
+    <value>Clear</value>
+    <comment>Button for clearing the custom HTTP headers</comment>
+  </data>
+  <data name="jobClearHeaderToolTip" xml:space="preserve">
+    <value>Clear the custom headers</value>
+    <comment>Hover text for clearing the custom HTTP headers</comment>
   </data>
 </root>

@@ -49,5 +49,19 @@ Licensed under the MIT License.
         <TextBox x:Name="_uiUserName" HorizontalAlignment="Stretch" AutomationProperties.LabeledBy="{Binding ElementName=_uiJobUserNameHeader}" />
         <TextBlock Text="{x:Static p:Resources.JobPassword}" x:Name="_uiJobPasswordHeader" />
         <TextBox x:Name="_uiPassword" HorizontalAlignment="Stretch" AutomationProperties.LabeledBy="{Binding ElementName=_uiJobPasswordHeader}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Static p:Resources.JobCustomHeadersTitle}" x:Name="_uiJobCustomHeadersHeader" />
+            <Button Grid.Column="1" Content="{x:Static p:Resources.JobAddHeader}" ToolTip="{x:Static p:Resources.JobAddHeaderToolTip}" Click="OnAddNewCustomHeader"  />
+            <Button Grid.Column="2" Content="{x:Static p:Resources.JobClearHeader}" Click="OnClearCustomHeaders" Margin="2,0,0,0"  />
+
+        </Grid>
+        <TextBox x:Name="_uiNewCustomHeader" HorizontalAlignment="Stretch" AutomationProperties.LabeledBy="{Binding ElementName=_uiJobCustomHeadersHeader}" />
+        <TextBlock Text="{x:Static p:Resources.JobAllCustomHeaders}" x:Name="_uiJobCustomHeadersAllHeader" />
+        <TextBlock x:Name="_uiCustomHeadersAll" HorizontalAlignment="Stretch" AutomationProperties.LabeledBy="{Binding ElementName=_uiJobCustomHeadersAllHeader}" MinHeight="50" />
     </StackPanel>
 </UserControl>
