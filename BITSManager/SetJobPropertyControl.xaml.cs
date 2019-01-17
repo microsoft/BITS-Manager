@@ -57,9 +57,9 @@ namespace BITSManager
             if (jobHttpOptions != null)
             {
                 var text = _uiCustomHeadersAll.Text;
-                if (!String.IsNullOrWhiteSpace (text))
+                if (!String.IsNullOrWhiteSpace(text))
                 {
-                    jobHttpOptions.SetCustomHeaders (text);
+                    jobHttpOptions.SetCustomHeaders(text);
                 }
             }
 

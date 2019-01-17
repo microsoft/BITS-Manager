@@ -552,9 +552,9 @@ namespace BITSManager.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Clear the custom headers.
         /// </summary>
-        public static string jobClearHeaderToolTip {
+        public static string JobClearHeaderToolTip {
             get {
-                return ResourceManager.GetString("jobClearHeaderToolTip", resourceCulture);
+                return ResourceManager.GetString("JobClearHeaderToolTip", resourceCulture);
             }
         }
         

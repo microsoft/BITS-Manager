@@ -724,7 +724,7 @@ Version {0}</value>
     <value>Clear</value>
     <comment>Button for clearing the custom HTTP headers</comment>
   </data>
-  <data name="jobClearHeaderToolTip" xml:space="preserve">
+  <data name="JobClearHeaderToolTip" xml:space="preserve">
     <value>Clear the custom headers</value>
     <comment>Hover text for clearing the custom HTTP headers</comment>
   </data>
