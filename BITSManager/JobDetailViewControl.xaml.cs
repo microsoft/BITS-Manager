@@ -112,13 +112,13 @@ namespace BITSManager
                         Error.GetErrorDescription((uint)langid, out ErrorDescription);
                         Error.GetErrorContextDescription((uint)langid, out ErrorContextDescription);
 
-                        var errorText = String.Format ("\t{0} \t0x{1:X08}\n\t{2} \t{3}{4}\t{5} \t{6}",
-                            Properties.Resources.JobErrorHRESULT, 
+                        var errorText = String.Format("\t{0} \t0x{1:X08}\n\t{2} \t{3}{4}\t{5} \t{6}",
+                            Properties.Resources.JobErrorHRESULT,
                             ErrorHRESULT,
-                            Properties.Resources.JobErrorDescription, 
+                            Properties.Resources.JobErrorDescription,
                             ErrorDescription,
                             ErrorDescription.EndsWith("\n") ? "" : "\n",
-                            Properties.Resources.JobErrorContext, 
+                            Properties.Resources.JobErrorContext,
                             ErrorContextDescription
                             );
                         _uiJobError.Text = errorText;
@@ -247,8 +247,10 @@ namespace BITSManager
                 try
                 {
                     httpOptions.GetCustomHeaders(out customHeaders);
-                    var headers = customHeaders ?? Properties.Resources.JobCustomHeadersNotSet;
-                    headers = TabifyHttpHeaders.AddTabs(headers);
+                    var headers = customHeaders == null
+                        ? Properties.Resources.JobCustomHeadersNotSet
+                        : TabifyHttpHeaders.AddTabs(TabifyHttpHeaders.PrependCRLF(customHeaders))
+                        ;
                     _uiJobCustomHeaders.Text = headers;
                 }
                 catch (System.Runtime.InteropServices.COMException ex)

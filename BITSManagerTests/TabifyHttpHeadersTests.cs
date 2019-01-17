@@ -51,5 +51,18 @@ namespace BITSManager.Tests
             Assert.AreEqual(" ", TabifyHttpHeaders.GetAlignedSpaces(-1));
             Assert.AreEqual(" ", TabifyHttpHeaders.GetAlignedSpaces(-99999999));
         }
+
+        [TestMethod()]
+        public void PrependCRLFTest()
+        {
+            Assert.AreEqual(TabifyHttpHeaders.PrependCRLF(null), null);
+            Assert.AreEqual(TabifyHttpHeaders.PrependCRLF(""), "");
+            Assert.AreEqual(TabifyHttpHeaders.PrependCRLF("abc"), "abc");
+            Assert.AreEqual(TabifyHttpHeaders.PrependCRLF("abc\rdef\rghi"), "abc\rdef\rghi");
+            Assert.AreEqual(TabifyHttpHeaders.PrependCRLF("abc\ndef"), "abc\ndef");
+            Assert.AreEqual(TabifyHttpHeaders.PrependCRLF("abc\ndef\nghi"), "\r\nabc\ndef\nghi");
+
+            Assert.Fail();
+        }
     }
 }
