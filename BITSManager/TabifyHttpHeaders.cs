@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Linq;
 using System.Text;
 
 namespace BITSManager
@@ -76,6 +77,22 @@ namespace BITSManager
                 tabs = tabs + " ";
             }
             return tabs;
+        }
+
+        /// <summary>
+        /// Given a string, prepend a \r\n if the string is a multi-line string. 
+        /// Multi-line means that the string has more than 1 \n character.
+        /// </summary>
+        /// <param name="text">Input text (can be null)</param>
+        /// <returns>Returns either the original text OR the original text prepended with \r\n</returns>
+        public static string PrependCRLF(string text)
+        {
+            if (text == null) return text;
+            // Note that the customHeaders use \r\n per the HTTP specs.
+            // What's displayed to the user also uses \r\n
+            var nline = text.Count(f => f == '\n');
+            text = nline > 1 ? "\r\n" + text : text;
+            return text;
         }
     }
 }

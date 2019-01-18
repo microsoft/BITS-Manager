@@ -218,7 +218,7 @@ namespace BITSManager
 
         public void JobModification(BITS.IBackgroundCopyJob pJob, uint dwReserved)
         {
-            // JobModification has to exist to satify the interface. But unless
+            // JobModification has to exist to satisfy the interface. But unless
             // the call to job.SetNotifyInterface includes the BG_NOTIFY_JOB_MODIFICATION flag,
             // this method won't be called.
         }

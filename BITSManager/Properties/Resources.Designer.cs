@@ -379,6 +379,33 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string JobAddHeader {
+            get {
+                return ResourceManager.GetString("JobAddHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds the custom HTTP header.
+        /// </summary>
+        public static string JobAddHeaderToolTip {
+            get {
+                return ResourceManager.GetString("JobAddHeaderToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All custom HTTP headers.
+        /// </summary>
+        public static string JobAllCustomHeaders {
+            get {
+                return ResourceManager.GetString("JobAllCustomHeaders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow implicit proxy credentials.
         /// </summary>
         public static string JobAuthProxyImplicit {
@@ -514,6 +541,24 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string JobClearHeader {
+            get {
+                return ResourceManager.GetString("JobClearHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear the custom headers.
+        /// </summary>
+        public static string JobClearHeaderToolTip {
+            get {
+                return ResourceManager.GetString("JobClearHeaderToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cost          .
         /// </summary>
         public static string JobCost {
@@ -586,7 +631,7 @@ namespace BITSManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom HTTP.
+        ///   Looks up a localized string similar to Custom HTTP Headers.
         /// </summary>
         public static string JobCustomHeaders {
             get {
@@ -618,6 +663,15 @@ namespace BITSManager.Properties {
         public static string JobCustomHeadersNotSet {
             get {
                 return ResourceManager.GetString("JobCustomHeadersNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add custom HTTP headers.
+        /// </summary>
+        public static string JobCustomHeadersTitle {
+            get {
+                return ResourceManager.GetString("JobCustomHeadersTitle", resourceCulture);
             }
         }
         
